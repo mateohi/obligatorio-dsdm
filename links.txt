@@ -1,0 +1,7 @@
+Generador de codigos QR en java:
+http://barcode4j.sourceforge.net/
+
+API para leer QR en android
+https://github.com/zxing/zxing
+https://code.google.com/p/android-quick-response-code/
+
