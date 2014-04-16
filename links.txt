@@ -4,4 +4,5 @@ http://barcode4j.sourceforge.net/
 API para leer QR en android
 https://github.com/zxing/zxing
 https://code.google.com/p/android-quick-response-code/
+http://stackoverflow.com/questions/2050263/using-zxing-to-create-an-android-barcode-scanning-app
 
