@@ -25,3 +25,4 @@ muestra la ubicación de tu mascota en un mapa con la ubicación aproximada de e
 - Lector QR (en otro caso solo un codigo)
 - Geolocalizacion + google maps
 - Push notifications
+- Servicios RESTful para comunicarse con el servidor
