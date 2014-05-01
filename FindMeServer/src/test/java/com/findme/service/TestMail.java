@@ -4,9 +4,9 @@
  */
 package com.findme.service;
 
-import com.findeme.service.utilities.ManejadorMail;
-import com.findeme.service.utilities.mail.MailGeneratorException;
-import com.findeme.service.utilities.qr.QRGeneratorException;
+import com.findme.service.utilities.ManejadorMail;
+import com.findme.service.utilities.mail.MailGeneratorException;
+import com.findme.service.utilities.qr.QRGeneratorException;
 import java.io.IOException;
 
 public class TestMail {

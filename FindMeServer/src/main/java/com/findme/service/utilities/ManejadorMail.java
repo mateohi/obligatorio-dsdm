@@ -1,9 +1,9 @@
-package com.findeme.service.utilities;
+package com.findme.service.utilities;
 
-import com.findeme.service.utilities.mail.GeneradorMail;
-import com.findeme.service.utilities.mail.MailGeneratorException;
-import com.findeme.service.utilities.qr.GeneradorQR;
-import com.findeme.service.utilities.qr.QRGeneratorException;
+import com.findme.service.utilities.mail.GeneradorMail;
+import com.findme.service.utilities.mail.MailGeneratorException;
+import com.findme.service.utilities.qr.GeneradorQR;
+import com.findme.service.utilities.qr.QRGeneratorException;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;

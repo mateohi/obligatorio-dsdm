@@ -1,4 +1,4 @@
-package com.findeme.service.utilities.mail;
+package com.findme.service.utilities.mail;
 
 import java.util.Arrays;
 import java.util.List;

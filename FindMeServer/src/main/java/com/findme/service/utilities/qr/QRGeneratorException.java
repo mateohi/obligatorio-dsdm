@@ -1,4 +1,4 @@
-package com.findeme.service.utilities.qr;
+package com.findme.service.utilities.qr;
 
 public class QRGeneratorException extends Exception {
 
