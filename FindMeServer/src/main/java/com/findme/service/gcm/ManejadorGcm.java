@@ -6,11 +6,12 @@ import com.findme.service.gcm.apimodel.ResponseGcm;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URISyntaxException;
 import java.util.Map;
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpException;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
@@ -47,15 +48,18 @@ public class ManejadorGcm {
 
             manejarStatus(status, responseGcm);
         }
-        catch (ClientProtocolException ex) {
+        catch (HttpException ex) {
             throw new GcmException("Error al intentar enviar a GCM");
         }
         catch (IOException ex) {
             throw new GcmException("Error al intentar enviar a GCM");
         }
+        catch (URISyntaxException ex) {
+            throw new GcmException("Error en la URI de GCM");
+        }
     }
 
-    private HttpPost crearPost(RequestBody body) throws UnsupportedEncodingException {
+    private HttpPost crearPost(RequestBody body) throws UnsupportedEncodingException, URISyntaxException {
         String jsonMensaje = gson.toJson(body);
         StringEntity entity = new StringEntity(jsonMensaje);
 

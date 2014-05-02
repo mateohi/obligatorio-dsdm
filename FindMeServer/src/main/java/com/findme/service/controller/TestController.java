@@ -12,6 +12,6 @@ public class TestController {
     @ResponseBody
     @RequestMapping(method = RequestMethod.GET)
     public String testService() {
-        return "[OK]";
+        return "{\"status\":\"ok\"}";
     }
 }
