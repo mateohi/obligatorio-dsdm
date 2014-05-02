@@ -1,4 +1,4 @@
-package com.findme.service.gcm;
+package com.findme.service;
 
 import com.findme.service.gcm.apimodel.RequestBody;
 import com.findme.service.gcm.apimodel.RequestBodyData;

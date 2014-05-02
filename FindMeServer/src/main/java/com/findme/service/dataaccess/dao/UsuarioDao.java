@@ -3,13 +3,8 @@ package com.findme.service.dataaccess.dao;
 import com.findme.service.dataaccess.IUsuarioDao;
 import com.findme.service.model.Usuario;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.hibernate3.HibernateTemplate;
 
 public class UsuarioDao implements IUsuarioDao {
-
-    @Autowired
-    private HibernateTemplate hibernateTemplate;
 
     @Override
     public List<Usuario> getUsuarios() {
