@@ -84,6 +84,22 @@
             <version>2.2</version>
         </dependency>
         <!--Zxing-->
+        
+        <!--Apache http-->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.0-alpha4</version>
+        </dependency>
+        <!--Apache http-->
+        
+        <!--gson-->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.2.4</version>
+        </dependency>
+        <!--gson-->     
             
     </dependencies>
 
