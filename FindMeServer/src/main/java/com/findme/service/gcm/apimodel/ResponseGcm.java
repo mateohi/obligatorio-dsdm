@@ -16,7 +16,7 @@ public class ResponseGcm {
         return failure;
     }
 
-    public boolean envioExitoso() {
-        return success > 0;
+    public boolean envioFallido() {
+        return this.failure != 0;
     }
 }

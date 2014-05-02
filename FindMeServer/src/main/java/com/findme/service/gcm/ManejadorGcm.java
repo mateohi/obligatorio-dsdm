@@ -5,11 +5,12 @@ import com.findme.service.gcm.apimodel.RequestBody;
 import com.findme.service.gcm.apimodel.ResponseGcm;
 import com.google.gson.Gson;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.Map;
 import org.apache.http.HttpEntity;
-import org.apache.http.HttpException;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
@@ -31,37 +32,30 @@ public class ManejadorGcm {
         this.gson = new Gson();
     }
 
-    public boolean enviarNotificacion(Map<String, String> data) throws GcmException {
+    public void enviarNotificacion(Map<String, String> data) throws GcmException {
         RequestBody body = ManejadorApiModel.mapToRequest(data);
-        return enviarNotificacion(body);
+        enviarNotificacion(body);
     }
 
-    private boolean enviarNotificacion(RequestBody body) throws GcmException {
+    private void enviarNotificacion(RequestBody body) throws GcmException {
         try {
             HttpPost post = crearPost(body);
             HttpResponse response = client.execute(post);
+
+            ResponseGcm responseGcm = devolverRespuestaGcm(response);
             int status = response.getStatusLine().getStatusCode();
 
-            if (status == HttpStatus.SC_OK) {
-                ResponseGcm respuestaGcm = devolverRespuestaGcm(response);
-                return respuestaGcm.envioExitoso();
-            } else if (status == HttpStatus.SC_NOT_FOUND) {
-                throw new GcmException("Body o json no valido");
-            } else if (status == HttpStatus.SC_UNAUTHORIZED) {
-                throw new GcmException("Error de autenticacion");
-            } else if (status / 100 == 5) {
-                throw new GcmException("Error interno en GCM");
-            } else {
-                throw new GcmException();
-            }
-        } catch (HttpException | IOException ex) {
+            manejarStatus(status, responseGcm);
+        }
+        catch (ClientProtocolException ex) {
             throw new GcmException("Error al intentar enviar a GCM");
-        } catch (Exception ex) {
-            throw new GcmException();
+        }
+        catch (IOException ex) {
+            throw new GcmException("Error al intentar enviar a GCM");
         }
     }
 
-    private HttpPost crearPost(RequestBody body) throws Exception {
+    private HttpPost crearPost(RequestBody body) throws UnsupportedEncodingException {
         String jsonMensaje = gson.toJson(body);
         StringEntity entity = new StringEntity(jsonMensaje);
 
@@ -78,5 +72,27 @@ public class ManejadorGcm {
         String respuestaString = EntityUtils.toString(responseEntity);
 
         return gson.fromJson(respuestaString, ResponseGcm.class);
+    }
+
+    private void manejarStatus(int status, ResponseGcm response) throws GcmException {
+        if (status == HttpStatus.SC_OK) {
+            if (response.envioFallido()) {
+                throw new GcmException("Registration ID no valido");
+            }
+        }
+        else {
+            if (status == HttpStatus.SC_NOT_FOUND) {
+                throw new GcmException("Body o json no valido");
+            }
+            else if (status == HttpStatus.SC_UNAUTHORIZED) {
+                throw new GcmException("API key no valido");
+            }
+            else if (status / 100 == 5) {
+                throw new GcmException("Error interno en GCM");
+            }
+            else {
+                throw new GcmException();
+            }
+        }
     }
 }

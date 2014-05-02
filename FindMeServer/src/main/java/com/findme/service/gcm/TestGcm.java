@@ -23,7 +23,7 @@ public class TestGcm {
                 + "  ]\n"
                 + "}";
         ResponseGcm resp = gson.fromJson(mockResponse, ResponseGcm.class);
-        System.out.println(resp.envioExitoso());
+        System.out.println(resp.envioFallido());
     }
 
     public static RequestBody mensajePrueba() {
