@@ -12,6 +12,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="28dp"
         android:lines="2"
+        android:textAppearance="?android:attr/textAppearanceSmall"
         android:gravity="center"
         android:text="@string/scan_how_to" />
 
@@ -22,7 +23,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="91dp"
-        android:background="@drawable/ic_launcher" 
+        android:background="@drawable/ic_scan_button" 
         android:onClick="scanQR"/>
 
 </RelativeLayout>

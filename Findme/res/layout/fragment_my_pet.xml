@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:text="Lucy"
-            android:textSize="35sp" />
+            android:textAppearance="?android:attr/textAppearanceLarge" />
     </TableRow>
 
     <TableRow
@@ -38,7 +38,7 @@
             android:layout_marginLeft="10dp"
             android:text="@string/my_pet_important_info"
             android:textColor="#33B5E5"
-            android:textSize="17sp" />
+            android:textAppearance="?android:attr/textAppearanceMedium" />
     </TableRow>
 
     <View
@@ -56,6 +56,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="@string/checkbox_careful" />
 
         <CheckBox
@@ -76,6 +77,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="@string/checkbox_vaccines" />
 
         <CheckBox
@@ -89,7 +91,7 @@
         android:id="@+id/my_profile_tableRow5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dip"
+        android:layout_marginTop="8dip"
         android:padding="5dip" >
 
         <TextView
@@ -99,7 +101,7 @@
             android:layout_marginLeft="10dp"
             android:text="@string/my_pet_extra_info"
             android:textColor="#33B5E5"
-            android:textSize="17sp" />
+            android:textAppearance="?android:attr/textAppearanceMedium" />
     </TableRow>
 
     <View
