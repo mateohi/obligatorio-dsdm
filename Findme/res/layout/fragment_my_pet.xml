@@ -1,0 +1,123 @@
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tableLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <TableRow
+        android:id="@+id/my_pet_tableRow1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="12dip" >
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/my_pet_tableRow2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="12dip" >
+
+        <TextView
+            android:id="@+id/my_pet_important_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="@string/my_pet_important_info"
+            android:textColor="#33B5E5"
+            android:textSize="17sp" />
+    </TableRow>
+
+    <View
+        android:layout_height="2dip"
+        android:background="#33B5E5" />
+
+    <TableRow
+        android:id="@+id/my_pet_tableRow3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dip" >
+
+        <CheckedTextView
+            android:id="@+id/checkBox_careful"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+            android:clickable="true"
+            android:gravity="center"
+            android:text="@string/checkbox_careful"
+            android:textSize="15sp" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/my_pet_tableRow4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dip" >
+
+        <CheckedTextView
+            android:id="@+id/checkBox_vaccines"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+            android:clickable="true"
+            android:gravity="center"
+            android:text="@string/checkbox_vaccines"
+            android:textSize="15sp" 
+            android:checked="true"/>
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/my_profile_tableRow5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dip"
+        android:padding="5dip" >
+
+        <TextView
+            android:id="@+id/my_pet_extra_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="@string/my_pet_extra_info"
+            android:textColor="#33B5E5"
+            android:textSize="17sp" />
+    </TableRow>
+
+    <View
+        android:layout_height="2dip"
+        android:background="#33B5E5" />
+
+    <TableRow
+        android:id="@+id/my_pet_tableRow6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="12dip" >
+
+        <EditText
+            android:id="@+id/my_pet_extra_information"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/my_pet_tableRow7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="12dip" >
+
+        <Button
+            android:id="@+id/button_resend_qr"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            android:onClick="resendQR"
+            android:text="@string/my_pet_button_resend_qr" />
+    </TableRow>
+
+</TableLayout>

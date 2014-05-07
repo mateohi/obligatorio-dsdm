@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tableLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <TableRow
+        android:id="@+id/my_profile_tableRow1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="12dip" >
+
+        <TextView
+            android:id="@+id/my_profile_personal_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="@string/my_profile_personal_title"
+            android:textColor="#33B5E5"
+            android:textSize="17sp" />
+    </TableRow>
+
+    <View
+        android:layout_height="2dip"
+        android:background="#33B5E5" />
+
+    <TableRow
+        android:id="@+id/my_profile_tableRow2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dip" >
+
+        <TextView
+            android:id="@+id/my_profile_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_weight="1"
+            android:text="@string/my_profile_name" />
+
+        <EditText
+            android:id="@+id/profile_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:layout_weight="2" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/my_profile_tableRow3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dip" >
+
+        <TextView
+            android:id="@+id/my_profile_last_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_weight="1"
+            android:text="@string/my_profile_last_name" />
+
+        <EditText
+            android:id="@+id/profile_last_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:layout_weight="2" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/my_profile_tableRow5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dip"
+        android:padding="5dip" >
+
+        <TextView
+            android:id="@+id/my_profile_contact_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_weight="1"
+            android:text="@string/my_profile_contact_title"
+            android:textColor="#33B5E5"
+            android:textSize="17sp" />
+    </TableRow>
+
+    <View
+        android:layout_height="2dip"
+        android:background="#33B5E5" />
+
+    <TableRow
+        android:id="@+id/my_profile_tableRow6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dip" >
+
+        <TextView
+            android:id="@+id/my_profile_mail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_weight="1"
+            android:text="@string/my_profile_mail" />
+
+        <EditText
+            android:id="@+id/profile_mail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:layout_weight="2" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/my_profile_tableRow7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dip" >
+
+        <TextView
+            android:id="@+id/my_profile_mobile_phone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_weight="1"
+            android:text="@string/my_profile_mobile_phone" />
+
+        <EditText
+            android:id="@+id/profile_mobile_phone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:layout_weight="2" />
+    </TableRow>
+
+</TableLayout>
