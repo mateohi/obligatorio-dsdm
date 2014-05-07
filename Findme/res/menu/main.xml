@@ -3,6 +3,11 @@
     tools:context="com.example.findme.MainActivity" >
 
     <item
+        android:id="@+id/notification"
+        android:showAsAction="withText|ifRoom"
+        android:icon="@drawable/rating_favorite_rojo"/>
+    
+    <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
         android:showAsAction="never"

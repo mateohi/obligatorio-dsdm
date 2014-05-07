@@ -43,7 +43,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
-            android:layout_weight="2" />
+            android:layout_weight="2"
+            android:inputType="textCapSentences" />
     </TableRow>
 
     <TableRow
@@ -65,7 +66,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
-            android:layout_weight="2" />
+            android:layout_weight="2"
+            android:inputType="textCapSentences" />
     </TableRow>
 
     <TableRow
@@ -109,7 +111,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
-            android:layout_weight="2" />
+            android:layout_weight="2"
+            android:inputType="textEmailAddress" />
     </TableRow>
 
     <TableRow
@@ -131,7 +134,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
-            android:layout_weight="2" />
+            android:layout_weight="2"
+            android:inputType="phone" />
     </TableRow>
 
 </TableLayout>

@@ -29,13 +29,15 @@ public final class R {
         public static final int ic_action_settings=0x7f020004;
         public static final int ic_drawer=0x7f020005;
         public static final int ic_launcher=0x7f020006;
+        public static final int rating_favorite_rojo=0x7f020007;
     }
     public static final class id {
-        public static final int action_settings=0x7f08002d;
-        public static final int button_resend_qr=0x7f08001b;
-        public static final int button_scan=0x7f08002c;
-        public static final int checkBox_careful=0x7f080013;
-        public static final int checkBox_vaccines=0x7f080015;
+        public static final int action_settings=0x7f080032;
+        public static final int button_change_pet_picture=0x7f080010;
+        public static final int button_resend_qr=0x7f08001f;
+        public static final int button_scan=0x7f080030;
+        public static final int checkBox_careful=0x7f080016;
+        public static final int checkBox_vaccines=0x7f080019;
         public static final int configuration_tableRow1=0x7f080007;
         public static final int configuration_tableRow2=0x7f080009;
         public static final int configuration_tableRow3=0x7f08000c;
@@ -46,36 +48,40 @@ public final class R {
         public static final int drawer_layout=0x7f080000;
         public static final int itemLayout=0x7f080003;
         public static final int left_drawer=0x7f080002;
-        public static final int my_pet_extra_info=0x7f080017;
-        public static final int my_pet_extra_information=0x7f080019;
-        public static final int my_pet_important_info=0x7f080011;
+        public static final int my_pet_extra_info=0x7f08001b;
+        public static final int my_pet_extra_information=0x7f08001d;
+        public static final int my_pet_important_info=0x7f080013;
+        public static final int my_pet_name=0x7f080011;
         public static final int my_pet_tableRow1=0x7f08000f;
-        public static final int my_pet_tableRow2=0x7f080010;
-        public static final int my_pet_tableRow3=0x7f080012;
-        public static final int my_pet_tableRow4=0x7f080014;
-        public static final int my_pet_tableRow6=0x7f080018;
-        public static final int my_pet_tableRow7=0x7f08001a;
-        public static final int my_profile_contact_title=0x7f080024;
-        public static final int my_profile_last_name=0x7f080022;
-        public static final int my_profile_mail=0x7f080026;
-        public static final int my_profile_mobile_phone=0x7f080029;
-        public static final int my_profile_name=0x7f08001f;
-        public static final int my_profile_personal_title=0x7f08001d;
-        public static final int my_profile_tableRow1=0x7f08001c;
-        public static final int my_profile_tableRow2=0x7f08001e;
-        public static final int my_profile_tableRow3=0x7f080021;
-        public static final int my_profile_tableRow5=0x7f080016;
-        public static final int my_profile_tableRow6=0x7f080025;
-        public static final int my_profile_tableRow7=0x7f080028;
-        public static final int profile_last_name=0x7f080023;
-        public static final int profile_mail=0x7f080027;
-        public static final int profile_mobile_phone=0x7f08002a;
-        public static final int profile_name=0x7f080020;
+        public static final int my_pet_tableRow2=0x7f080012;
+        public static final int my_pet_tableRow3=0x7f080014;
+        public static final int my_pet_tableRow4=0x7f080017;
+        public static final int my_pet_tableRow6=0x7f08001c;
+        public static final int my_pet_tableRow7=0x7f08001e;
+        public static final int my_profile_contact_title=0x7f080028;
+        public static final int my_profile_last_name=0x7f080026;
+        public static final int my_profile_mail=0x7f08002a;
+        public static final int my_profile_mobile_phone=0x7f08002d;
+        public static final int my_profile_name=0x7f080023;
+        public static final int my_profile_personal_title=0x7f080021;
+        public static final int my_profile_tableRow1=0x7f080020;
+        public static final int my_profile_tableRow2=0x7f080022;
+        public static final int my_profile_tableRow3=0x7f080025;
+        public static final int my_profile_tableRow5=0x7f08001a;
+        public static final int my_profile_tableRow6=0x7f080029;
+        public static final int my_profile_tableRow7=0x7f08002c;
+        public static final int notification=0x7f080031;
+        public static final int profile_last_name=0x7f080027;
+        public static final int profile_mail=0x7f08002b;
+        public static final int profile_mobile_phone=0x7f08002e;
+        public static final int profile_name=0x7f080024;
         public static final int sound_text=0x7f08000d;
         public static final int switch_sound=0x7f08000e;
         public static final int switch_vibrate=0x7f08000b;
         public static final int tableLayout1=0x7f080006;
-        public static final int text_main_scan=0x7f08002b;
+        public static final int textView_careful=0x7f080015;
+        public static final int textView_vaccines=0x7f080018;
+        public static final int text_main_scan=0x7f08002f;
         public static final int vibrate_text=0x7f08000a;
     }
     public static final class layout {
@@ -85,7 +91,8 @@ public final class R {
         public static final int fragment_main=0x7f030003;
         public static final int fragment_my_pet=0x7f030004;
         public static final int fragment_my_profile=0x7f030005;
-        public static final int fragment_scan=0x7f030006;
+        public static final int fragment_notifications=0x7f030006;
+        public static final int fragment_scan=0x7f030007;
     }
     public static final class menu {
         public static final int main=0x7f070000;

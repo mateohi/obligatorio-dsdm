@@ -8,13 +8,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="12dip" >
+
+        <Button
+            android:id="@+id/button_change_pet_picture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Image"
+			android:onClick="changeImage"/>
+
+        <TextView
+            android:id="@+id/my_pet_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Lucy"
+            android:textSize="35sp" />
     </TableRow>
 
     <TableRow
         android:id="@+id/my_pet_tableRow2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="12dip" >
+        android:padding="5dip" >
 
         <TextView
             android:id="@+id/my_pet_important_info"
@@ -36,16 +51,18 @@
         android:layout_height="wrap_content"
         android:padding="5dip" >
 
-        <CheckedTextView
+        <TextView
+            android:id="@+id/textView_careful"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/checkbox_careful" />
+
+        <CheckBox
             android:id="@+id/checkBox_careful"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
-            android:clickable="true"
-            android:gravity="center"
-            android:text="@string/checkbox_careful"
-            android:textSize="15sp" />
+            android:text="" />
     </TableRow>
 
     <TableRow
@@ -54,24 +71,25 @@
         android:layout_height="wrap_content"
         android:padding="5dip" >
 
-        <CheckedTextView
+        <TextView
+            android:id="@+id/textView_vaccines"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/checkbox_vaccines" />
+
+        <CheckBox
             android:id="@+id/checkBox_vaccines"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
-            android:clickable="true"
-            android:gravity="center"
-            android:text="@string/checkbox_vaccines"
-            android:textSize="15sp" 
-            android:checked="true"/>
+            android:text="" />
     </TableRow>
 
     <TableRow
         android:id="@+id/my_profile_tableRow5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="35dip"
+        android:layout_marginTop="20dip"
         android:padding="5dip" >
 
         <TextView
@@ -100,14 +118,17 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_weight="1" />
+            android:layout_weight="1" 
+            android:maxLines="2"
+            android:maxLength="21"
+            android:inputType="textCapSentences"/>
     </TableRow>
 
     <TableRow
         android:id="@+id/my_pet_tableRow7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="12dip" >
+        android:padding="5dip" >
 
         <Button
             android:id="@+id/button_resend_qr"
