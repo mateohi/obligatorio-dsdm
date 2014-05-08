@@ -3,7 +3,7 @@ package com.findme.service.dataaccess;
 import com.findme.service.model.Usuario;
 import java.util.List;
 
-public interface IUsuarioDao {
+public interface UsuarioDao {
 
     public List<Usuario> getUsuarios();
 

@@ -1,10 +1,10 @@
-package com.findme.service.dataaccess.dao;
+package com.findme.service.dataaccess.hibernatedao;
 
-import com.findme.service.dataaccess.IMascotaDao;
+import com.findme.service.dataaccess.MascotaDao;
 import com.findme.service.model.Mascota;
 import java.util.List;
 
-public class MascotaDao implements IMascotaDao {
+public class MascotaDaoHibernate implements MascotaDao {
 
     @Override
     public List<Mascota> getMascotas() {
