@@ -17,7 +17,7 @@
             android:layout_marginLeft="10dp"
             android:text="@string/my_profile_personal_title"
             android:textColor="#33B5E5"
-            android:textSize="17sp" />
+            android:textAppearance="?android:attr/textAppearanceMedium" />
     </TableRow>
 
     <View
@@ -36,6 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_weight="1"
+            android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="@string/my_profile_name" />
 
         <EditText
@@ -43,7 +44,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
-            android:layout_weight="2" />
+            android:layout_weight="2"
+            android:inputType="textCapSentences" />
     </TableRow>
 
     <TableRow
@@ -58,6 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_weight="1"
+            android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="@string/my_profile_last_name" />
 
         <EditText
@@ -65,7 +68,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
-            android:layout_weight="2" />
+            android:layout_weight="2"
+            android:inputType="textCapSentences" />
     </TableRow>
 
     <TableRow
@@ -83,7 +87,7 @@
             android:layout_weight="1"
             android:text="@string/my_profile_contact_title"
             android:textColor="#33B5E5"
-            android:textSize="17sp" />
+            android:textAppearance="?android:attr/textAppearanceMedium" />
     </TableRow>
 
     <View
@@ -102,6 +106,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_weight="1"
+            android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="@string/my_profile_mail" />
 
         <EditText
@@ -109,7 +114,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
-            android:layout_weight="2" />
+            android:layout_weight="2"
+            android:inputType="textEmailAddress" />
     </TableRow>
 
     <TableRow
@@ -124,6 +130,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_weight="1"
+            android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="@string/my_profile_mobile_phone" />
 
         <EditText
@@ -131,7 +138,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
-            android:layout_weight="2" />
+            android:layout_weight="2"
+            android:inputType="phone" />
     </TableRow>
 
 </TableLayout>

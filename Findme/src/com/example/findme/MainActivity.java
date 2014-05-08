@@ -3,8 +3,9 @@ package com.example.findme;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.findme.R.id;
+
 import android.app.Activity;
-import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.res.Configuration;
@@ -12,14 +13,15 @@ import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.CheckedTextView;
 import android.widget.ListView;
-import android.os.Build;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
@@ -29,8 +31,10 @@ public class MainActivity extends Activity {
 
 	private CharSequence mDrawerTitle;
 	private CharSequence mTitle;
-	CustomDrawerAdapter adapter;
 
+	private int actualPosition = 0;
+
+	CustomDrawerAdapter adapter;
 	List<DrawerItem> dataList;
 
 	@Override
@@ -103,18 +107,19 @@ public class MainActivity extends Activity {
 		switch (position) {
 		case 0:
 			fragment = new FragmentScan();
-
+			saveChanges(position);
 			break;
 		case 1:
 			fragment = new FragmentPetProfile();
-
+			saveChanges(position);
 			break;
 		case 2:
 			fragment = new FragmentMyProfile();
-
+			saveChanges(position);
 			break;
 		case 3:
 			fragment = new FragmentConfiguration();
+			saveChanges(position);
 			break;
 		default:
 			break;
@@ -157,6 +162,16 @@ public class MainActivity extends Activity {
 		if (mDrawerToggle.onOptionsItemSelected(item)) {
 			return true;
 		}
+		if (item.getItemId() == id.notification) {
+			Fragment fragment = new FragmentNotifications();
+			saveChanges(4);
+			FragmentManager frgManager = getFragmentManager();
+			frgManager.beginTransaction().replace(R.id.content_frame, fragment)
+					.commit();
+			setTitle("Notifications");
+			mDrawerLayout.closeDrawer(mDrawerList);
+			return true;
+		}
 
 		return false;
 	}
@@ -171,28 +186,6 @@ public class MainActivity extends Activity {
 		}
 	}
 
-//	public void addListenerOnCheckboxCareful() {
-//		checkedTextView = (CheckedTextView) findViewById(R.id.checkBox_careful);
-//		btnDisplay = (Button) findViewById(R.id.button1);
-//		
-//		checkedTextView.setOnClickListener(new OnClickListener() {
-//
-//			@Override
-//			public void onClick(View v) {
-//				checkedTextView.toggle();
-//				if (checkedTextView.isChecked()) {
-//					checkedTextView.setText("Checked");
-//
-//				} else {
-//					checkedTextView.setText("Unchecked");
-//				}
-//			}
-//		});
-//		
-//	 
-//	  }
-
-	
 	public void scanQR(View view) {
 
 	}
@@ -200,4 +193,22 @@ public class MainActivity extends Activity {
 	public void resendQR(View view) {
 	}
 
+	public void changeImage(View view) {
+
+	}
+
+	public void saveChanges(int position) {
+		if (position != this.actualPosition) {
+			if(this.actualPosition == 1){
+				Toast.makeText(this, "Se han guardado los datos de la mascota", Toast.LENGTH_SHORT).show();
+			}
+			else if(this.actualPosition == 2){
+				Toast.makeText(this, "Se han guardado los datos del usuario", Toast.LENGTH_SHORT).show();
+			}
+			else if(this.actualPosition == 3){
+				Toast.makeText(this, "Se han guardado los datos de la configuración", Toast.LENGTH_SHORT).show();
+			}
+			this.actualPosition = position;
+		}
+	}
 }

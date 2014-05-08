@@ -11,9 +11,13 @@
     <property name="hibernate.hbm2ddl.auto">update</property>
     <property name="hibernate.show_sql">true</property>
     
+<<<<<<< HEAD
     <mapping class="com.findme.service.model.Mascota" />
     <mapping class="com.findme.service.model.Usuario" />
 <!--    <mapping class="com.findme.service.model.Persistent" />-->
+=======
+    <mapping class="com.findme.service.model.Usuario" />
+>>>>>>> 6b6916d83884c1d469363be2cf135427e90e5835
         
   </session-factory>
 </hibernate-configuration>
