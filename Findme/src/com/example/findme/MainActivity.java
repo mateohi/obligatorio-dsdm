@@ -3,6 +3,7 @@ package com.example.findme;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -188,9 +189,14 @@ public class MainActivity extends FragmentActivity {
 	}
 
 	public void scanQR(View view) {
+		try {
 		Intent intent = new Intent("com.google.zxing.client.android.SCAN");
 		intent.putExtra("SCAN_MODE", "QR_CODE_MODE");
-		startActivityForResult(intent, REQUEST_SCAN);
+		startActivityForResult(intent, REQUEST_SCAN); 
+		}
+		catch (ActivityNotFoundException ex) {
+			Toast.makeText(this, "Baje una aplicacion para leer QR.", Toast.LENGTH_LONG).show();
+		}
 	}
 
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
