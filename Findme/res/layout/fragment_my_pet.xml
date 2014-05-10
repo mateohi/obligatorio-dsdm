@@ -22,6 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:text="Lucy"
+            android:fontFamily="Lucida"
             android:textAppearance="?android:attr/textAppearanceLarge" />
     </TableRow>
 
@@ -36,14 +37,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
+            android:fontFamily="Lucida"
             android:text="@string/my_pet_important_info"
-            android:textColor="#33B5E5"
+            android:textColor="#FF3333"
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </TableRow>
 
     <View
         android:layout_height="2dip"
-        android:background="#33B5E5" />
+        android:background="#FF3333" />
 
     <TableRow
         android:id="@+id/my_pet_tableRow3"
@@ -56,6 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:fontFamily="Lucida"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="@string/checkbox_careful" />
 
@@ -77,6 +80,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:fontFamily="Lucida"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="@string/checkbox_vaccines" />
 
@@ -100,13 +104,14 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:text="@string/my_pet_extra_info"
-            android:textColor="#33B5E5"
+            android:textColor="#FF3333"
+            android:fontFamily="Lucida"
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </TableRow>
 
     <View
         android:layout_height="2dip"
-        android:background="#33B5E5" />
+        android:background="#FF3333" />
 
     <TableRow
         android:id="@+id/my_pet_tableRow6"
@@ -139,6 +144,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_weight="1"
+            android:fontFamily="Lucida"
             android:onClick="resendQR"
             android:text="@string/my_pet_button_resend_qr" />
     </TableRow>

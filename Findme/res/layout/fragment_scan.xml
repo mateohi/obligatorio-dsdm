@@ -12,6 +12,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="28dp"
         android:lines="2"
+        android:fontFamily="Lucida"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:gravity="center"
         android:text="@string/scan_how_to" />

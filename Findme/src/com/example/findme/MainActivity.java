@@ -3,27 +3,25 @@ package com.example.findme;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.findme.R.id;
-
-import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTabHost;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.CheckedTextView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class MainActivity extends Activity {
+import com.example.findme.R.id;
+
+public class MainActivity extends FragmentActivity {
 
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;
@@ -36,6 +34,8 @@ public class MainActivity extends Activity {
 
 	CustomDrawerAdapter adapter;
 	List<DrawerItem> dataList;
+
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -125,10 +125,10 @@ public class MainActivity extends Activity {
 			break;
 		}
 
-		FragmentManager frgManager = getFragmentManager();
+		FragmentManager frgManager = getSupportFragmentManager();
 		frgManager.beginTransaction().replace(R.id.content_frame, fragment)
 				.commit();
-
+		
 		mDrawerList.setItemChecked(position, true);
 		setTitle(dataList.get(position).getItemName());
 		mDrawerLayout.closeDrawer(mDrawerList);
@@ -165,11 +165,12 @@ public class MainActivity extends Activity {
 		if (item.getItemId() == id.notification) {
 			Fragment fragment = new FragmentNotifications();
 			saveChanges(4);
-			FragmentManager frgManager = getFragmentManager();
+			FragmentManager frgManager = getSupportFragmentManager();
 			frgManager.beginTransaction().replace(R.id.content_frame, fragment)
 					.commit();
 			setTitle("Notifications");
 			mDrawerLayout.closeDrawer(mDrawerList);
+			
 			return true;
 		}
 
@@ -182,7 +183,7 @@ public class MainActivity extends Activity {
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
 			SelectItem(position);
-
+			
 		}
 	}
 
@@ -199,14 +200,16 @@ public class MainActivity extends Activity {
 
 	public void saveChanges(int position) {
 		if (position != this.actualPosition) {
-			if(this.actualPosition == 1){
-				Toast.makeText(this, "Se han guardado los datos de la mascota", Toast.LENGTH_SHORT).show();
-			}
-			else if(this.actualPosition == 2){
-				Toast.makeText(this, "Se han guardado los datos del usuario", Toast.LENGTH_SHORT).show();
-			}
-			else if(this.actualPosition == 3){
-				Toast.makeText(this, "Se han guardado los datos de la configuración", Toast.LENGTH_SHORT).show();
+			if (this.actualPosition == 1) {
+				Toast.makeText(this, "Se han guardado los datos de la mascota",
+						Toast.LENGTH_SHORT).show();
+			} else if (this.actualPosition == 2) {
+				Toast.makeText(this, "Se han guardado los datos del usuario",
+						Toast.LENGTH_SHORT).show();
+			} else if (this.actualPosition == 3) {
+				Toast.makeText(this,
+						"Se han guardado los datos de la configuración",
+						Toast.LENGTH_SHORT).show();
 			}
 			this.actualPosition = position;
 		}

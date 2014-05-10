@@ -16,13 +16,14 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:text="@string/my_profile_personal_title"
-            android:textColor="#33B5E5"
+            android:textColor="#FF3333"
+			android:fontFamily="Lucida"
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </TableRow>
 
     <View
         android:layout_height="2dip"
-        android:background="#33B5E5" />
+        android:background="#FF3333" />
 
     <TableRow
         android:id="@+id/my_profile_tableRow2"
@@ -36,6 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_weight="1"
+			android:fontFamily="Lucida"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="@string/my_profile_name" />
 
@@ -60,6 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_weight="1"
+            android:fontFamily="Lucida"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="@string/my_profile_last_name" />
 
@@ -85,14 +88,15 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_weight="1"
+            android:fontFamily="Lucida"
             android:text="@string/my_profile_contact_title"
-            android:textColor="#33B5E5"
+            android:textColor="#FF3333"
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </TableRow>
 
     <View
         android:layout_height="2dip"
-        android:background="#33B5E5" />
+        android:background="#FF3333" />
 
     <TableRow
         android:id="@+id/my_profile_tableRow6"
@@ -106,6 +110,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_weight="1"
+            android:fontFamily="Lucida"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="@string/my_profile_mail" />
 
@@ -130,6 +135,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_weight="1"
+            android:fontFamily="Lucida"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="@string/my_profile_mobile_phone" />
 

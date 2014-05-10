@@ -7,8 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class FragmentScan extends Fragment {
-	public FragmentScan() {
+public class FragmentNotificationsSent extends Fragment {
+	public FragmentNotificationsSent() {
 
 	}
 
@@ -16,7 +16,7 @@ public class FragmentScan extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
-		View view = inflater.inflate(R.layout.fragment_scan,
+		View view = inflater.inflate(R.layout.fragment_notifications_sent,
 				container, false);
 
 		return view;

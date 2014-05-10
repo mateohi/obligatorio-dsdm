@@ -1,14 +1,13 @@
 package com.example.findme;
 
-
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class FragmentScan extends Fragment {
-	public FragmentScan() {
+public class FragmentNotificationsReceived extends Fragment {
+	public FragmentNotificationsReceived() {
 
 	}
 
@@ -16,7 +15,7 @@ public class FragmentScan extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
-		View view = inflater.inflate(R.layout.fragment_scan,
+		View view = inflater.inflate(R.layout.fragment_notifications_received,
 				container, false);
 
 		return view;
