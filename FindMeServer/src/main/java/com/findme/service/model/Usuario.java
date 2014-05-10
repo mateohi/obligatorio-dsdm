@@ -16,6 +16,8 @@ public class Usuario extends Persistent {
     private String correo;
     @Column(name = "Celular")
     private String celular;
+    @Column(name = "Mascota")
+    private Mascota mascota;
 
     public Usuario() {
     }
@@ -50,5 +52,13 @@ public class Usuario extends Persistent {
 
     public void setCelular(String celular) {
         this.celular = celular;
+    }
+
+    public Mascota getMascota() {
+        return mascota;
+    }
+
+    public void setMascota(Mascota mascota) {
+        this.mascota = mascota;
     }
 }

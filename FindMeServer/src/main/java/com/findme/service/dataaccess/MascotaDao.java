@@ -3,7 +3,7 @@ package com.findme.service.dataaccess;
 import com.findme.service.model.Mascota;
 import java.util.List;
 
-public interface IMascotaDao {
+public interface MascotaDao {
 
     public List<Mascota> getMascotas();
 
