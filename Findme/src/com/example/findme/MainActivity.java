@@ -3,13 +3,13 @@ package com.example.findme;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTabHost;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
@@ -30,12 +30,12 @@ public class MainActivity extends FragmentActivity {
 	private CharSequence mDrawerTitle;
 	private CharSequence mTitle;
 
+	private static final int REQUEST_SCAN = 0;
+
 	private int actualPosition = 0;
 
 	CustomDrawerAdapter adapter;
 	List<DrawerItem> dataList;
-
-
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -128,7 +128,7 @@ public class MainActivity extends FragmentActivity {
 		FragmentManager frgManager = getSupportFragmentManager();
 		frgManager.beginTransaction().replace(R.id.content_frame, fragment)
 				.commit();
-		
+
 		mDrawerList.setItemChecked(position, true);
 		setTitle(dataList.get(position).getItemName());
 		mDrawerLayout.closeDrawer(mDrawerList);
@@ -170,7 +170,7 @@ public class MainActivity extends FragmentActivity {
 					.commit();
 			setTitle("Notifications");
 			mDrawerLayout.closeDrawer(mDrawerList);
-			
+
 			return true;
 		}
 
@@ -183,12 +183,28 @@ public class MainActivity extends FragmentActivity {
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
 			SelectItem(position);
-			
+
 		}
 	}
 
 	public void scanQR(View view) {
+		Intent intent = new Intent("com.google.zxing.client.android.SCAN");
+		intent.putExtra("SCAN_MODE", "QR_CODE_MODE");
+		startActivityForResult(intent, REQUEST_SCAN);
+	}
 
+	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+		if (requestCode == REQUEST_SCAN) {
+			if (resultCode == RESULT_OK) {
+				String contents = intent.getStringExtra("SCAN_RESULT");
+
+				Toast.makeText(this, contents, Toast.LENGTH_SHORT)
+						.show();
+			} else if (resultCode == RESULT_CANCELED) {
+				Toast.makeText(this, "Error al leer el QR", Toast.LENGTH_SHORT)
+						.show();
+			}
+		}
 	}
 
 	public void resendQR(View view) {
