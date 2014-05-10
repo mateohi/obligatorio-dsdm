@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Findme</string>
+    <string name="action_settings">Settings</string>
+    <string name="drawer_open">Open drawer</string>
+    <string name="drawer_close">Close drawer</string>
+    <string name="scan_how_to">Apretá el botón y escaneá el código
+    						          QR del perro que encontraste.</string>
+    <string name="my_pet_important_info">Datos de importancia</string>
+    <string name="checkbox_careful">Manejar con cuidado</string>
+    <string name="checkbox_vaccines">Tiene vacunas al día</string>	
+    <string name="my_pet_extra_info">Información adicional</string>
+    <string name="my_pet_button_resend_qr">Reenviar QR a mi correo</string>
+    <string name="my_profile_personal_title">Datos personales</string>
+    <string name="my_profile_name">Nombre</string>
+    <string name="my_profile_last_name">Apellido</string>
+    <string name="my_profile_contact_title">Información de contacto</string>
+    <string name="my_profile_mail">Correo</string>
+    <string name="my_profile_mobile_phone">Celular</string>
+    <string name="configuration_notification">Notificaciones</string>
+    <string name="configuration_vibrate">Vibración</string>
+    <string name="configuration_sound">Sonido</string>
+
+</resources>
