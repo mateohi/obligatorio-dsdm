@@ -1,6 +1,7 @@
 target/
+bin/
 
+R.class
 *.class
 
-*.jar
-*.war
+*.apk
