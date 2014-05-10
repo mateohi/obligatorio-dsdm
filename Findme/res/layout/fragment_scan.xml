@@ -4,27 +4,26 @@
     android:layout_height="match_parent"
     android:layout_centerInParent="true" >
 
+    <Button
+        android:id="@+id/button_scan"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/ic_scan_button"
+        android:onClick="scanQR" />
+
     <TextView
         android:id="@+id/text_main_scan"
         android:layout_width="240dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/button_scan"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="28dp"
-        android:lines="2"
+        android:layout_marginTop="30dp"
         android:fontFamily="Lucida"
-        android:textAppearance="?android:attr/textAppearanceSmall"
         android:gravity="center"
-        android:text="@string/scan_how_to" />
-
-    <Button
-        android:id="@+id/button_scan"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="91dp"
-        android:background="@drawable/ic_scan_button" 
-        android:onClick="scanQR"/>
+        android:lines="2"
+        android:text="@string/scan_how_to"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </RelativeLayout>
