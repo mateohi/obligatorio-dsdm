@@ -3,13 +3,19 @@ package com.findme.service.dataaccess.hibernatedao;
 import com.findme.service.dataaccess.UsuarioDao;
 import com.findme.service.model.Usuario;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.hibernate3.HibernateTemplate;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.springframework.stereotype.Component;
 
+@Component
 public class UsuarioDaoHibernate implements UsuarioDao {
 
-    @Autowired
-    private HibernateTemplate hibernateTemplate;
+    private SessionFactory sessionFactory;
+
+    public UsuarioDaoHibernate() {
+        this.sessionFactory = HibernateUtil.getSessionFactory();
+    }
 
     @Override
     public List<Usuario> getUsuarios() {
@@ -28,6 +34,12 @@ public class UsuarioDaoHibernate implements UsuarioDao {
 
     @Override
     public void addUsuario(Usuario usuario) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Session session = this.sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+
+        session.saveOrUpdate(usuario);
+
+        transaction.commit();
+        session.close();
     }
 }

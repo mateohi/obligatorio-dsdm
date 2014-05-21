@@ -3,13 +3,17 @@ package com.findme.service.dataaccess.hibernatedao;
 import com.findme.service.dataaccess.MascotaDao;
 import com.findme.service.model.Mascota;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.hibernate3.HibernateTemplate;
+import org.hibernate.SessionFactory;
+import org.springframework.stereotype.Component;
 
+@Component
 public class MascotaDaoHibernate implements MascotaDao {
 
-    @Autowired
-    private HibernateTemplate hibernateTemplate;
+    private SessionFactory sessionFactory;
+
+    public MascotaDaoHibernate() {
+        this.sessionFactory = HibernateUtil.getSessionFactory();
+    }
 
     @Override
     public List<Mascota> getMascotas() {

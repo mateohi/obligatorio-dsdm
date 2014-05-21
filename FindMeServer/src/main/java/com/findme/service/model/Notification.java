@@ -9,7 +9,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "Notificacion")
-public class Notificacion extends Persistent {
+public class Notification extends Persistent {
 
     @Column(name = "Dueño")
     private Usuario usuarioDueno;
@@ -25,7 +25,7 @@ public class Notificacion extends Persistent {
     @Column(name = "Latitud")
     private String latitud;
 
-    public Notificacion() {
+    public Notification() {
     }
 
     public Usuario getUsuarioDueno() {
