@@ -1,4 +1,4 @@
-package com.findme.app.controller;
+package com.findme.app.controller.integration;
 
 import java.io.IOException;
 
@@ -10,21 +10,29 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 
-import com.example.findme.model.Usuario;
+import com.findme.app.model.Usuario;
 import com.google.gson.Gson;
 
-public class ServiceClient {
+public class UserServiceClient {
 
 	//private static final String SERVICE_URL = "http://mateohi.noip.me";
 	private static final String SERVICE_URL = "http://localhost:8080";
 	private static final String ADD_USER = "/users";
 
+	private UserServiceClient instance;
 	private HttpClient cliente;
 	private Gson gson;
 
-	public ServiceClient() {
+	private UserServiceClient() {
 		this.cliente = new DefaultHttpClient();
 		this.gson = new Gson();
+	}
+	
+	public UserServiceClient instance() {
+		if (this.instance == null) {
+			this.instance = new UserServiceClient();
+		}
+		return this.instance;
 	}
 	
 	public String postUser(Usuario usuario) {
