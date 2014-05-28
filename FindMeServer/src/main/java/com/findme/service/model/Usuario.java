@@ -9,6 +9,7 @@ public class Usuario extends Persistent {
     private String apellido;
     private String correo;
     private String celular;
+    private String gcmId;
     private Mascota mascota;
 
     public Usuario() {
@@ -44,6 +45,14 @@ public class Usuario extends Persistent {
 
     public void setCelular(String celular) {
         this.celular = celular;
+    }
+
+    public String getGcmId() {
+        return gcmId;
+    }
+
+    public void setGcmId(String gcmId) {
+        this.gcmId = gcmId;
     }
 
     public Mascota getMascota() {
