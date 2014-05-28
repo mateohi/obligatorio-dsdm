@@ -6,7 +6,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-//@ImportResource(value = "classpath*:application-context.xml")
 @ComponentScan(basePackages = {"com.findme.service.controller", "com.findme.service.dataaccess.hibernatedao"})
 @EnableAutoConfiguration
 public class FindMeServer {

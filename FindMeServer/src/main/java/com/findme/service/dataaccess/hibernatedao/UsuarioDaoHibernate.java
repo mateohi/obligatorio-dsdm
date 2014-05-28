@@ -19,17 +19,40 @@ public class UsuarioDaoHibernate implements UsuarioDao {
 
     @Override
     public List<Usuario> getUsuarios() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Session session = this.sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+
+        List<Usuario> usuarios = session.createCriteria(Usuario.class).list();
+
+        transaction.commit();
+        session.close();
+
+        return usuarios;
     }
 
     @Override
     public Usuario getUsuarioById(long id) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Session session = this.sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+
+        Usuario usuario = (Usuario) session.get(Usuario.class, id);
+
+        transaction.commit();
+        session.close();
+
+        return usuario;
     }
 
     @Override
     public void deleteUsuario(long id) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Session session = this.sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+
+        Usuario usuario = getUsuarioById(id);
+        session.delete(usuario);
+
+        transaction.commit();
+        session.close();
     }
 
     @Override
