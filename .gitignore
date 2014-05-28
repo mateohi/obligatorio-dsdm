@@ -1,8 +1,12 @@
 target/
 bin/
 .metadata/
+findeme/gen/
+gen/
 
 R.class
-*.class
+lint.xml
+project.properties
 
+*.class
 *.apk
