@@ -2,6 +2,7 @@ package com.findme.app.model;
 
 public class Usuario {
 
+	private int id;
     private String nombre;
     private String apellido;
     private String correo;
@@ -11,10 +12,18 @@ public class Usuario {
     public Usuario() {
     }
 
+    public int getId(){
+    	return id;
+    }
+        
+    public void setId(int pId){
+    	this.id = pId;
+    }
+    
     public String getNombre() {
         return nombre;
     }
-
+    
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }

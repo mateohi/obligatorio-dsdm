@@ -2,6 +2,7 @@ package com.findme.app.model;
 
 public class Mascota {
 
+	private int id;
     private String nombre;
     private String info;
     private String pathFoto;
@@ -11,6 +12,14 @@ public class Mascota {
     public Mascota() {
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int pId) {
+        this.id = pId;
+    }
+    
     public String getNombre() {
         return nombre;
     }
