@@ -15,11 +15,11 @@ import com.google.gson.Gson;
 
 public class UserServiceClient {
 
-	//private static final String SERVICE_URL = "http://mateohi.noip.me";
-	private static final String SERVICE_URL = "http://localhost:8080";
+	//private static final String SERVICE_URL = "http://mateohi.noip.me/findme";
+	private static final String SERVICE_URL = "http://192.168.0.101:8080/findme";
 	private static final String ADD_USER = "/users";
 
-	private UserServiceClient instance;
+	private static UserServiceClient instance;
 	private HttpClient cliente;
 	private Gson gson;
 
@@ -28,11 +28,11 @@ public class UserServiceClient {
 		this.gson = new Gson();
 	}
 	
-	public UserServiceClient instance() {
-		if (this.instance == null) {
-			this.instance = new UserServiceClient();
+	public static UserServiceClient instance() {
+		if (instance == null) {
+			instance = new UserServiceClient();
 		}
-		return this.instance;
+		return instance;
 	}
 	
 	public String postUser(Usuario usuario) {

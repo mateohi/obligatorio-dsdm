@@ -1,7 +1,7 @@
 target/
 bin/
 .metadata/
-findeme/gen/
+findme/gen/
 gen/
 
 R.class

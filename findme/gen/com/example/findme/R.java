@@ -176,9 +176,11 @@ containing a value of this type.
         public static final int common_signin_btn_light_text_disabled=0x7f040006;
         public static final int common_signin_btn_light_text_focused=0x7f040007;
         public static final int common_signin_btn_light_text_pressed=0x7f040005;
-        public static final int common_signin_btn_text_dark=0x7f04000b;
-        public static final int common_signin_btn_text_light=0x7f04000c;
+        public static final int common_signin_btn_text_dark=0x7f04000d;
+        public static final int common_signin_btn_text_light=0x7f04000e;
         public static final int coral_red=0x7f04000a;
+        public static final int light_gray=0x7f04000c;
+        public static final int white=0x7f04000b;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -231,13 +233,12 @@ containing a value of this type.
         public static final int rating_favorite_rojo=0x7f020024;
     }
     public static final class id {
-        public static final int REGID=0x7f050037;
-        public static final int action_settings=0x7f050039;
+        public static final int REGID=0x7f05003a;
+        public static final int action_settings=0x7f05003c;
         public static final int button_change_pet_picture=0x7f050016;
-        public static final int button_resend_qr=0x7f050025;
-        public static final int button_scan=0x7f050035;
-        public static final int checkBox_careful=0x7f05001c;
-        public static final int checkBox_vaccines=0x7f05001f;
+        public static final int button_resend_qr=0x7f050027;
+        public static final int button_save_profile=0x7f050025;
+        public static final int button_scan=0x7f050038;
         public static final int configuration_tableRow1=0x7f05000c;
         public static final int configuration_tableRow2=0x7f05000e;
         public static final int configuration_tableRow3=0x7f050011;
@@ -259,35 +260,39 @@ containing a value of this type.
         public static final int my_pet_tableRow4=0x7f05001d;
         public static final int my_pet_tableRow6=0x7f050022;
         public static final int my_pet_tableRow7=0x7f050024;
-        public static final int my_profile_contact_title=0x7f05002e;
-        public static final int my_profile_last_name=0x7f05002c;
-        public static final int my_profile_mail=0x7f050030;
-        public static final int my_profile_mobile_phone=0x7f050033;
-        public static final int my_profile_name=0x7f050029;
-        public static final int my_profile_personal_title=0x7f050027;
-        public static final int my_profile_tableRow1=0x7f050026;
-        public static final int my_profile_tableRow2=0x7f050028;
-        public static final int my_profile_tableRow3=0x7f05002b;
+        public static final int my_pet_tableRow8=0x7f050026;
+        public static final int my_profile_contact_title=0x7f050030;
+        public static final int my_profile_last_name=0x7f05002e;
+        public static final int my_profile_mail=0x7f050032;
+        public static final int my_profile_mobile_phone=0x7f050035;
+        public static final int my_profile_name=0x7f05002b;
+        public static final int my_profile_personal_title=0x7f050029;
+        public static final int my_profile_tableRow1=0x7f050028;
+        public static final int my_profile_tableRow2=0x7f05002a;
+        public static final int my_profile_tableRow3=0x7f05002d;
         public static final int my_profile_tableRow5=0x7f050020;
-        public static final int my_profile_tableRow6=0x7f05002f;
-        public static final int my_profile_tableRow7=0x7f050032;
+        public static final int my_profile_tableRow6=0x7f050031;
+        public static final int my_profile_tableRow7=0x7f050034;
+        public static final int my_profile_tableRow8=0x7f050037;
         public static final int none=0x7f050000;
         public static final int normal=0x7f050001;
-        public static final int notification=0x7f050038;
-        public static final int profile_last_name=0x7f05002d;
-        public static final int profile_mail=0x7f050031;
-        public static final int profile_mobile_phone=0x7f050034;
-        public static final int profile_name=0x7f05002a;
+        public static final int notification=0x7f05003b;
+        public static final int profile_last_name=0x7f05002f;
+        public static final int profile_mail=0x7f050033;
+        public static final int profile_mobile_phone=0x7f050036;
+        public static final int profile_name=0x7f05002c;
         public static final int realtabcontent=0x7f050014;
         public static final int satellite=0x7f050002;
         public static final int sound_text=0x7f050012;
+        public static final int switch_cuidado=0x7f05001c;
         public static final int switch_sound=0x7f050013;
+        public static final int switch_vacunada=0x7f05001f;
         public static final int switch_vibrate=0x7f050010;
         public static final int tableLayout1=0x7f05000b;
         public static final int terrain=0x7f050003;
         public static final int textView_careful=0x7f05001b;
         public static final int textView_vaccines=0x7f05001e;
-        public static final int text_main_scan=0x7f050036;
+        public static final int text_main_scan=0x7f050039;
         public static final int vibrate_text=0x7f05000f;
     }
     public static final class integer {
@@ -417,12 +422,14 @@ containing a value of this type.
         public static final int my_pet_button_resend_qr=0x7f060024;
         public static final int my_pet_extra_info=0x7f060023;
         public static final int my_pet_important_info=0x7f060020;
+        public static final int my_pet_save=0x7f06002f;
         public static final int my_profile_contact_title=0x7f060028;
         public static final int my_profile_last_name=0x7f060027;
         public static final int my_profile_mail=0x7f060029;
         public static final int my_profile_mobile_phone=0x7f06002a;
         public static final int my_profile_name=0x7f060026;
         public static final int my_profile_personal_title=0x7f060025;
+        public static final int my_profile_save=0x7f06002e;
         public static final int scan_how_to=0x7f06001f;
     }
     public static final class style {

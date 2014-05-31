@@ -1,18 +1,24 @@
 package com.findme.app.controller.integration;
 
+import com.findme.app.model.Mascota;
+
 public class PetServiceClient {
 
-	private PetServiceClient instance;
+	private static PetServiceClient instance;
 	
 	private PetServiceClient() {
 		
 	}
 	
-	public PetServiceClient instance() {
-		if (this.instance == null) {
-			this.instance = new PetServiceClient();
+	public static PetServiceClient instance() {
+		if (instance == null) {
+			instance = new PetServiceClient();
 		}
 		
-		return this.instance;
+		return instance;
+	}
+	
+	public String postPet(Mascota mascota) {
+		return "";
 	}
 }
