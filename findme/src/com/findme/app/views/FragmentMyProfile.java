@@ -1,6 +1,5 @@
 package com.findme.app.views;
 
-import utils.EmailValidator;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -14,6 +13,7 @@ import com.example.findme.R.id;
 import com.findme.app.controller.DatabaseHandler;
 import com.findme.app.controller.integration.UserServiceClient;
 import com.findme.app.model.Usuario;
+import com.findme.app.utils.EmailValidator;
 
 public class FragmentMyProfile extends Fragment {
 	public FragmentMyProfile() {
