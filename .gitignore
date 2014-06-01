@@ -5,8 +5,6 @@ findme/gen/
 gen/
 
 R.class
-lint.xml
-project.properties
 
 *.class
 *.apk
