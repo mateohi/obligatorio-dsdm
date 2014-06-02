@@ -157,7 +157,7 @@
             android:layout_weight="1"
             android:background="@color/coral_red"
             android:fontFamily="Lucida"
-            android:onClick="saveProfile"
+            android:onClick="savePetProfile"
             android:text="@string/my_pet_save"
             android:textColor="@color/white" />
 
