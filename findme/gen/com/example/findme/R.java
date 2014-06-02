@@ -230,12 +230,12 @@ containing a value of this type.
         public static final int ic_plusone_standard_off_client=0x7f020021;
         public static final int ic_plusone_tall_off_client=0x7f020022;
         public static final int ic_scan_button=0x7f020023;
-        public static final int rating_favorite_rojo=0x7f020024;
+        public static final int pet_default=0x7f020024;
+        public static final int rating_favorite_rojo=0x7f020025;
     }
     public static final class id {
         public static final int REGID=0x7f05003a;
         public static final int action_settings=0x7f05003c;
-        public static final int button_change_pet_picture=0x7f050016;
         public static final int button_resend_qr=0x7f050027;
         public static final int button_save_profile=0x7f050025;
         public static final int button_scan=0x7f050038;
@@ -252,8 +252,9 @@ containing a value of this type.
         public static final int left_drawer=0x7f050007;
         public static final int my_pet_extra_info=0x7f050021;
         public static final int my_pet_extra_information=0x7f050023;
+        public static final int my_pet_image=0x7f050016;
         public static final int my_pet_important_info=0x7f050019;
-        public static final int my_pet_name=0x7f050017;
+        public static final int my_pet_profile_name=0x7f050017;
         public static final int my_pet_tableRow1=0x7f050015;
         public static final int my_pet_tableRow2=0x7f050018;
         public static final int my_pet_tableRow3=0x7f05001a;
@@ -430,6 +431,7 @@ containing a value of this type.
         public static final int my_profile_name=0x7f060026;
         public static final int my_profile_personal_title=0x7f060025;
         public static final int my_profile_save=0x7f06002e;
+        public static final int pet_name=0x7f060030;
         public static final int scan_how_to=0x7f06001f;
     }
     public static final class style {

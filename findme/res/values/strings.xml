@@ -23,5 +23,6 @@
     <string name="configuration_sound">Sonido</string>
     <string name="my_profile_save">Guardar perfil</string>
     <string name="my_pet_save">Guardar mascota</string>
+    <string name="pet_name">Nombre</string>
 
 </resources>

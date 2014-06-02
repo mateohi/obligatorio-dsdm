@@ -44,13 +44,11 @@
             android:id="@+id/switch_vibrate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="30dp" />
+            android:layout_marginRight="30dp"
+            android:textOff="No"
+            android:textOn="Si" />
         
     </TableRow>
-
-    <View
-        android:layout_height="1dip"
-        android:background="#999999" />
 
     <TableRow
         android:id="@+id/configuration_tableRow3"
@@ -72,11 +70,10 @@
             android:id="@+id/switch_sound"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="30dp" />
-    </TableRow>
+            android:layout_marginRight="30dp"
+            android:textOff="No"
+            android:textOn="Si" />
 
-    <View
-        android:layout_height="1dip"
-        android:background="#999999" />
+    </TableRow>
 
 </TableLayout>

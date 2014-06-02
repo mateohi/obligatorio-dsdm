@@ -12,8 +12,11 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -25,11 +28,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.findme.R;
+import com.findme.app.utils.ImageUtils;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
@@ -44,6 +49,7 @@ public class MainActivity extends FragmentActivity {
 	private CharSequence mTitle;
 
 	private static final int REQUEST_SCAN = 0;
+	private static final int REQUEST_SELECT_IMAGE = 1;
 
 	CustomDrawerAdapter adapter;
 	List<DrawerItem> dataList;
@@ -62,7 +68,7 @@ public class MainActivity extends FragmentActivity {
 	/**
 	 * Tag used on log messages.
 	 */
-	static final String TAG = "GCM Demo";
+	static final String TAG = "MainActivity";
 
 	TextView mDisplay;
 	GoogleCloudMessaging gcm;
@@ -70,7 +76,7 @@ public class MainActivity extends FragmentActivity {
 	Context context;
 
 	String regid;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -123,9 +129,9 @@ public class MainActivity extends FragmentActivity {
 		if (savedInstanceState == null) {
 			SelectItem(0);
 		}
-		
+
 		context = getApplicationContext();
-		
+
 		// Check device for Play Services APK. If check succeeds, proceed with
 		// GCM registration.
 		if (checkPlayServices()) {
@@ -135,7 +141,7 @@ public class MainActivity extends FragmentActivity {
 			if (regid.isEmpty()) {
 				registerInBackground();
 			} else {
-				//Toast.makeText(this, regid, Toast.LENGTH_SHORT).show();
+				// Toast.makeText(this, regid, Toast.LENGTH_SHORT).show();
 			}
 		} else {
 			Log.i(TAG, "No valid Google Play Services APK found.");
@@ -235,12 +241,12 @@ public class MainActivity extends FragmentActivity {
 
 	public void scanQR(View view) {
 		try {
-		Intent intent = new Intent("com.google.zxing.client.android.SCAN");
-		intent.putExtra("SCAN_MODE", "QR_CODE_MODE");
-		startActivityForResult(intent, REQUEST_SCAN); 
-		}
-		catch (ActivityNotFoundException ex) {
-			Toast.makeText(this, "Baje una aplicacion para leer QR.", Toast.LENGTH_LONG).show();
+			Intent intent = new Intent("com.google.zxing.client.android.SCAN");
+			intent.putExtra("SCAN_MODE", "QR_CODE_MODE");
+			startActivityForResult(intent, REQUEST_SCAN);
+		} catch (ActivityNotFoundException ex) {
+			Toast.makeText(this, "Baje una aplicacion para leer QR.",
+					Toast.LENGTH_LONG).show();
 		}
 	}
 
@@ -249,11 +255,29 @@ public class MainActivity extends FragmentActivity {
 			if (resultCode == RESULT_OK) {
 				String contents = intent.getStringExtra("SCAN_RESULT");
 
-				Toast.makeText(this, contents, Toast.LENGTH_SHORT)
-						.show();
+				Toast.makeText(this, contents, Toast.LENGTH_SHORT).show();
 			} else if (resultCode == RESULT_CANCELED) {
 				Toast.makeText(this, "Error al leer el QR", Toast.LENGTH_SHORT)
 						.show();
+			}
+		}
+
+		if (requestCode == REQUEST_SELECT_IMAGE) {
+			if (resultCode == RESULT_OK) {
+				try {
+					Uri selectedImage = intent.getData();
+					Bitmap image = ImageUtils.getImageFromUri(
+							getContentResolver(), selectedImage);
+					ImageUtils.saveImageOnDevice(image, "test",
+							getApplicationContext());
+					Bitmap recovered = ImageUtils.getCircleBitmapFromDevice(
+							"test", this.getApplicationContext());
+
+					ImageView imageView = (ImageView) findViewById(R.id.my_pet_image);
+					imageView.setImageBitmap(recovered);
+				} catch (Exception ex) {
+					Log.e(TAG, ex.getMessage(), ex);
+				}
 			}
 		}
 	}
@@ -264,7 +288,7 @@ public class MainActivity extends FragmentActivity {
 	public void changeImage(View view) {
 
 	}
-	
+
 	private boolean checkPlayServices() {
 		int resultCode = GooglePlayServicesUtil
 				.isGooglePlayServicesAvailable(this);
@@ -375,4 +399,11 @@ public class MainActivity extends FragmentActivity {
 		editor.commit();
 	}
 
+	// My pet fragment methods
+
+	public void changePetImage(View v) {
+		Intent i = new Intent(Intent.ACTION_PICK,
+				MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+		startActivityForResult(i, REQUEST_SELECT_IMAGE);
+	}
 }

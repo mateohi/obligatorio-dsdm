@@ -9,21 +9,25 @@
         android:layout_height="wrap_content"
         android:padding="12dip" >
 
-        <Button
-            android:id="@+id/button_change_pet_picture"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="changeImage"
-            android:text="Image" />
+        <ImageView
+            android:id="@+id/my_pet_image"
+            android:contentDescription=""
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:onClick="changePetImage"
+            android:src="@drawable/pet_default" />
 
-        <TextView
-            android:id="@+id/my_pet_name"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/my_pet_profile_name"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:fontFamily="Lucida"
-            android:text="Lucy"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:ems="10"
+            android:hint="@string/pet_name"
+            android:textSize="20sp" >
+
+            <requestFocus />
+        </EditText>
+
     </TableRow>
 
     <TableRow
@@ -66,6 +70,7 @@
             android:id="@+id/switch_cuidado"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="left"
             android:textOn="Si"
             android:textOff="No"/>
     </TableRow>
@@ -89,6 +94,7 @@
             android:id="@+id/switch_vacunada"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="left"
             android:textOn="Si"
             android:textOff="No"/>
 
@@ -129,9 +135,11 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_weight="1"
-            android:inputType="textCapSentences"
+            android:inputType="textCapSentences|textMultiLine"
             android:maxLength="21"
-            android:maxLines="2" />
+            android:maxLines="2"
+            android:singleLine="false" />
+
     </TableRow>
 
     <TableRow
