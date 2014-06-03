@@ -69,8 +69,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		db.execSQL("DROP TABLE IF EXISTS " + TABLA_MASCOTA);
 	}
 
-	public void agregarUsuario(Usuario usuario) {
-//		agregarMascota(usuario.getMascota());
+	public void addUsuario(Usuario usuario) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = new ContentValues();
 
@@ -84,8 +83,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		db.close();
 	}
 
-	public boolean actualizarUsuario(Usuario usuario) {
-		boolean pudoMascota = actualizarMascota(usuario.getMascota());
+	public boolean updateUsuario(Usuario usuario) {
+		boolean pudoMascota = updateMascota(usuario.getMascota());
 
 		SQLiteDatabase db = this.getWritableDatabase();
 
@@ -116,7 +115,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 				usuario.setApellido(cursor.getString(2));
 				usuario.setCorreo(cursor.getString(3));
 				usuario.setCelular(cursor.getString(4));
-				usuario.setMascota(recuperarMascota(Integer.parseInt(cursor
+				usuario.setMascota(getMascota(Integer.parseInt(cursor
 						.getString(5))));
 			}
 		}
@@ -124,7 +123,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		return usuario;
 	}
 
-	public void agregarMascota(Mascota mascota) {
+	public void addMascota(Mascota mascota) {
 		SQLiteDatabase db = this.getWritableDatabase();
 
 		ContentValues values = new ContentValues();
@@ -138,7 +137,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		db.close();
 	}
 
-	public boolean actualizarMascota(Mascota mascota) {
+	public boolean updateMascota(Mascota mascota) {
 		SQLiteDatabase db = this.getWritableDatabase();
 
 		ContentValues values = new ContentValues();
@@ -155,7 +154,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		return i > 0;
 	}
 
-	public Mascota recuperarMascota(int id) {
+	public Mascota getMascota(int id) {
 		Mascota mascota = new Mascota();
 		SQLiteDatabase db = this.getWritableDatabase();
 
@@ -177,7 +176,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		return mascota;
 	}
 
-	public Mascota recuperarMascota() {
+	public Mascota getMascota() {
 		Mascota mascota = new Mascota();
 		SQLiteDatabase db = this.getWritableDatabase();
 
@@ -195,5 +194,19 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 			}
 		}
 		return mascota;
+	}
+	
+	public boolean hayUsuario() {
+		SQLiteDatabase db = this.getWritableDatabase();
+		Cursor cursor = db.rawQuery("SELECT * FROM " + TABLA_USUARIO, null);
+		
+		return cursor == null || cursor.getCount() == 0;
+	}
+	
+	public boolean hayMascota() {
+		SQLiteDatabase db = this.getWritableDatabase();
+		Cursor cursor = db.rawQuery("SELECT * FROM " + TABLA_MASCOTA, null);
+		
+		return cursor == null || cursor.getCount() == 0;
 	}
 }

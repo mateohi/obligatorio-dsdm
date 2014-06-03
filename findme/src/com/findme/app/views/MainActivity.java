@@ -13,6 +13,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -44,6 +45,7 @@ import com.findme.app.controller.integration.tasks.PostPetTask;
 import com.findme.app.controller.integration.tasks.PostUserTask;
 import com.findme.app.model.Mascota;
 import com.findme.app.model.Usuario;
+import com.findme.app.utils.Base64Utils;
 import com.findme.app.utils.EmailValidator;
 import com.findme.app.utils.ImageUtils;
 import com.google.android.gms.common.ConnectionResult;
@@ -377,6 +379,12 @@ public class MainActivity extends FragmentActivity {
 	}
 
 	public void savePetProfile(View v) {
+		
+		if (!hayUsuario()) {
+			Toast.makeText(this, "Cree un usuario antes", Toast.LENGTH_LONG).show();
+			return;
+		}
+		
 		String nombre = ((EditText) findViewById(id.my_pet_profile_name))
 				.getText().toString().trim();
 		boolean estaVacunada = ((Switch) findViewById(id.switch_vacunada))
@@ -385,12 +393,14 @@ public class MainActivity extends FragmentActivity {
 				.isChecked();
 		String info = ((EditText) findViewById(id.my_pet_extra_information))
 				.getText().toString().trim();
+		String fotoBase64 = getBase64FromImageView();
 
 		Mascota mascota = new Mascota();
 		mascota.setNombre(nombre);
 		mascota.setEstaVacunada(estaVacunada);
 		mascota.setTenerCuidado(tenerCuidado);
 		mascota.setInfo(info);
+		mascota.setFotoBase64(fotoBase64);
 
 		if (!nombre.isEmpty()) {
 			try {
@@ -410,8 +420,8 @@ public class MainActivity extends FragmentActivity {
 	private void guardarMascota(Mascota mascota) {
 		// Guardar local
 		DatabaseHandler handler = new DatabaseHandler(getApplicationContext());
-		handler.agregarMascota(mascota);
-		
+		handler.addMascota(mascota);
+
 		// Guardar en el servidor
 		new PostPetTask(this).execute(mascota);
 	}
@@ -439,7 +449,8 @@ public class MainActivity extends FragmentActivity {
 			try {
 				guardarUsuario(usuario);
 			} catch (Exception ex) {
-				Toast.makeText(this, "Error al guardar", Toast.LENGTH_SHORT).show();
+				Toast.makeText(this, "Error al guardar", Toast.LENGTH_SHORT)
+						.show();
 			}
 
 		} else {
@@ -450,7 +461,7 @@ public class MainActivity extends FragmentActivity {
 	private void guardarUsuario(Usuario usuario) {
 		// Guardar local
 		DatabaseHandler handler = new DatabaseHandler(getApplicationContext());
-		handler.agregarUsuario(usuario);
+		handler.addUsuario(usuario);
 
 		// Guardar en el servidor
 		new PostUserTask(this).execute(usuario);
@@ -480,5 +491,45 @@ public class MainActivity extends FragmentActivity {
 		}
 
 		return validaciones.toString();
+	}
+
+	// Utility methods
+
+	private Usuario getUsuario() {
+		DatabaseHandler dh = new DatabaseHandler(getApplicationContext());
+
+		if (dh.hayUsuario()) {
+			return dh.getUsuario();
+		} else {
+			return null;
+		}
+	}
+
+	private Mascota getMascota() {
+		DatabaseHandler dh = new DatabaseHandler(getApplicationContext());
+		
+		if (dh.hayUsuario()) {
+			return dh.getMascota();
+		} else {
+			return null;
+		}
+	}
+
+	private boolean hayUsuario() {
+		DatabaseHandler dh = new DatabaseHandler(getApplicationContext());
+		return dh.hayUsuario();
+	}
+
+	private boolean hayMascota() {
+		DatabaseHandler dh = new DatabaseHandler(getApplicationContext());
+		return dh.hayMascota();
+	}
+	
+	private String getBase64FromImageView() {
+		ImageView image = (ImageView) findViewById(id.my_pet_image);
+		Bitmap bitmap = ((BitmapDrawable)image.getDrawable()).getBitmap();
+		String fotoBase64 = Base64Utils.bytesToBase64String(ImageUtils.bitmapToBytes(bitmap));
+		
+		return fotoBase64;
 	}
 }
