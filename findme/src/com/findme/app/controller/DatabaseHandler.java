@@ -57,7 +57,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 				+ " TEXT, " + COLUMNA_USUARIO_EMAIL + " TEXT, "
 				+ COLUMNA_USUARIO_CELULAR + " TEXT, "
 				+ COLUMNA_USUARIO_FK_MASCOTA_ID
-				+ " INTEGER NOT NULL ,FOREIGN  KEY ("
+				+ " INTEGER,FOREIGN  KEY ("
 				+ COLUMNA_USUARIO_FK_MASCOTA_ID + ") REFERENCES "
 				+ TABLA_MASCOTA + " (" + COLUMNA_MASCOTA_ID + "));)";
 		db.execSQL(CREAR_TABLA_USUARIOS);
@@ -70,7 +70,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	}
 
 	public void agregarUsuario(Usuario usuario) {
-		agregarMascota(usuario.getMascota());
+//		agregarMascota(usuario.getMascota());
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = new ContentValues();
 
@@ -78,7 +78,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		values.put(COLUMNA_USUARIO_APELLIDO, usuario.getApellido());
 		values.put(COLUMNA_USUARIO_EMAIL, usuario.getCorreo());
 		values.put(COLUMNA_USUARIO_CELULAR, usuario.getCelular());
-		values.put(COLUMNA_USUARIO_FK_MASCOTA_ID, recuperarMascota().getId());
+//		values.put(COLUMNA_USUARIO_FK_MASCOTA_ID, recuperarMascota().getId());
 
 		db.insert(TABLA_USUARIO, COLUMNA_USUARIO_NOMBRE, values);
 		db.close();
