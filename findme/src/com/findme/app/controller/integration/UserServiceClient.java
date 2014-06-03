@@ -16,7 +16,7 @@ import com.google.gson.Gson;
 public class UserServiceClient {
 
 	//private static final String SERVICE_URL = "http://mateohi.noip.me/findme";
-	private static final String SERVICE_URL = "http://192.168.0.101:8080/findme";
+	private static final String SERVICE_URL = "http://192.168.2.111:8080/findme";
 	private static final String ADD_USER = "/users";
 
 	private static UserServiceClient instance;

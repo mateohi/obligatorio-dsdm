@@ -436,11 +436,12 @@ public class MainActivity extends FragmentActivity {
 			usuario.setApellido(apellido);
 			usuario.setCorreo(correo);
 			usuario.setCelular(celular);
+			usuario.setGcmId(this.getRegistrationId(context));
 
 			try {
-				DatabaseHandler handler = new DatabaseHandler(
-						getApplicationContext());
-				handler.agregarUsuario(usuario);
+//				DatabaseHandler handler = new DatabaseHandler(
+//						getApplicationContext());
+//				handler.agregarUsuario(usuario);
 
 				String serviceResponse = UserServiceClient.instance().postUser(
 						usuario);
@@ -453,7 +454,7 @@ public class MainActivity extends FragmentActivity {
 							.show();
 				}
 			} catch (Exception ex) {
-				Toast.makeText(this, "Error al guardar", Toast.LENGTH_SHORT)
+				Toast.makeText(this, "Error al guardar\n" + ex.getMessage(), Toast.LENGTH_SHORT)
 						.show();
 			}
 
