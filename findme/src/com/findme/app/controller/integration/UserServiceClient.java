@@ -18,6 +18,8 @@ public class UserServiceClient {
 	//private static final String SERVICE_URL = "http://mateohi.noip.me/findme";
 	private static final String SERVICE_URL = "http://192.168.2.111:8080/findme";
 	private static final String ADD_USER = "/users";
+	private static final String CONTENT_TYPE = "Content-Type";
+	private static final String APPLICATION_JSON = "application/json";
 
 	private static UserServiceClient instance;
 	private HttpClient cliente;
@@ -42,6 +44,7 @@ public class UserServiceClient {
 
 	        HttpPost post = new HttpPost(SERVICE_URL + ADD_USER);
 	        post.setEntity(entity);
+	        post.addHeader(CONTENT_TYPE, APPLICATION_JSON);
 	        
 			HttpResponse response = cliente.execute(post);
 			int status = response.getStatusLine().getStatusCode();

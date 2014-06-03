@@ -40,6 +40,8 @@ import com.example.findme.R.id;
 import com.findme.app.controller.DatabaseHandler;
 import com.findme.app.controller.integration.PetServiceClient;
 import com.findme.app.controller.integration.UserServiceClient;
+import com.findme.app.controller.integration.tasks.PostPetTask;
+import com.findme.app.controller.integration.tasks.PostUserTask;
 import com.findme.app.model.Mascota;
 import com.findme.app.model.Usuario;
 import com.findme.app.utils.EmailValidator;
@@ -392,20 +394,7 @@ public class MainActivity extends FragmentActivity {
 
 		if (!nombre.isEmpty()) {
 			try {
-				DatabaseHandler handler = new DatabaseHandler(
-						getApplicationContext());
-				handler.agregarMascota(mascota);
-
-				String serviceResponse = PetServiceClient.instance().postPet(
-						mascota);
-
-				if (serviceResponse.isEmpty()) {
-					Toast.makeText(this, "Mascota guardada", Toast.LENGTH_SHORT)
-							.show();
-				} else {
-					Toast.makeText(this, serviceResponse, Toast.LENGTH_SHORT)
-							.show();
-				}
+				guardarMascota(mascota);
 			} catch (Exception ex) {
 				Toast.makeText(this, "Error al guardar", Toast.LENGTH_SHORT)
 						.show();
@@ -417,7 +406,16 @@ public class MainActivity extends FragmentActivity {
 	}
 
 	// My Profile fragment methods
-	
+
+	private void guardarMascota(Mascota mascota) {
+		// Guardar local
+		DatabaseHandler handler = new DatabaseHandler(getApplicationContext());
+		handler.agregarMascota(mascota);
+		
+		// Guardar en el servidor
+		new PostPetTask(this).execute(mascota);
+	}
+
 	public void saveMyProfile(View v) {
 		String nombre = ((EditText) findViewById(id.profile_name)).getText()
 				.toString().trim();
@@ -439,28 +437,23 @@ public class MainActivity extends FragmentActivity {
 			usuario.setGcmId(this.getRegistrationId(context));
 
 			try {
-//				DatabaseHandler handler = new DatabaseHandler(
-//						getApplicationContext());
-//				handler.agregarUsuario(usuario);
-
-				String serviceResponse = UserServiceClient.instance().postUser(
-						usuario);
-
-				if (serviceResponse.isEmpty()) {
-					Toast.makeText(this, "Usuario guardado", Toast.LENGTH_SHORT)
-							.show();
-				} else {
-					Toast.makeText(this, serviceResponse, Toast.LENGTH_SHORT)
-							.show();
-				}
+				guardarUsuario(usuario);
 			} catch (Exception ex) {
-				Toast.makeText(this, "Error al guardar\n" + ex.getMessage(), Toast.LENGTH_SHORT)
-						.show();
+				Toast.makeText(this, "Error al guardar", Toast.LENGTH_SHORT).show();
 			}
 
 		} else {
 			Toast.makeText(this, validaciones, Toast.LENGTH_LONG).show();
 		}
+	}
+
+	private void guardarUsuario(Usuario usuario) {
+		// Guardar local
+		DatabaseHandler handler = new DatabaseHandler(getApplicationContext());
+		handler.agregarUsuario(usuario);
+
+		// Guardar en el servidor
+		new PostUserTask(this).execute(usuario);
 	}
 
 	private String validarUsuario(String nombre, String apellido,

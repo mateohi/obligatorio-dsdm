@@ -21,7 +21,16 @@ public class UserController {
     @ResponseBody
     @RequestMapping(method = RequestMethod.POST)
     public void guardarUsuario(@RequestBody(required = false) Usuario usuario) {
-        LOG.info("Nuevo usuario");
-        this.usuarioDao.addUsuario(usuario);
+        Usuario usuarioAnterior = this.usuarioDao.getUsuarioByGcmId(usuario.getGcmId());
+
+        if (usuarioAnterior == null) {
+            LOG.info("Nuevo usuario");
+            this.usuarioDao.addUsuario(usuario);
+        }
+        else {
+            LOG.info("Actualizando usuario");
+            usuario.setId(usuarioAnterior.getId());
+            this.usuarioDao.addUsuario(usuario);
+        }
     }
 }
