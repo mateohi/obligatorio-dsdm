@@ -402,6 +402,8 @@ public class MainActivity extends FragmentActivity {
 		String info = ((EditText) findViewById(id.my_pet_extra_information))
 				.getText().toString().trim();
 		String fotoBase64 = getBase64FromImageView(id.my_pet_image);
+		ImageView image = (ImageView) findViewById(id.my_pet_image);
+		Bitmap bitmap = ((BitmapDrawable) image.getDrawable()).getBitmap();
 
 		Mascota mascota = new Mascota();
 		mascota.setNombre(nombre);
@@ -409,10 +411,13 @@ public class MainActivity extends FragmentActivity {
 		mascota.setTenerCuidado(tenerCuidado);
 		mascota.setInfo(info);
 		mascota.setFotoBase64(fotoBase64);
+		mascota.setPathFoto(nombre);
 
 		if (!nombre.isEmpty()) {
 			try {
 				guardarMascota(mascota);
+				// Guardar imagen local
+				ImageUtils.saveImageOnDevice(bitmap, mascota.getPathFoto(), getApplicationContext());
 			} catch (Exception ex) {
 				Toast.makeText(this, "Error al guardar", Toast.LENGTH_SHORT)
 						.show();
