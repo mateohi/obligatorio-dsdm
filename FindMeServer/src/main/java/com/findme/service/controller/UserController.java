@@ -25,6 +25,7 @@ public class UserController {
 
         if (usuarioAnterior == null) {
             LOG.info("Nuevo usuario");
+            usuario.setId(null);
             this.usuarioDao.addUsuario(usuario);
         }
         else {

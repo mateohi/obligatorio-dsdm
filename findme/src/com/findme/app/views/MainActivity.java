@@ -427,9 +427,7 @@ public class MainActivity extends FragmentActivity {
 					Toast.LENGTH_LONG).show();
 		}
 	}
-
-	// My Profile fragment methods
-
+	
 	private void guardarMascota(Mascota mascota) {
 		// Guardar local
 		DatabaseHandler handler = new DatabaseHandler(getApplicationContext());
@@ -444,6 +442,8 @@ public class MainActivity extends FragmentActivity {
 		String gcmId = getRegistrationId(getApplicationContext());
 		new PostPetTask(this).execute(mascota, gcmId);
 	}
+
+	// My Profile fragment methods
 
 	public void saveMyProfile(View v) {
 		String nombre = ((EditText) findViewById(id.profile_name)).getText()

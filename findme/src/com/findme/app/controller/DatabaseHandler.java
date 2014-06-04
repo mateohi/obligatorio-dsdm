@@ -78,8 +78,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	}
 
 	public boolean updateUsuario(Usuario usuario) {
-		boolean pudoMascota = true;
-
 		SQLiteDatabase db = this.getWritableDatabase();
 
 		ContentValues values = new ContentValues();
@@ -89,11 +87,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		values.put(COLUMNA_USUARIO_CELULAR, usuario.getCelular());
 		values.put(COLUMNA_USUARIO_GCM_ID, usuario.getGcmId());
 
+		int id = getUsuario().getId();
 		int i = db.update(TABLA_USUARIO, values, COLUMNA_USUARIO_ID + " = ?",
-				new String[] { String.valueOf(usuario.getId()) });
+				new String[] { String.valueOf(id) });
 		db.close();
 
-		return i > 0 && pudoMascota;
+		return i > 0;
 	}
 
 	public Usuario getUsuario() {
@@ -141,8 +140,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		values.put(COLUMNA_MASCOTA_CUIDADO, mascota.tenerCuidado() ? 1 : 0);
 		values.put(COLUMNA_MASCOTA_VACUNAS, mascota.estaVacunada() ? 1 : 0);
 
+		int id = getMascota().getId();
 		int i = db.update(TABLA_MASCOTA, values, COLUMNA_MASCOTA_ID + " = ?",
-				new String[] { String.valueOf(mascota.getId()) });
+				new String[] { String.valueOf(id) });
 		db.close();
 
 		return i > 0;

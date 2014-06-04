@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class PetController {
 
     private static final Logger LOG = Logger.getLogger(PetController.class);
-    private static final String PROPS = "project.properties";
+    private static final String PROPS = "src\\main\\resources\\project.properties";
     private static final String PNG = "png";
     @Autowired
     private MascotaDao mascotaDao;
@@ -36,16 +36,26 @@ public class PetController {
     @RequestMapping(method = RequestMethod.POST)
     public void guardarMascota(@RequestBody(required = true) Mascota mascota,
             @RequestParam("gcmId") String gcmId) throws Base64Exception, IOException, QRGeneratorException, MailGeneratorException {
-        LOG.info("Nueva mascota");
 
         Usuario usuario = this.usuarioDao.getUsuarioByGcmId(gcmId);
         if (usuario != null) {
+
+            Mascota mascotaAnterior = usuario.getMascota();
+            if (mascotaAnterior == null) {
+                mascota.setId(null);
+                LOG.info("Guardando nueva mascota");
+            }
+            else {
+                mascota.setId(mascotaAnterior.getId());
+                LOG.info("Actualizando mascota");
+            }
+
             mascota.setPathFoto(gcmId + mascota.getNombre());
             this.mascotaDao.addMascota(mascota);
-            usuario.setMascota(mascota);
+            LOG.info("Mascota guardada");
 
+            usuario.setMascota(mascota);
             this.usuarioDao.addUsuario(usuario);
-            LOG.info("Nueva mascota guardada");
 
             ManejadorBase64.base64AFile(mascota.getFotoBase64(), mascota.getPathFoto(), PNG);
             LOG.info("Foto guardada");

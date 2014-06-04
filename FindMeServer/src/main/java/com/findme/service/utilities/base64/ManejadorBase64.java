@@ -20,7 +20,7 @@ public class ManejadorBase64 {
             BufferedImage image = ImageIO.read(bis);
             bis.close();
 
-            ImageIO.write(image, type, new File(path));
+            ImageIO.write(image, type, new File(path + "." + type));
         }
         catch (Exception e) {
             throw new Base64Exception(Base64Exception.DECODIFICAR);
@@ -32,7 +32,7 @@ public class ManejadorBase64 {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
 
         try {
-            BufferedImage img = ImageIO.read(new File(path));
+            BufferedImage img = ImageIO.read(new File(path + "." + type));
             ImageIO.write(img, type, bos);
             byte[] imageBytes = bos.toByteArray();
             String imageString = encoder.encodeToString(imageBytes);
