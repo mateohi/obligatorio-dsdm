@@ -62,6 +62,10 @@ public class MainActivity extends FragmentActivity {
 	private static final String PROPERTY_REG_ID = "registrationId";
 	private static final String PROPERTY_APP_VERSION = "appVersion";
 	private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+	
+	public static final String PREFS_NAME = "FindMeConfig";
+	private static final String SILENT = "silent";
+	private static final String VIBRATE = "vibrate";
 
 	private static final int REQUEST_SCAN = 0;
 	private static final int REQUEST_SELECT_IMAGE = 1;
@@ -166,10 +170,10 @@ public class MainActivity extends FragmentActivity {
 			fragment = new FragmentScan();
 			break;
 		case 1:
-			fragment = new FragmentPetProfile();
+			fragment = new FragmentPetProfile(getMascota());
 			break;
 		case 2:
-			fragment = new FragmentMyProfile();
+			fragment = new FragmentMyProfile(getUsuario());
 			break;
 		case 3:
 			fragment = new FragmentConfiguration();
@@ -236,17 +240,6 @@ public class MainActivity extends FragmentActivity {
 				long id) {
 			selectItem(position);
 
-		}
-	}
-
-	public void scanQR(View view) {
-		try {
-			Intent intent = new Intent("com.google.zxing.client.android.SCAN");
-			intent.putExtra("SCAN_MODE", "QR_CODE_MODE");
-			startActivityForResult(intent, REQUEST_SCAN);
-		} catch (ActivityNotFoundException ex) {
-			Toast.makeText(this, "Baje una aplicacion para leer QR.",
-					Toast.LENGTH_LONG).show();
 		}
 	}
 
@@ -365,6 +358,19 @@ public class MainActivity extends FragmentActivity {
 		editor.putInt(PROPERTY_APP_VERSION, appVersion);
 		editor.commit();
 	}
+	
+	// Configuration fragment methods
+	
+	public void scanQR(View view) {
+		try {
+			Intent intent = new Intent("com.google.zxing.client.android.SCAN");
+			intent.putExtra("SCAN_MODE", "QR_CODE_MODE");
+			startActivityForResult(intent, REQUEST_SCAN);
+		} catch (ActivityNotFoundException ex) {
+			Toast.makeText(this, "Baje una aplicacion para leer QR.",
+					Toast.LENGTH_LONG).show();
+		}
+	}
 
 	// My pet fragment methods
 
@@ -393,7 +399,7 @@ public class MainActivity extends FragmentActivity {
 				.isChecked();
 		String info = ((EditText) findViewById(id.my_pet_extra_information))
 				.getText().toString().trim();
-		String fotoBase64 = getBase64FromImageView();
+		String fotoBase64 = getBase64FromImageView(id.my_pet_image);
 
 		Mascota mascota = new Mascota();
 		mascota.setNombre(nombre);
@@ -420,10 +426,16 @@ public class MainActivity extends FragmentActivity {
 	private void guardarMascota(Mascota mascota) {
 		// Guardar local
 		DatabaseHandler handler = new DatabaseHandler(getApplicationContext());
-		handler.addMascota(mascota);
+		if (hayMascota()) {
+			handler.updateMascota(mascota);
+		} 
+		else {
+			handler.addMascota(mascota);
+		}
 
 		// Guardar en el servidor
-		new PostPetTask(this).execute(mascota);
+		String gcmId = getRegistrationId(getApplicationContext());
+		new PostPetTask(this).execute(mascota, gcmId);
 	}
 
 	public void saveMyProfile(View v) {
@@ -461,7 +473,12 @@ public class MainActivity extends FragmentActivity {
 	private void guardarUsuario(Usuario usuario) {
 		// Guardar local
 		DatabaseHandler handler = new DatabaseHandler(getApplicationContext());
-		handler.addUsuario(usuario);
+		if (hayUsuario()) {
+			handler.updateUsuario(usuario);
+		}
+		else {
+			handler.addUsuario(usuario);
+		}
 
 		// Guardar en el servidor
 		new PostUserTask(this).execute(usuario);
@@ -504,11 +521,11 @@ public class MainActivity extends FragmentActivity {
 			return null;
 		}
 	}
-
+	
 	private Mascota getMascota() {
 		DatabaseHandler dh = new DatabaseHandler(getApplicationContext());
-		
-		if (dh.hayUsuario()) {
+
+		if (dh.hayMascota()) {
 			return dh.getMascota();
 		} else {
 			return null;
@@ -525,11 +542,21 @@ public class MainActivity extends FragmentActivity {
 		return dh.hayMascota();
 	}
 	
-	private String getBase64FromImageView() {
-		ImageView image = (ImageView) findViewById(id.my_pet_image);
+	private String getBase64FromImageView(int imageViewId) {
+		ImageView image = (ImageView) findViewById(imageViewId);
 		Bitmap bitmap = ((BitmapDrawable)image.getDrawable()).getBitmap();
 		String fotoBase64 = Base64Utils.bytesToBase64String(ImageUtils.bitmapToBytes(bitmap));
 		
 		return fotoBase64;
+	}
+	
+	private boolean conSonido() {
+		SharedPreferences settings = this.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+		return settings.getBoolean(SILENT, false);
+	}
+	
+	private boolean conVibrar() {
+		SharedPreferences settings = this.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+		return settings.getBoolean(VIBRATE, false);
 	}
 }

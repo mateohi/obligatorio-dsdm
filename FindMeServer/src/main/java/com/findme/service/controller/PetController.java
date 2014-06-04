@@ -43,10 +43,13 @@ public class PetController {
             mascota.setPathFoto(gcmId + mascota.getNombre());
             this.mascotaDao.addMascota(mascota);
             usuario.setMascota(mascota);
+
             this.usuarioDao.addUsuario(usuario);
             LOG.info("Nueva mascota guardada");
+
             ManejadorBase64.base64AFile(mascota.getFotoBase64(), mascota.getPathFoto(), PNG);
             LOG.info("Foto guardada");
+
             ManejadorMail.enviarQR(gcmId + "+" + mascota.getNombre(), usuario.getCorreo(), PROPS);
             LOG.info("Mail enviado");
         }

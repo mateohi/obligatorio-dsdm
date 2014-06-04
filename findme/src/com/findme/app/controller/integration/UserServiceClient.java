@@ -10,14 +10,13 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import com.findme.app.controller.integration.tasks.ServiceConstants;
 import com.findme.app.model.Usuario;
 import com.google.gson.Gson;
 
 public class UserServiceClient {
 
-	//private static final String SERVICE_URL = "http://mateohi.noip.me/findme";
-	private static final String SERVICE_URL = "http://192.168.2.111:8080/findme";
-	private static final String ADD_USER = "/users";
+	private static final String USERS = "/users";
 	private static final String CONTENT_TYPE = "Content-Type";
 	private static final String APPLICATION_JSON = "application/json";
 
@@ -42,7 +41,7 @@ public class UserServiceClient {
 			String jsonBody = gson.toJson(usuario);
 	        StringEntity entity = new StringEntity(jsonBody);
 
-	        HttpPost post = new HttpPost(SERVICE_URL + ADD_USER);
+	        HttpPost post = new HttpPost(ServiceConstants.SERVICE_URL + USERS);
 	        post.setEntity(entity);
 	        post.addHeader(CONTENT_TYPE, APPLICATION_JSON);
 	        

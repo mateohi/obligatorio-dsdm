@@ -7,7 +7,7 @@ import android.widget.Toast;
 import com.findme.app.controller.integration.PetServiceClient;
 import com.findme.app.model.Mascota;
 
-public class PostPetTask  extends AsyncTask<Mascota, Void, String> {
+public class PostPetTask  extends AsyncTask<Object, Void, String> {
 
 	private Activity parent;
 
@@ -16,9 +16,10 @@ public class PostPetTask  extends AsyncTask<Mascota, Void, String> {
 	}
 
 	@Override
-	protected String doInBackground(Mascota... arg0) {
-		Mascota mascota = arg0[0];
-		String serviceResponse = PetServiceClient.instance().postPet(mascota);
+	protected String doInBackground(Object... arg0) {
+		Mascota mascota = (Mascota) arg0[0];
+		String gcmId = (String) arg0[1];
+		String serviceResponse = PetServiceClient.instance().postPet(mascota, gcmId);
 		
 		return serviceResponse;
 	}
