@@ -6,6 +6,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -18,6 +19,7 @@ public class PetServiceClient {
 
 	private static final String PETS = "/pets";
 	private static final String GCM_ID = "?gcmId=";
+	private static final String RESEND_QR = "/%s/qr";
 	private static final String CONTENT_TYPE = "Content-Type";
 	private static final String APPLICATION_JSON = "application/json";
 
@@ -68,7 +70,29 @@ public class PetServiceClient {
 		}
 	}
 
-	public String resendQR(Mascota mascota) {
-		return "";
+	public String resendQR(String gcmId) {
+		try {
+			HttpGet get = new HttpGet(ServiceConstants.SERVICE_URL + PETS +  String.format(RESEND_QR, gcmId));
+			get.addHeader(CONTENT_TYPE, APPLICATION_JSON);
+
+			HttpResponse response = cliente.execute(get);
+			int status = response.getStatusLine().getStatusCode();
+
+			if (status == HttpStatus.SC_OK) {
+				return "";
+			} 
+			else {
+				return "Server responde: " + status;
+			}
+		} 
+		catch (ClientProtocolException ex) {
+			return ex.getMessage();
+		} 
+		catch (IOException ex) {
+			return ex.getMessage();
+		} 
+		catch (Exception ex) {
+			return "ERROR inesperado: " + ex.getMessage();
+		}
 	}
 }

@@ -43,6 +43,7 @@ import com.findme.app.controller.integration.PetServiceClient;
 import com.findme.app.controller.integration.UserServiceClient;
 import com.findme.app.controller.integration.tasks.PostPetTask;
 import com.findme.app.controller.integration.tasks.PostUserTask;
+import com.findme.app.controller.integration.tasks.ResendQrTask;
 import com.findme.app.model.Mascota;
 import com.findme.app.model.Usuario;
 import com.findme.app.utils.Base64Utils;
@@ -381,7 +382,8 @@ public class MainActivity extends FragmentActivity {
 	}
 
 	public void resendQR(View v) {
-		Toast.makeText(this, "resend", Toast.LENGTH_SHORT).show();
+		String gcmId = getRegistrationId(getApplicationContext());
+		new ResendQrTask(this).execute(gcmId);
 	}
 
 	public void savePetProfile(View v) {

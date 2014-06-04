@@ -56,9 +56,16 @@ public class PetController {
     }
 
     @ResponseBody
-    @RequestMapping(method = RequestMethod.GET, value = "/{idMascota}/qr")
-    public void reenviarQr(@PathVariable("idMascota") long idMascota) {
+    @RequestMapping(method = RequestMethod.GET, value = "/{gcmId}/qr")
+    public void reenviarQr(@PathVariable("gcmId") String gcmId) throws QRGeneratorException, MailGeneratorException, IOException {
         LOG.info("Reenviar QR");
-        // TODO agregar logica
+        Usuario usuario = this.usuarioDao.getUsuarioByGcmId(gcmId);
+        if (usuario != null) {
+            String nombre = usuario.getMascota().getNombre();
+            String correo = usuario.getCorreo();
+
+            ManejadorMail.enviarQR(gcmId + "+" + nombre, correo, PROPS);
+            LOG.info("Mail enviado");
+        }
     }
 }
