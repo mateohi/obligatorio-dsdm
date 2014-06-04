@@ -12,8 +12,11 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -25,16 +28,39 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.findme.R;
+import com.example.findme.R.id;
+import com.findme.app.controller.DatabaseHandler;
+import com.findme.app.controller.integration.PetServiceClient;
+import com.findme.app.controller.integration.UserServiceClient;
+import com.findme.app.model.Mascota;
+import com.findme.app.model.Usuario;
+import com.findme.app.utils.EmailValidator;
+import com.findme.app.utils.ImageUtils;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 public class MainActivity extends FragmentActivity {
+
+	/**
+	 * Project number de la console API
+	 */
+	private static final String SENDER_ID = "163539247139";
+	private static final String TAG = "MainActivity";
+	private static final String PROPERTY_REG_ID = "registrationId";
+	private static final String PROPERTY_APP_VERSION = "appVersion";
+	private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+
+	private static final int REQUEST_SCAN = 0;
+	private static final int REQUEST_SELECT_IMAGE = 1;
 
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;
@@ -43,34 +69,12 @@ public class MainActivity extends FragmentActivity {
 	private CharSequence mDrawerTitle;
 	private CharSequence mTitle;
 
-	private static final int REQUEST_SCAN = 0;
+	private CustomDrawerAdapter adapter;
+	private List<DrawerItem> dataList;
 
-	CustomDrawerAdapter adapter;
-	List<DrawerItem> dataList;
+	private GoogleCloudMessaging gcm;
+	private Context context;
 
-	public static final String EXTRA_MESSAGE = "message";
-	public static final String PROPERTY_REG_ID = "registration_id";
-	private static final String PROPERTY_APP_VERSION = "appVersion";
-	private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
-
-	/**
-	 * Substitute you own sender ID here. This is the project number you got
-	 * from the API Console, as described in "Getting Started."
-	 */
-	String SENDER_ID = "163539247139";
-
-	/**
-	 * Tag used on log messages.
-	 */
-	static final String TAG = "GCM Demo";
-
-	TextView mDisplay;
-	GoogleCloudMessaging gcm;
-	AtomicInteger msgId = new AtomicInteger();
-	Context context;
-
-	String regid;
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -121,21 +125,19 @@ public class MainActivity extends FragmentActivity {
 		mDrawerLayout.setDrawerListener(mDrawerToggle);
 
 		if (savedInstanceState == null) {
-			SelectItem(0);
+			selectItem(0);
 		}
-		
+
 		context = getApplicationContext();
-		
+
 		// Check device for Play Services APK. If check succeeds, proceed with
 		// GCM registration.
 		if (checkPlayServices()) {
 			gcm = GoogleCloudMessaging.getInstance(this);
-			regid = getRegistrationId(context);
+			String regid = getRegistrationId(context);
 
 			if (regid.isEmpty()) {
 				registerInBackground();
-			} else {
-				//Toast.makeText(this, regid, Toast.LENGTH_SHORT).show();
 			}
 		} else {
 			Log.i(TAG, "No valid Google Play Services APK found.");
@@ -151,7 +153,7 @@ public class MainActivity extends FragmentActivity {
 		return true;
 	}
 
-	public void SelectItem(int position) {
+	public void selectItem(int position) {
 
 		Fragment fragment = null;
 
@@ -228,19 +230,19 @@ public class MainActivity extends FragmentActivity {
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
-			SelectItem(position);
+			selectItem(position);
 
 		}
 	}
 
 	public void scanQR(View view) {
 		try {
-		Intent intent = new Intent("com.google.zxing.client.android.SCAN");
-		intent.putExtra("SCAN_MODE", "QR_CODE_MODE");
-		startActivityForResult(intent, REQUEST_SCAN); 
-		}
-		catch (ActivityNotFoundException ex) {
-			Toast.makeText(this, "Baje una aplicacion para leer QR.", Toast.LENGTH_LONG).show();
+			Intent intent = new Intent("com.google.zxing.client.android.SCAN");
+			intent.putExtra("SCAN_MODE", "QR_CODE_MODE");
+			startActivityForResult(intent, REQUEST_SCAN);
+		} catch (ActivityNotFoundException ex) {
+			Toast.makeText(this, "Baje una aplicacion para leer QR.",
+					Toast.LENGTH_LONG).show();
 		}
 	}
 
@@ -249,22 +251,30 @@ public class MainActivity extends FragmentActivity {
 			if (resultCode == RESULT_OK) {
 				String contents = intent.getStringExtra("SCAN_RESULT");
 
-				Toast.makeText(this, contents, Toast.LENGTH_SHORT)
-						.show();
-			} else if (resultCode == RESULT_CANCELED) {
-				Toast.makeText(this, "Error al leer el QR", Toast.LENGTH_SHORT)
-						.show();
+				Toast.makeText(this, contents, Toast.LENGTH_SHORT).show();
+			}
+		}
+
+		if (requestCode == REQUEST_SELECT_IMAGE) {
+			if (resultCode == RESULT_OK) {
+				try {
+					Uri selectedImage = intent.getData();
+					Bitmap image = ImageUtils.getImageFromUri(
+							getContentResolver(), selectedImage);
+					ImageUtils.saveImageOnDevice(image, "test",
+							getApplicationContext());
+					Bitmap recovered = ImageUtils.getCircleBitmapFromDevice(
+							"test", this.getApplicationContext());
+
+					ImageView imageView = (ImageView) findViewById(R.id.my_pet_image);
+					imageView.setImageBitmap(recovered);
+				} catch (Exception ex) {
+					Log.e(TAG, ex.getMessage(), ex);
+				}
 			}
 		}
 	}
 
-	public void resendQR(View view) {
-	}
-
-	public void changeImage(View view) {
-
-	}
-	
 	private boolean checkPlayServices() {
 		int resultCode = GooglePlayServicesUtil
 				.isGooglePlayServicesAvailable(this);
@@ -302,9 +312,6 @@ public class MainActivity extends FragmentActivity {
 	}
 
 	private SharedPreferences getGcmPreferences(Context context) {
-		// This sample app persists the registration ID in shared preferences,
-		// but
-		// how you store the regID in your app is up to you.
 		return getSharedPreferences(MainActivity.class.getSimpleName(),
 				Context.MODE_PRIVATE);
 	}
@@ -329,40 +336,20 @@ public class MainActivity extends FragmentActivity {
 					if (gcm == null) {
 						gcm = GoogleCloudMessaging.getInstance(context);
 					}
-					regid = gcm.register(SENDER_ID);
+					String regid = gcm.register(SENDER_ID);
 					msg = "Device registered, registration ID=" + regid;
-
-					// You should send the registration ID to your server over
-					// HTTP, so it
-					// can use GCM/HTTP or CCS to send messages to your app.
-					sendRegistrationIdToBackend();
-
-					// For this demo: we don't need to send it because the
-					// device will send
-					// upstream messages to a server that echo back the message
-					// using the
-					// 'from' address in the message.
-
-					// Persist the regID - no need to register again.
 					storeRegistrationId(context, regid);
 				} catch (IOException ex) {
 					msg = "Error :" + ex.getMessage();
-					// If there is an error, don't just keep trying to register.
-					// Require the user to click a button again, or perform
-					// exponential back-off.
 				}
 				return msg;
 			}
 
 			@Override
 			protected void onPostExecute(String msg) {
-				Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+				Log.i(TAG, msg);
 			}
 		}.execute(null, null, null);
-	}
-
-	private void sendRegistrationIdToBackend() {
-		// Your implementation here.
 	}
 
 	private void storeRegistrationId(Context context, String regId) {
@@ -375,4 +362,130 @@ public class MainActivity extends FragmentActivity {
 		editor.commit();
 	}
 
+	// My pet fragment methods
+
+	public void changePetImage(View v) {
+		Intent i = new Intent(Intent.ACTION_PICK,
+				MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+		startActivityForResult(i, REQUEST_SELECT_IMAGE);
+	}
+
+	public void resendQR(View v) {
+		Toast.makeText(this, "resend", Toast.LENGTH_SHORT).show();
+	}
+
+	public void savePetProfile(View v) {
+		String nombre = ((EditText) findViewById(id.my_pet_profile_name))
+				.getText().toString().trim();
+		boolean estaVacunada = ((Switch) findViewById(id.switch_vacunada))
+				.isChecked();
+		boolean tenerCuidado = ((Switch) findViewById(id.switch_cuidado))
+				.isChecked();
+		String info = ((EditText) findViewById(id.my_pet_extra_information))
+				.getText().toString().trim();
+
+		Mascota mascota = new Mascota();
+		mascota.setNombre(nombre);
+		mascota.setEstaVacunada(estaVacunada);
+		mascota.setTenerCuidado(tenerCuidado);
+		mascota.setInfo(info);
+
+		if (!nombre.isEmpty()) {
+			try {
+				DatabaseHandler handler = new DatabaseHandler(
+						getApplicationContext());
+				handler.agregarMascota(mascota);
+
+				String serviceResponse = PetServiceClient.instance().postPet(
+						mascota);
+
+				if (serviceResponse.isEmpty()) {
+					Toast.makeText(this, "Mascota guardada", Toast.LENGTH_SHORT)
+							.show();
+				} else {
+					Toast.makeText(this, serviceResponse, Toast.LENGTH_SHORT)
+							.show();
+				}
+			} catch (Exception ex) {
+				Toast.makeText(this, "Error al guardar", Toast.LENGTH_SHORT)
+						.show();
+			}
+		} else {
+			Toast.makeText(this, "El nombre no puede ser vacio",
+					Toast.LENGTH_LONG).show();
+		}
+	}
+
+	// My Profile fragment methods
+	
+	public void saveMyProfile(View v) {
+		String nombre = ((EditText) findViewById(id.profile_name)).getText()
+				.toString().trim();
+		String apellido = ((EditText) findViewById(id.profile_last_name))
+				.getText().toString().trim();
+		String correo = ((EditText) findViewById(id.profile_mail)).getText()
+				.toString().trim();
+		String celular = ((EditText) findViewById(id.profile_mobile_phone))
+				.getText().toString().trim();
+
+		String validaciones = validarUsuario(nombre, apellido, correo, celular);
+
+		if (validaciones.isEmpty()) {
+			Usuario usuario = new Usuario();
+			usuario.setNombre(nombre);
+			usuario.setApellido(apellido);
+			usuario.setCorreo(correo);
+			usuario.setCelular(celular);
+			usuario.setGcmId(this.getRegistrationId(context));
+
+			try {
+//				DatabaseHandler handler = new DatabaseHandler(
+//						getApplicationContext());
+//				handler.agregarUsuario(usuario);
+
+				String serviceResponse = UserServiceClient.instance().postUser(
+						usuario);
+
+				if (serviceResponse.isEmpty()) {
+					Toast.makeText(this, "Usuario guardado", Toast.LENGTH_SHORT)
+							.show();
+				} else {
+					Toast.makeText(this, serviceResponse, Toast.LENGTH_SHORT)
+							.show();
+				}
+			} catch (Exception ex) {
+				Toast.makeText(this, "Error al guardar\n" + ex.getMessage(), Toast.LENGTH_SHORT)
+						.show();
+			}
+
+		} else {
+			Toast.makeText(this, validaciones, Toast.LENGTH_LONG).show();
+		}
+	}
+
+	private String validarUsuario(String nombre, String apellido,
+			String correo, String celular) {
+		StringBuilder validaciones = new StringBuilder();
+
+		if (nombre.equals("")) {
+			validaciones.append("Nombre no puede ser vacio\n");
+		}
+		if (apellido.equals("")) {
+			validaciones.append("Apellido no puede ser vacio\n");
+		}
+		if (correo.equals("")) {
+			validaciones.append("Correo no puede ser vacio\n");
+		} else if (!EmailValidator.valid(correo)) {
+			validaciones.append("Correo no valido\n");
+		}
+		if (celular.equals("")) {
+			validaciones.append("Celular no puede ser vacio\n");
+		}
+
+		if (validaciones.length() > 0) {
+			validaciones.deleteCharAt(validaciones.length() - 1);
+		}
+
+		return validaciones.toString();
+	}
 }

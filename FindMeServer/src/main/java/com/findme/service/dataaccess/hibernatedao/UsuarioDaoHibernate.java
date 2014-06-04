@@ -3,6 +3,7 @@ package com.findme.service.dataaccess.hibernatedao;
 import com.findme.service.dataaccess.UsuarioDao;
 import com.findme.service.model.Usuario;
 import java.util.List;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -64,5 +65,19 @@ public class UsuarioDaoHibernate implements UsuarioDao {
 
         transaction.commit();
         session.close();
+    }
+
+    @Override
+    public Usuario getUsuarioByGcmId(String gcmId) {
+        Session session = this.sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+
+        Query query = session.createQuery("from usuario u where u.gcmId=" + gcmId);
+        Usuario usuario = (Usuario) query.list().get(0);
+
+        transaction.commit();
+        session.close();
+
+        return usuario;
     }
 }

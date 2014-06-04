@@ -161,7 +161,7 @@
             android:layout_height="wrap_content"
             android:background="@color/coral_red"
             android:fontFamily="Lucida"
-            android:onClick="saveProfile"
+            android:onClick="saveMyProfile"
             android:text="@string/my_profile_save"
             android:textColor="@color/white" />
     </LinearLayout>

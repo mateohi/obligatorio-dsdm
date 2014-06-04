@@ -21,7 +21,7 @@ public class ManejadorApiModel {
         requestData.setCorreo(mapa.get(CORREO));
 
         RequestBody request = new RequestBody();
-        request.setRegistration_ids(Arrays.asList(mapa.get(APELLIDO_USUARIO)));
+        request.setRegistration_ids(Arrays.asList(mapa.get(REG_ID)));
         request.setData(requestData);
 
         return request;

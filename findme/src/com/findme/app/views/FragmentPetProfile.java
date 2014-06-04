@@ -29,32 +29,4 @@ public class FragmentPetProfile extends Fragment {
 
 		return view;
 	}
-
-	public void saveProfile(View view) {
-		String nombre = ((EditText) view.findViewById(id.my_pet_name))
-				.getText().toString().trim();
-		boolean estaVacunada = ((Switch) view.findViewById(id.switch_vacunada))
-				.isChecked();
-		boolean tenerCuidado = ((Switch) view.findViewById(id.switch_cuidado))
-				.isChecked();
-
-		Mascota mascota = new Mascota();
-		mascota.setNombre(nombre);
-		mascota.setEstaVacunada(estaVacunada);
-		mascota.setTenerCuidado(tenerCuidado);
-
-		DatabaseHandler handler = new DatabaseHandler(this.getActivity()
-				.getApplicationContext());
-		handler.agregarMascota(mascota);
-
-		String serviceResponse = PetServiceClient.instance().postPet(mascota);
-
-		if (serviceResponse.isEmpty()) {
-			Toast.makeText(null, "Mascota guardada", Toast.LENGTH_SHORT).show();
-		} else {
-			Toast.makeText(null, serviceResponse, Toast.LENGTH_SHORT).show();
-		}
-
-		Toast.makeText(null, "Usuario guardado", Toast.LENGTH_SHORT).show();
-	}
 }

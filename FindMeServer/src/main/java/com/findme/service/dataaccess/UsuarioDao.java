@@ -12,4 +12,6 @@ public interface UsuarioDao {
     public void deleteUsuario(long id);
 
     public void addUsuario(Usuario usuario);
+
+    public Usuario getUsuarioByGcmId(String gcmId);
 }

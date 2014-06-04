@@ -1,23 +1,18 @@
 package com.findme.service.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
-@Table(name = "Mascota")
 public class Mascota extends Persistent {
 
-    @Column(name = "Nombre")
     private String nombre;
-    @Column(name = "Info")
     private String info;
-    @Column(name = "Foto")
     private String pathFoto;
-    @Column(name = "Cuidado")
     private boolean tenerCuidado;
-    @Column(name = "Vacunada")
     private boolean estaVacunada;
+    @Transient
+    private String fotoBase64;
 
     public Mascota() {
     }
@@ -60,5 +55,13 @@ public class Mascota extends Persistent {
 
     public void setEstaVacunada(boolean estaVacunada) {
         this.estaVacunada = estaVacunada;
+    }
+
+    public String getFotoBase64() {
+        return fotoBase64;
+    }
+
+    public void setFotoBase64(String fotoBase64) {
+        this.fotoBase64 = fotoBase64;
     }
 }

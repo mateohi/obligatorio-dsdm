@@ -21,4 +21,8 @@ public class PetServiceClient {
 	public String postPet(Mascota mascota) {
 		return "";
 	}
+	
+	public String resendQR(Mascota mascota) {
+		return "";
+	}
 }
