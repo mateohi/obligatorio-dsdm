@@ -1,6 +1,8 @@
 package com.findme.service.model;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Usuario extends Persistent {
@@ -10,6 +12,8 @@ public class Usuario extends Persistent {
     private String correo;
     private String celular;
     private String gcmId;
+    @OneToOne
+    @JoinColumn(name = "mascota_id")
     private Mascota mascota;
 
     public Usuario() {

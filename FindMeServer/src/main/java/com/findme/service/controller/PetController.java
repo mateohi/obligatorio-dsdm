@@ -43,19 +43,29 @@ public class PetController {
             mascota.setPathFoto(gcmId + mascota.getNombre());
             this.mascotaDao.addMascota(mascota);
             usuario.setMascota(mascota);
+
             this.usuarioDao.addUsuario(usuario);
             LOG.info("Nueva mascota guardada");
+
             ManejadorBase64.base64AFile(mascota.getFotoBase64(), mascota.getPathFoto(), PNG);
             LOG.info("Foto guardada");
+
             ManejadorMail.enviarQR(gcmId + "+" + mascota.getNombre(), usuario.getCorreo(), PROPS);
             LOG.info("Mail enviado");
         }
     }
 
     @ResponseBody
-    @RequestMapping(method = RequestMethod.GET, value = "/{idMascota}/qr")
-    public void reenviarQr(@PathVariable("idMascota") long idMascota) {
+    @RequestMapping(method = RequestMethod.GET, value = "/{gcmId}/qr")
+    public void reenviarQr(@PathVariable("gcmId") String gcmId) throws QRGeneratorException, MailGeneratorException, IOException {
         LOG.info("Reenviar QR");
-        // TODO agregar logica
+        Usuario usuario = this.usuarioDao.getUsuarioByGcmId(gcmId);
+        if (usuario != null) {
+            String nombre = usuario.getMascota().getNombre();
+            String correo = usuario.getCorreo();
+
+            ManejadorMail.enviarQR(gcmId + "+" + nombre, correo, PROPS);
+            LOG.info("Mail enviado");
+        }
     }
 }

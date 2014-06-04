@@ -13,6 +13,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -40,8 +41,12 @@ import com.example.findme.R.id;
 import com.findme.app.controller.DatabaseHandler;
 import com.findme.app.controller.integration.PetServiceClient;
 import com.findme.app.controller.integration.UserServiceClient;
+import com.findme.app.controller.integration.tasks.PostPetTask;
+import com.findme.app.controller.integration.tasks.PostUserTask;
+import com.findme.app.controller.integration.tasks.ResendQrTask;
 import com.findme.app.model.Mascota;
 import com.findme.app.model.Usuario;
+import com.findme.app.utils.Base64Utils;
 import com.findme.app.utils.EmailValidator;
 import com.findme.app.utils.ImageUtils;
 import com.google.android.gms.common.ConnectionResult;
@@ -58,6 +63,10 @@ public class MainActivity extends FragmentActivity {
 	private static final String PROPERTY_REG_ID = "registrationId";
 	private static final String PROPERTY_APP_VERSION = "appVersion";
 	private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+	
+	public static final String PREFS_NAME = "FindMeConfig";
+	private static final String SILENT = "silent";
+	private static final String VIBRATE = "vibrate";
 
 	private static final int REQUEST_SCAN = 0;
 	private static final int REQUEST_SELECT_IMAGE = 1;
@@ -162,10 +171,10 @@ public class MainActivity extends FragmentActivity {
 			fragment = new FragmentScan();
 			break;
 		case 1:
-			fragment = new FragmentPetProfile();
+			fragment = new FragmentPetProfile(getMascota());
 			break;
 		case 2:
-			fragment = new FragmentMyProfile();
+			fragment = new FragmentMyProfile(getUsuario());
 			break;
 		case 3:
 			fragment = new FragmentConfiguration();
@@ -232,17 +241,6 @@ public class MainActivity extends FragmentActivity {
 				long id) {
 			selectItem(position);
 
-		}
-	}
-
-	public void scanQR(View view) {
-		try {
-			Intent intent = new Intent("com.google.zxing.client.android.SCAN");
-			intent.putExtra("SCAN_MODE", "QR_CODE_MODE");
-			startActivityForResult(intent, REQUEST_SCAN);
-		} catch (ActivityNotFoundException ex) {
-			Toast.makeText(this, "Baje una aplicacion para leer QR.",
-					Toast.LENGTH_LONG).show();
 		}
 	}
 
@@ -361,6 +359,19 @@ public class MainActivity extends FragmentActivity {
 		editor.putInt(PROPERTY_APP_VERSION, appVersion);
 		editor.commit();
 	}
+	
+	// Configuration fragment methods
+	
+	public void scanQR(View view) {
+		try {
+			Intent intent = new Intent("com.google.zxing.client.android.SCAN");
+			intent.putExtra("SCAN_MODE", "QR_CODE_MODE");
+			startActivityForResult(intent, REQUEST_SCAN);
+		} catch (ActivityNotFoundException ex) {
+			Toast.makeText(this, "Baje una aplicacion para leer QR.",
+					Toast.LENGTH_LONG).show();
+		}
+	}
 
 	// My pet fragment methods
 
@@ -371,10 +382,17 @@ public class MainActivity extends FragmentActivity {
 	}
 
 	public void resendQR(View v) {
-		Toast.makeText(this, "resend", Toast.LENGTH_SHORT).show();
+		String gcmId = getRegistrationId(getApplicationContext());
+		new ResendQrTask(this).execute(gcmId);
 	}
 
 	public void savePetProfile(View v) {
+		
+		if (!hayUsuario()) {
+			Toast.makeText(this, "Cree un usuario antes", Toast.LENGTH_LONG).show();
+			return;
+		}
+		
 		String nombre = ((EditText) findViewById(id.my_pet_profile_name))
 				.getText().toString().trim();
 		boolean estaVacunada = ((Switch) findViewById(id.switch_vacunada))
@@ -383,29 +401,23 @@ public class MainActivity extends FragmentActivity {
 				.isChecked();
 		String info = ((EditText) findViewById(id.my_pet_extra_information))
 				.getText().toString().trim();
+		String fotoBase64 = getBase64FromImageView(id.my_pet_image);
+		ImageView image = (ImageView) findViewById(id.my_pet_image);
+		Bitmap bitmap = ((BitmapDrawable) image.getDrawable()).getBitmap();
 
 		Mascota mascota = new Mascota();
 		mascota.setNombre(nombre);
 		mascota.setEstaVacunada(estaVacunada);
 		mascota.setTenerCuidado(tenerCuidado);
 		mascota.setInfo(info);
+		mascota.setFotoBase64(fotoBase64);
+		mascota.setPathFoto(nombre);
 
 		if (!nombre.isEmpty()) {
 			try {
-				DatabaseHandler handler = new DatabaseHandler(
-						getApplicationContext());
-				handler.agregarMascota(mascota);
-
-				String serviceResponse = PetServiceClient.instance().postPet(
-						mascota);
-
-				if (serviceResponse.isEmpty()) {
-					Toast.makeText(this, "Mascota guardada", Toast.LENGTH_SHORT)
-							.show();
-				} else {
-					Toast.makeText(this, serviceResponse, Toast.LENGTH_SHORT)
-							.show();
-				}
+				guardarMascota(mascota);
+				// Guardar imagen local
+				ImageUtils.saveImageOnDevice(bitmap, mascota.getPathFoto(), getApplicationContext());
 			} catch (Exception ex) {
 				Toast.makeText(this, "Error al guardar", Toast.LENGTH_SHORT)
 						.show();
@@ -417,7 +429,22 @@ public class MainActivity extends FragmentActivity {
 	}
 
 	// My Profile fragment methods
-	
+
+	private void guardarMascota(Mascota mascota) {
+		// Guardar local
+		DatabaseHandler handler = new DatabaseHandler(getApplicationContext());
+		if (hayMascota()) {
+			handler.updateMascota(mascota);
+		} 
+		else {
+			handler.addMascota(mascota);
+		}
+
+		// Guardar en el servidor
+		String gcmId = getRegistrationId(getApplicationContext());
+		new PostPetTask(this).execute(mascota, gcmId);
+	}
+
 	public void saveMyProfile(View v) {
 		String nombre = ((EditText) findViewById(id.profile_name)).getText()
 				.toString().trim();
@@ -439,28 +466,29 @@ public class MainActivity extends FragmentActivity {
 			usuario.setGcmId(this.getRegistrationId(context));
 
 			try {
-//				DatabaseHandler handler = new DatabaseHandler(
-//						getApplicationContext());
-//				handler.agregarUsuario(usuario);
-
-				String serviceResponse = UserServiceClient.instance().postUser(
-						usuario);
-
-				if (serviceResponse.isEmpty()) {
-					Toast.makeText(this, "Usuario guardado", Toast.LENGTH_SHORT)
-							.show();
-				} else {
-					Toast.makeText(this, serviceResponse, Toast.LENGTH_SHORT)
-							.show();
-				}
+				guardarUsuario(usuario);
 			} catch (Exception ex) {
-				Toast.makeText(this, "Error al guardar\n" + ex.getMessage(), Toast.LENGTH_SHORT)
+				Toast.makeText(this, "Error al guardar", Toast.LENGTH_SHORT)
 						.show();
 			}
 
 		} else {
 			Toast.makeText(this, validaciones, Toast.LENGTH_LONG).show();
 		}
+	}
+
+	private void guardarUsuario(Usuario usuario) {
+		// Guardar local
+		DatabaseHandler handler = new DatabaseHandler(getApplicationContext());
+		if (hayUsuario()) {
+			handler.updateUsuario(usuario);
+		}
+		else {
+			handler.addUsuario(usuario);
+		}
+
+		// Guardar en el servidor
+		new PostUserTask(this).execute(usuario);
 	}
 
 	private String validarUsuario(String nombre, String apellido,
@@ -487,5 +515,55 @@ public class MainActivity extends FragmentActivity {
 		}
 
 		return validaciones.toString();
+	}
+
+	// Utility methods
+
+	private Usuario getUsuario() {
+		DatabaseHandler dh = new DatabaseHandler(getApplicationContext());
+
+		if (dh.hayUsuario()) {
+			return dh.getUsuario();
+		} else {
+			return null;
+		}
+	}
+	
+	private Mascota getMascota() {
+		DatabaseHandler dh = new DatabaseHandler(getApplicationContext());
+
+		if (dh.hayMascota()) {
+			return dh.getMascota();
+		} else {
+			return null;
+		}
+	}
+
+	private boolean hayUsuario() {
+		DatabaseHandler dh = new DatabaseHandler(getApplicationContext());
+		return dh.hayUsuario();
+	}
+
+	private boolean hayMascota() {
+		DatabaseHandler dh = new DatabaseHandler(getApplicationContext());
+		return dh.hayMascota();
+	}
+	
+	private String getBase64FromImageView(int imageViewId) {
+		ImageView image = (ImageView) findViewById(imageViewId);
+		Bitmap bitmap = ((BitmapDrawable)image.getDrawable()).getBitmap();
+		String fotoBase64 = Base64Utils.bytesToBase64String(ImageUtils.bitmapToBytes(bitmap));
+		
+		return fotoBase64;
+	}
+	
+	private boolean conSonido() {
+		SharedPreferences settings = this.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+		return settings.getBoolean(SILENT, false);
+	}
+	
+	private boolean conVibrar() {
+		SharedPreferences settings = this.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+		return settings.getBoolean(VIBRATE, false);
 	}
 }

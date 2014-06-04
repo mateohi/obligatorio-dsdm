@@ -8,7 +8,6 @@ public class Usuario {
     private String correo;
     private String celular;
     private String gcmId;
-    private Mascota mascota;
 
     public Usuario() {
     }
@@ -51,14 +50,6 @@ public class Usuario {
 
     public void setCelular(String celular) {
         this.celular = celular;
-    }
-
-    public Mascota getMascota() {
-        return mascota;
-    }
-
-    public void setMascota(Mascota mascota) {
-        this.mascota = mascota;
     }
 
 	public String getGcmId() {

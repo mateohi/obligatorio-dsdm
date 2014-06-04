@@ -72,8 +72,15 @@ public class UsuarioDaoHibernate implements UsuarioDao {
         Session session = this.sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
 
-        Query query = session.createQuery("from usuario u where u.gcmId=" + gcmId);
-        Usuario usuario = (Usuario) query.list().get(0);
+        Query query = session.createQuery("from Usuario u where u.gcmId = :id");
+        query.setParameter("id", gcmId);
+
+        List usuarios = query.list();
+        Usuario usuario = null;
+
+        if (usuarios.size() > 0) {
+            usuario = (Usuario) usuarios.get(0);
+        }
 
         transaction.commit();
         session.close();

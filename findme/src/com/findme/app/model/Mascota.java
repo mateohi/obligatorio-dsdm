@@ -6,6 +6,7 @@ public class Mascota {
     private String nombre;
     private String info;
     private String pathFoto;
+    private String fotoBase64;
     private boolean tenerCuidado;
     private boolean estaVacunada;
 
@@ -59,4 +60,12 @@ public class Mascota {
     public void setEstaVacunada(boolean estaVacunada) {
         this.estaVacunada = estaVacunada;
     }
+
+	public String getFotoBase64() {
+		return fotoBase64;
+	}
+
+	public void setFotoBase64(String fotoBase64) {
+		this.fotoBase64 = fotoBase64;
+	}
 }

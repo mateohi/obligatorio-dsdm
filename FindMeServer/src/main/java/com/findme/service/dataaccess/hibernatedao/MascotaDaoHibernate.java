@@ -3,7 +3,9 @@ package com.findme.service.dataaccess.hibernatedao;
 import com.findme.service.dataaccess.MascotaDao;
 import com.findme.service.model.Mascota;
 import java.util.List;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -32,6 +34,12 @@ public class MascotaDaoHibernate implements MascotaDao {
 
     @Override
     public void addMascota(Mascota mascota) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Session session = this.sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+
+        session.saveOrUpdate(mascota);
+
+        transaction.commit();
+        session.close();
     }
 }
