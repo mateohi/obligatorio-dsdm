@@ -3,7 +3,6 @@ package com.findme.app.views;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -33,15 +32,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Switch;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ProgressBar;
 
 import com.example.findme.R;
 import com.example.findme.R.id;
 import com.findme.app.controller.DatabaseHandler;
-import com.findme.app.controller.integration.PetServiceClient;
-import com.findme.app.controller.integration.UserServiceClient;
 import com.findme.app.controller.integration.tasks.PostNotificationTask;
 import com.findme.app.controller.integration.tasks.PostPetTask;
 import com.findme.app.controller.integration.tasks.PostUserTask;
@@ -249,7 +245,8 @@ public class MainActivity extends FragmentActivity {
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
 		if (requestCode == REQUEST_SCAN) {
 			if (resultCode == RESULT_OK) {
-				String[] contents = intent.getStringExtra("SCAN_RESULT").split("+");
+				String[] contents = intent.getStringExtra("SCAN_RESULT").split("\\+");
+				
 				String gcmId = contents[0];
 				String nombreMascota = contents[1];
 

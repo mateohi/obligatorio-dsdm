@@ -1,9 +1,12 @@
 package com.findme.service.gcm.apimodel;
 
+import java.util.List;
+
 public class ResponseGcm {
 
     private int success;
     private int failure;
+    private List<Result> results;
 
     public ResponseGcm() {
     }
@@ -18,5 +21,13 @@ public class ResponseGcm {
 
     public boolean envioFallido() {
         return this.failure != 0;
+    }
+
+    public List<Result> getResults() {
+        return results;
+    }
+
+    public void setResults(List<Result> results) {
+        this.results = results;
     }
 }
