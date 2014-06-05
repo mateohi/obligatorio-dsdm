@@ -25,12 +25,20 @@ public class ManejadorGcm {
     private static final String AUTH_KEY = "key=AIzaSyB8naiF_-N-4eAZvQdgZRPzTev0nIie_js";
     private static final String CONTENT_TYPE = "Content-Type";
     private static final String TYPE_JSON = "application/json";
+    private static ManejadorGcm instance;
     private HttpClient client;
     private Gson gson;
 
-    public ManejadorGcm() {
+    private ManejadorGcm() {
         this.client = new DefaultHttpClient();
         this.gson = new Gson();
+    }
+
+    public static ManejadorGcm instance() {
+        if (instance == null) {
+            instance = new ManejadorGcm();
+        }
+        return instance;
     }
 
     public void enviarNotificacion(Map<String, String> data) throws GcmException {

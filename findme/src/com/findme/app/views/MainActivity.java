@@ -35,12 +35,14 @@ import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ProgressBar;
 
 import com.example.findme.R;
 import com.example.findme.R.id;
 import com.findme.app.controller.DatabaseHandler;
 import com.findme.app.controller.integration.PetServiceClient;
 import com.findme.app.controller.integration.UserServiceClient;
+import com.findme.app.controller.integration.tasks.PostNotificationTask;
 import com.findme.app.controller.integration.tasks.PostPetTask;
 import com.findme.app.controller.integration.tasks.PostUserTask;
 import com.findme.app.controller.integration.tasks.ResendQrTask;
@@ -247,9 +249,13 @@ public class MainActivity extends FragmentActivity {
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
 		if (requestCode == REQUEST_SCAN) {
 			if (resultCode == RESULT_OK) {
-				String contents = intent.getStringExtra("SCAN_RESULT");
+				String[] contents = intent.getStringExtra("SCAN_RESULT").split("+");
+				String gcmId = contents[0];
+				String nombreMascota = contents[1];
 
-				Toast.makeText(this, contents, Toast.LENGTH_SHORT).show();
+				Toast.makeText(this, "Se encontro a " + nombreMascota, Toast.LENGTH_SHORT).show();
+				
+				new PostNotificationTask(this).execute(gcmId);
 			}
 		}
 
@@ -427,7 +433,7 @@ public class MainActivity extends FragmentActivity {
 					Toast.LENGTH_LONG).show();
 		}
 	}
-	
+
 	private void guardarMascota(Mascota mascota) {
 		// Guardar local
 		DatabaseHandler handler = new DatabaseHandler(getApplicationContext());
@@ -478,6 +484,7 @@ public class MainActivity extends FragmentActivity {
 	}
 
 	private void guardarUsuario(Usuario usuario) {
+		toggleProgressBarProfile();
 		// Guardar local
 		DatabaseHandler handler = new DatabaseHandler(getApplicationContext());
 		if (hayUsuario()) {
@@ -489,6 +496,7 @@ public class MainActivity extends FragmentActivity {
 
 		// Guardar en el servidor
 		new PostUserTask(this).execute(usuario);
+		toggleProgressBarProfile();
 	}
 
 	private String validarUsuario(String nombre, String apellido,
@@ -515,6 +523,18 @@ public class MainActivity extends FragmentActivity {
 		}
 
 		return validaciones.toString();
+	}
+	
+	private void toggleProgressBarProfile() {
+		ProgressBar progressBar = (ProgressBar) findViewById(id.progress_bar_profile);
+		int visibility = progressBar.getVisibility();
+		
+		if (ProgressBar.VISIBLE == visibility) {
+			progressBar.setVisibility(ProgressBar.GONE);
+		}
+		else {
+			progressBar.setVisibility(ProgressBar.VISIBLE);
+		}
 	}
 
 	// Utility methods

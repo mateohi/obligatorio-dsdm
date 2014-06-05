@@ -15,7 +15,7 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:onClick="changePetImage"
-            android:src="@drawable/pet_default" />
+            android:src="@drawable/default_pet" />
 
         <EditText
             android:id="@+id/my_pet_profile_name"
