@@ -1,176 +1,181 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/tableLayout1"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
 
-    <TableRow
-        android:id="@+id/my_profile_tableRow1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="12dip" >
+    <TableLayout
+        android:id="@+id/tableLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
 
-        <TextView
-            android:id="@+id/my_profile_personal_title"
+        <TableRow
+            android:id="@+id/my_profile_tableRow1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:fontFamily="Lucida"
-            android:text="@string/my_profile_personal_title"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/coral_red" />
-    </TableRow>
+            android:padding="12dip" >
 
-    <View
-        android:layout_height="2dip"
-        android:background="@color/coral_red" />
+            <TextView
+                android:id="@+id/my_profile_personal_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:fontFamily="Lucida"
+                android:text="@string/my_profile_personal_title"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/coral_red" />
+        </TableRow>
 
-    <TableRow
-        android:id="@+id/my_profile_tableRow2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="5dip" >
+        <View
+            android:layout_height="2dip"
+            android:background="@color/coral_red" />
 
-        <TextView
-            android:id="@+id/my_profile_name"
-            android:layout_width="0dp"
+        <TableRow
+            android:id="@+id/my_profile_tableRow2"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_weight="1"
-            android:fontFamily="Lucida"
-            android:text="@string/my_profile_name"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+            android:padding="5dip" >
 
-        <EditText
-            android:id="@+id/profile_name"
-            android:layout_width="0dp"
+            <TextView
+                android:id="@+id/my_profile_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_weight="1"
+                android:fontFamily="Lucida"
+                android:text="@string/my_profile_name"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <EditText
+                android:id="@+id/profile_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_weight="2"
+                android:inputType="textCapSentences" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/my_profile_tableRow3"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:layout_weight="2"
-            android:inputType="textCapSentences" />
-    </TableRow>
+            android:padding="5dip" >
 
-    <TableRow
-        android:id="@+id/my_profile_tableRow3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="5dip" >
+            <TextView
+                android:id="@+id/my_profile_last_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_weight="1"
+                android:fontFamily="Lucida"
+                android:text="@string/my_profile_last_name"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
 
-        <TextView
-            android:id="@+id/my_profile_last_name"
-            android:layout_width="0dp"
+            <EditText
+                android:id="@+id/profile_last_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_weight="2"
+                android:inputType="textCapSentences" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/my_profile_tableRow5"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_weight="1"
-            android:fontFamily="Lucida"
-            android:text="@string/my_profile_last_name"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+            android:layout_marginTop="35dip"
+            android:padding="5dip" >
 
-        <EditText
-            android:id="@+id/profile_last_name"
-            android:layout_width="0dp"
+            <TextView
+                android:id="@+id/my_profile_contact_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_weight="1"
+                android:fontFamily="Lucida"
+                android:text="@string/my_profile_contact_title"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#FF3333" />
+        </TableRow>
+
+        <View
+            android:layout_height="2dip"
+            android:background="@color/coral_red" />
+
+        <TableRow
+            android:id="@+id/my_profile_tableRow6"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:layout_weight="2"
-            android:inputType="textCapSentences" />
-    </TableRow>
+            android:padding="5dip" >
 
-    <TableRow
-        android:id="@+id/my_profile_tableRow5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="35dip"
-        android:padding="5dip" >
+            <TextView
+                android:id="@+id/my_profile_mail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_weight="1"
+                android:fontFamily="Lucida"
+                android:text="@string/my_profile_mail"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
 
-        <TextView
-            android:id="@+id/my_profile_contact_title"
-            android:layout_width="0dp"
+            <EditText
+                android:id="@+id/profile_mail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_weight="2"
+                android:inputType="textEmailAddress" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/my_profile_tableRow7"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_weight="1"
-            android:fontFamily="Lucida"
-            android:text="@string/my_profile_contact_title"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#FF3333" />
-    </TableRow>
+            android:padding="5dip" >
 
-    <View
-        android:layout_height="2dip"
-        android:background="@color/coral_red" />
+            <TextView
+                android:id="@+id/my_profile_mobile_phone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_weight="1"
+                android:fontFamily="Lucida"
+                android:text="@string/my_profile_mobile_phone"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
 
-    <TableRow
-        android:id="@+id/my_profile_tableRow6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="5dip" >
+            <EditText
+                android:id="@+id/profile_mobile_phone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_weight="2"
+                android:inputType="phone" />
+        </TableRow>
 
-        <TextView
-            android:id="@+id/my_profile_mail"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:id="@+id/my_profile_tableRow8"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_weight="1"
-            android:fontFamily="Lucida"
-            android:text="@string/my_profile_mail"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+            android:layout_marginTop="10dip"
+            android:padding="5dip" >
 
-        <EditText
-            android:id="@+id/profile_mail"
-            android:layout_width="0dp"
+            <Button
+                android:id="@+id/button_save_profile"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/coral_red"
+                android:fontFamily="Lucida"
+                android:onClick="saveMyProfile"
+                android:text="@string/my_profile_save"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progress_bar_profile"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:layout_weight="2"
-            android:inputType="textEmailAddress" />
-    </TableRow>
+            android:visibility="gone" />
+    </TableLayout>
 
-    <TableRow
-        android:id="@+id/my_profile_tableRow7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="5dip" >
-
-        <TextView
-            android:id="@+id/my_profile_mobile_phone"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_weight="1"
-            android:fontFamily="Lucida"
-            android:text="@string/my_profile_mobile_phone"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-
-        <EditText
-            android:id="@+id/profile_mobile_phone"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:layout_weight="2"
-            android:inputType="phone" />
-    </TableRow>
-
-    <LinearLayout
-        android:id="@+id/my_profile_tableRow8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dip"
-        android:padding="5dip" >
-
-        <Button
-            android:id="@+id/button_save_profile"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/coral_red"
-            android:fontFamily="Lucida"
-            android:onClick="saveMyProfile"
-            android:text="@string/my_profile_save"
-            android:textColor="@color/white" />
-    </LinearLayout>
-
-    <ProgressBar
-        android:id="@+id/progress_bar_profile"
-        style="?android:attr/progressBarStyleLarge"
-        android:visibility="gone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-</TableLayout>
+</ScrollView>

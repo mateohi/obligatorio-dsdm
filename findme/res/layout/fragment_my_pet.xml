@@ -1,185 +1,185 @@
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/tableLayout1"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
+    <TableLayout
+        android:id="@+id/tableLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
 
-    <TableRow
-        android:id="@+id/my_pet_tableRow1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="12dip" >
-
-        <ImageView
-            android:id="@+id/my_pet_image"
-            android:contentDescription=""
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:onClick="changePetImage"
-            android:src="@drawable/default_pet" />
-
-        <EditText
-            android:id="@+id/my_pet_profile_name"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/pet_name"
-            android:textSize="20sp" >
-
-            <requestFocus />
-        </EditText>
-
-    </TableRow>
-
-    <TableRow
-        android:id="@+id/my_pet_tableRow2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="5dip" >
-
-        <TextView
-            android:id="@+id/my_pet_important_info"
+        <TableRow
+            android:id="@+id/my_pet_tableRow1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:fontFamily="Lucida"
-            android:text="@string/my_pet_important_info"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#FF3333" />
-    </TableRow>
+            android:padding="12dip" >
 
-    <View
-        android:layout_height="2dip"
-        android:background="#FF3333" />
+            <ImageView
+                android:id="@+id/my_pet_image"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:contentDescription=""
+                android:onClick="changePetImage"
+                android:src="@drawable/default_pet" />
 
-    <TableRow
-        android:id="@+id/my_pet_tableRow3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="5dip" >
+            <EditText
+                android:id="@+id/my_pet_profile_name"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/pet_name"
+                android:textSize="20sp" >
 
-        <TextView
-            android:id="@+id/textView_careful"
+                <requestFocus />
+            </EditText>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/my_pet_tableRow2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="Lucida"
-            android:gravity="center"
-            android:text="@string/checkbox_careful"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+            android:padding="5dip" >
 
-        <Switch
-            android:id="@+id/switch_cuidado"
+            <TextView
+                android:id="@+id/my_pet_important_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:fontFamily="Lucida"
+                android:text="@string/my_pet_important_info"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#FF3333" />
+        </TableRow>
+
+        <View
+            android:layout_height="2dip"
+            android:background="#FF3333" />
+
+        <TableRow
+            android:id="@+id/my_pet_tableRow3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:textOn="Si"
-            android:textOff="No"/>
-    </TableRow>
+            android:padding="5dip" >
 
-    <TableRow
-        android:id="@+id/my_pet_tableRow4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="5dip" >
+            <TextView
+                android:id="@+id/textView_careful"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="Lucida"
+                android:gravity="center"
+                android:text="@string/checkbox_careful"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
 
-        <TextView
-            android:id="@+id/textView_vaccines"
+            <Switch
+                android:id="@+id/switch_cuidado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:textOff="No"
+                android:textOn="Si" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/my_pet_tableRow4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="Lucida"
-            android:gravity="center"
-            android:text="@string/checkbox_vaccines"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+            android:padding="5dip" >
 
-        <Switch
-            android:id="@+id/switch_vacunada"
+            <TextView
+                android:id="@+id/textView_vaccines"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="Lucida"
+                android:gravity="center"
+                android:text="@string/checkbox_vaccines"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <Switch
+                android:id="@+id/switch_vacunada"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:textOff="No"
+                android:textOn="Si" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/my_profile_tableRow5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:textOn="Si"
-            android:textOff="No"/>
+            android:layout_marginTop="8dip"
+            android:padding="5dip" >
 
-    </TableRow>
+            <TextView
+                android:id="@+id/my_pet_extra_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:fontFamily="Lucida"
+                android:text="@string/my_pet_extra_info"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#FF3333" />
+        </TableRow>
 
-    <TableRow
-        android:id="@+id/my_profile_tableRow5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dip"
-        android:padding="5dip" >
+        <View
+            android:layout_height="2dip"
+            android:background="#FF3333" />
 
-        <TextView
-            android:id="@+id/my_pet_extra_info"
+        <TableRow
+            android:id="@+id/my_pet_tableRow6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:fontFamily="Lucida"
-            android:text="@string/my_pet_extra_info"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#FF3333" />
-    </TableRow>
+            android:padding="12dip" >
 
-    <View
-        android:layout_height="2dip"
-        android:background="#FF3333" />
+            <EditText
+                android:id="@+id/my_pet_extra_information"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:inputType="textCapSentences|textMultiLine"
+                android:maxLength="21"
+                android:maxLines="2"
+                android:singleLine="false" />
+        </TableRow>
 
-    <TableRow
-        android:id="@+id/my_pet_tableRow6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="12dip" >
-
-        <EditText
-            android:id="@+id/my_pet_extra_information"
-            android:layout_width="0dp"
+        <TableRow
+            android:id="@+id/my_pet_tableRow7"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_weight="1"
-            android:inputType="textCapSentences|textMultiLine"
-            android:maxLength="21"
-            android:maxLines="2"
-            android:singleLine="false" />
+            android:padding="5dip" >
 
-    </TableRow>
+            <Button
+                android:id="@+id/button_save_profile"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:background="@color/coral_red"
+                android:fontFamily="Lucida"
+                android:onClick="savePetProfile"
+                android:text="@string/my_pet_save"
+                android:textColor="@color/white" />
+        </TableRow>
 
-    <TableRow
-        android:id="@+id/my_pet_tableRow7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="5dip" >
-
-        <Button
-            android:id="@+id/button_save_profile"
-            android:layout_width="0dp"
+        <TableRow
+            android:id="@+id/my_pet_tableRow8"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_weight="1"
-            android:background="@color/coral_red"
-            android:fontFamily="Lucida"
-            android:onClick="savePetProfile"
-            android:text="@string/my_pet_save"
-            android:textColor="@color/white" />
+            android:padding="5dip" >
 
-    </TableRow>
-    
-    <TableRow
-        android:id="@+id/my_pet_tableRow8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="5dip" >
+            <Button
+                android:id="@+id/button_resend_qr"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:background="@color/light_gray"
+                android:fontFamily="Lucida"
+                android:onClick="resendQR"
+                android:text="@string/my_pet_button_resend_qr" />
+        </TableRow>
+    </TableLayout>
 
-        <Button
-            android:id="@+id/button_resend_qr"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_weight="1"
-            android:fontFamily="Lucida"
-            android:onClick="resendQR"
-            android:background="@color/light_gray"
-            android:text="@string/my_pet_button_resend_qr" />
-    </TableRow>
-
-</TableLayout>
+</ScrollView>
