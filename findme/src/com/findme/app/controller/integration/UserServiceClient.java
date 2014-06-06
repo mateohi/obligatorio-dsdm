@@ -59,10 +59,10 @@ public class UserServiceClient {
 			return ex.getMessage();
 		}
 		catch (IOException ex) {
-			return ex.getMessage();
+			return "No se pudo conectar con el servidor";
 		}
 		catch (Exception ex) {
-			return "ERROR inesperado: " + ex.getMessage();
+			return "Error inesperado: " + ex.getMessage();
 		}
 	}
 }

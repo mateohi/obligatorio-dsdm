@@ -1,10 +1,11 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
-    <TableLayout
+
+    <TableLayout
         android:id="@+id/tableLayout1"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
+        android:layout_height="50dp" >
 
         <TableRow
             android:id="@+id/my_pet_tableRow1"
@@ -16,7 +17,7 @@
                 android:id="@+id/my_pet_image"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:contentDescription=""
+                android:contentDescription="Imagen mascota"
                 android:onClick="changePetImage"
                 android:src="@drawable/default_pet" />
 
@@ -74,14 +75,15 @@
                 android:text="@string/checkbox_careful"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
-            <Switch
+            <ToggleButton
                 android:id="@+id/switch_cuidado"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                style="@style/ToggleAppTheme"
+                android:width = "100dp"
+                android:layout_height="35dp"
+                android:layout_gravity="top"
                 android:textOff="No"
                 android:textOn="Si" />
+
         </TableRow>
 
         <TableRow
@@ -99,11 +101,12 @@
                 android:text="@string/checkbox_vaccines"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
-            <Switch
+            <ToggleButton
                 android:id="@+id/switch_vacunada"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
+                android:layout_height="35dp"
+                android:width = "100dp"
+                android:layout_gravity="top"
                 android:textOff="No"
                 android:textOn="Si" />
         </TableRow>

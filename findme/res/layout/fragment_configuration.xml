@@ -14,16 +14,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="@string/configuration_notification"
-            android:textColor="#FF3333" 
             android:fontFamily="Lucida"
-            android:textAppearance="?android:attr/textAppearanceMedium"/>
+            android:text="@string/configuration_notification"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#FF3333" />
     </TableRow>
 
     <View
         android:layout_height="2dip"
-        android:background="#FF3333"
-        android:layout_marginBottom="15dip" />
+        android:layout_marginBottom="15dip"
+        android:background="#FF3333" />
 
     <TableRow
         android:id="@+id/configuration_tableRow2"
@@ -33,22 +33,23 @@
 
         <TextView
             android:id="@+id/vibrate_text"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_weight="2"
             android:fontFamily="Lucida"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="@string/configuration_vibrate" />
+            android:text="@string/configuration_vibrate"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
 
-        <Switch
+        <ToggleButton
             android:id="@+id/switch_vibrate"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
+            android:width="130dp"
+            android:layout_gravity="top"
             android:layout_marginRight="30dp"
             android:textOff="No"
             android:textOn="Si" />
-        
     </TableRow>
 
     <TableRow
@@ -59,22 +60,23 @@
 
         <TextView
             android:id="@+id/sound_text"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
             android:layout_weight="2"
             android:fontFamily="Lucida"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="@string/configuration_sound" />
+            android:text="@string/configuration_sound"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
 
-        <Switch
+        <ToggleButton
             android:id="@+id/switch_sound"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
+            android:width = "130dp"
+            android:layout_gravity="top"
             android:layout_marginRight="30dp"
             android:textOff="No"
             android:textOn="Si" />
-
     </TableRow>
 
 </TableLayout>

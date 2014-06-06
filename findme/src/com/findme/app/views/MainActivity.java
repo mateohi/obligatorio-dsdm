@@ -31,9 +31,9 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Switch;
 import android.widget.Toast;
 import android.widget.ProgressBar;
+import android.widget.ToggleButton;
 
 import com.example.findme.R;
 import com.example.findme.R.id;
@@ -73,9 +73,6 @@ public class MainActivity extends FragmentActivity {
 	private ListView mDrawerList;
 	private ActionBarDrawerToggle mDrawerToggle;
 
-	private CharSequence mDrawerTitle;
-	private CharSequence mTitle;
-
 	private CustomDrawerAdapter adapter;
 	private List<DrawerItem> dataList;
 
@@ -89,7 +86,6 @@ public class MainActivity extends FragmentActivity {
 
 		// Initializing
 		dataList = new ArrayList<DrawerItem>();
-		mTitle = mDrawerTitle = getTitle();
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
@@ -186,12 +182,6 @@ public class MainActivity extends FragmentActivity {
 		mDrawerList.setItemChecked(position, true);
 		mDrawerLayout.closeDrawer(mDrawerList);
 
-	}
-
-	@Override
-	public void setTitle(CharSequence title) {
-		mTitle = title;
-		getActionBar().setTitle(mTitle);
 	}
 
 	@Override
@@ -394,9 +384,9 @@ public class MainActivity extends FragmentActivity {
 		
 		String nombre = ((EditText) findViewById(id.my_pet_profile_name))
 				.getText().toString().trim();
-		boolean estaVacunada = ((Switch) findViewById(id.switch_vacunada))
+		boolean estaVacunada = ((ToggleButton) findViewById(id.switch_vacunada))
 				.isChecked();
-		boolean tenerCuidado = ((Switch) findViewById(id.switch_cuidado))
+		boolean tenerCuidado = ((ToggleButton) findViewById(id.switch_cuidado))
 				.isChecked();
 		String info = ((EditText) findViewById(id.my_pet_extra_information))
 				.getText().toString().trim();

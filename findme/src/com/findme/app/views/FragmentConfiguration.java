@@ -2,7 +2,6 @@ package com.findme.app.views;
 
 import com.example.findme.R;
 import com.example.findme.R.id;
-import com.google.android.gms.analytics.Logger;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,8 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Switch;
-import android.widget.Toast;
+import android.widget.ToggleButton;
 
 public class FragmentConfiguration extends Fragment {
 
@@ -52,9 +50,9 @@ public class FragmentConfiguration extends Fragment {
 			boolean silent = settings.getBoolean(SILENT, false);
 			boolean vibrate = settings.getBoolean(VIBRATE, false);
 
-			((Switch) parentView.findViewById(id.switch_sound))
+			((ToggleButton) parentView.findViewById(id.switch_sound))
 					.setChecked(silent);
-			((Switch) parentView.findViewById(id.switch_vibrate))
+			((ToggleButton) parentView.findViewById(id.switch_vibrate))
 					.setChecked(vibrate);
 		} catch (Exception ex) {
 			Log.e(TAG, "Error al recuperar las configuraciones", ex);
@@ -64,15 +62,15 @@ public class FragmentConfiguration extends Fragment {
 	}
 
 	private void setDefaultPreferences() {
-		((Switch) parentView.findViewById(id.switch_sound)).setChecked(true);
-		((Switch) parentView.findViewById(id.switch_vibrate)).setChecked(true);
+		((ToggleButton) parentView.findViewById(id.switch_sound)).setChecked(true);
+		((ToggleButton) parentView.findViewById(id.switch_vibrate)).setChecked(true);
 	}
 
 	private void savePreferences() {
 		try {
-			boolean silent = ((Switch) parentView.findViewById(id.switch_sound))
+			boolean silent = ((ToggleButton) parentView.findViewById(id.switch_sound))
 					.isChecked();
-			boolean vibrate = ((Switch) parentView
+			boolean vibrate = ((ToggleButton) parentView
 					.findViewById(id.switch_vibrate)).isChecked();
 
 			SharedPreferences settings = getActivity().getSharedPreferences(
