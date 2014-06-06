@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="5dip" >
+ 
+    <!--  ListRow Left sied Thumbnail image -->
+    <LinearLayout android:id="@+id/foto_mascota_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="3dip"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="5dip">
+ 
+        <ImageView
+            android:id="@+id/foto_mascota"
+            android:src="@drawable/pet_default"
+            android:layout_width="50dip"
+            android:layout_height="50dip"/>
+ 
+    </LinearLayout>
+ 
+    <!-- Nombre del perro -->
+    <TextView
+        android:id="@+id/pet_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/foto_mascota_container"
+        android:layout_toRightOf="@+id/foto_mascota_container"
+        android:textColor="#040404"
+        android:typeface="sans"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
+ 
+    <!-- Ubicado por -->
+    <TextView
+        android:id="@+id/user_found_name"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/pet_name"
+        android:textColor="#343434"
+        android:textSize="16sp"
+        android:layout_marginTop="1dip"
+        android:layout_toRightOf="@+id/foto_mascota_container"/>
+ 
+    <!-- Hora -->
+    <TextView
+        android:id="@+id/date_found"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@id/pet_name"
+        android:gravity="right"
+        android:layout_marginRight="5dip"
+        android:textSize="12sp"
+        android:textColor="#343434"
+        android:textStyle="bold"/>
+  
+</RelativeLayout>

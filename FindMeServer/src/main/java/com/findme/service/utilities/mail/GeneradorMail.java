@@ -25,12 +25,18 @@ public class GeneradorMail {
     private static final String PORT = "port";
     private static final String SUBJECT = "subject";
     private static final String TEXT = "text";
+    private static final String PROXY_SET = "proxySet";
+    private static final String PROXY_HOST = "socksProxyHost";
+    private static final String PROXY_PORT = "socksProxyPort";
     private String mail;
     private String pass;
     private String host;
     private String port;
     private String subject;
     private String text;
+    private boolean proxySet;
+    private String proxyHost;
+    private String proxyPort;
 
     private void loadProperties(Properties props) {
         this.mail = props.getProperty(MAIL);
@@ -39,6 +45,9 @@ public class GeneradorMail {
         this.port = props.getProperty(PORT);
         this.subject = props.getProperty(SUBJECT);
         this.text = props.getProperty(TEXT);
+        this.proxySet = Boolean.valueOf(props.getProperty(PROXY_SET));
+        this.proxyHost = props.getProperty(PROXY_HOST);
+        this.proxyPort = props.getProperty(PROXY_PORT);
     }
 
     public GeneradorMail(Properties props) throws MailGeneratorException {
@@ -99,6 +108,12 @@ public class GeneradorMail {
         props.put("mail.smtp.port", this.port);
         props.put(MAIL, this.mail);
         props.put(PASS, this.pass);
+        
+        if (this.proxySet) {
+            props.put(PROXY_SET, this.proxySet);
+            props.put(PROXY_HOST, this.proxyHost);
+            props.put(PROXY_PORT, this.proxyPort);
+        }
 
         return props;
     }
