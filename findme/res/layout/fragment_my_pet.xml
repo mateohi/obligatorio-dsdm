@@ -14,19 +14,24 @@
 
             <ImageView
                 android:id="@+id/my_pet_image"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:contentDescription=""
                 android:onClick="changePetImage"
                 android:src="@drawable/default_pet" />
 
             <EditText
                 android:id="@+id/my_pet_profile_name"
-                android:layout_width="120dp"
+                android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:textStyle="bold"
+                android:layout_gravity="center_vertical"
                 android:hint="@string/pet_name"
-                android:textSize="20sp" >
+                android:inputType="textCapSentences"
+                android:maxLength="20"
+                android:maxLines="2"
+                android:textSize="23sp" >
 
                 <requestFocus />
             </EditText>
@@ -51,7 +56,8 @@
 
         <View
             android:layout_height="2dip"
-            android:background="#FF3333" />
+            android:background="#FF3333"
+            android:layout_marginBottom="15dip" />
 
         <TableRow
             android:id="@+id/my_pet_tableRow3"
@@ -73,6 +79,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
+                style="@style/ToggleAppTheme"
                 android:textOff="No"
                 android:textOn="Si" />
         </TableRow>
@@ -121,7 +128,8 @@
 
         <View
             android:layout_height="2dip"
-            android:background="#FF3333" />
+            android:background="#FF3333"
+            android:layout_marginBottom="15dip" />
 
         <TableRow
             android:id="@+id/my_pet_tableRow6"
@@ -137,8 +145,8 @@
                 android:layout_marginRight="20dp"
                 android:layout_weight="1"
                 android:inputType="textCapSentences|textMultiLine"
-                android:maxLength="21"
-                android:maxLines="2"
+                android:maxLength="100"
+                android:maxLines="4"
                 android:singleLine="false" />
         </TableRow>
 
@@ -154,6 +162,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
+                android:layout_marginTop="10dip"
                 android:layout_weight="1"
                 android:background="@color/coral_red"
                 android:fontFamily="Lucida"

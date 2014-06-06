@@ -22,7 +22,8 @@
 
     <View
         android:layout_height="2dip"
-        android:background="#FF3333" />
+        android:background="#FF3333"
+        android:layout_marginBottom="15dip" />
 
     <TableRow
         android:id="@+id/configuration_tableRow2"

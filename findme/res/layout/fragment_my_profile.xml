@@ -27,7 +27,8 @@
 
         <View
             android:layout_height="2dip"
-            android:background="@color/coral_red" />
+            android:background="@color/coral_red"
+            android:layout_marginBottom="15dip" />
 
         <TableRow
             android:id="@+id/my_profile_tableRow2"
@@ -100,7 +101,8 @@
 
         <View
             android:layout_height="2dip"
-            android:background="@color/coral_red" />
+            android:background="@color/coral_red"
+            android:layout_marginBottom="15dip" />
 
         <TableRow
             android:id="@+id/my_profile_tableRow6"
@@ -151,24 +153,27 @@
                 android:layout_weight="2"
                 android:inputType="phone" />
         </TableRow>
-
-        <LinearLayout
-            android:id="@+id/my_profile_tableRow8"
+        
+        <TableRow
+            android:id="@+id/my_pet_tableRow8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dip"
             android:padding="5dip" >
 
             <Button
                 android:id="@+id/button_save_profile"
-                android:layout_width="fill_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:layout_marginTop="10dip"
                 android:background="@color/coral_red"
                 android:fontFamily="Lucida"
                 android:onClick="saveMyProfile"
                 android:text="@string/my_profile_save"
                 android:textColor="@color/white" />
-        </LinearLayout>
+        </TableRow>
 
         <ProgressBar
             android:id="@+id/progress_bar_profile"

@@ -117,13 +117,11 @@ public class MainActivity extends FragmentActivity {
 				R.drawable.ic_drawer, R.string.drawer_open,
 				R.string.drawer_close) {
 			public void onDrawerClosed(View view) {
-				getActionBar().setTitle(mTitle);
 				invalidateOptionsMenu(); // creates call to
 											// onPrepareOptionsMenu()
 			}
 
 			public void onDrawerOpened(View drawerView) {
-				getActionBar().setTitle(mDrawerTitle);
 				invalidateOptionsMenu(); // creates call to
 											// onPrepareOptionsMenu()
 			}
@@ -186,7 +184,6 @@ public class MainActivity extends FragmentActivity {
 				.commit();
 
 		mDrawerList.setItemChecked(position, true);
-		setTitle(dataList.get(position).getItemName());
 		mDrawerLayout.closeDrawer(mDrawerList);
 
 	}
@@ -223,7 +220,6 @@ public class MainActivity extends FragmentActivity {
 			FragmentManager frgManager = getSupportFragmentManager();
 			frgManager.beginTransaction().replace(R.id.content_frame, fragment)
 					.commit();
-			setTitle("Notifications");
 			mDrawerLayout.closeDrawer(mDrawerList);
 
 			return true;
