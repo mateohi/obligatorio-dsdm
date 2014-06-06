@@ -1,0 +1,190 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <TableLayout
+        android:id="@+id/tableLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <TableRow
+            android:id="@+id/notification_tableRow1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="12dip" >
+
+            <ImageView
+                android:id="@+id/my_pet_image_notification"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:contentDescription=""
+                android:src="@drawable/default_pet" />
+
+            <TextView
+                android:id="@+id/my_pet_profile_name_notification"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:textSize="20sp"
+                android:layout_marginTop="25dp"></TextView>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/notification_tableRow2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dip" >
+
+            <TextView
+                android:id="@+id/detailed_notification_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:fontFamily="Lucida"
+                android:text="@string/detailed_notification_title"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#FF3333" />
+        </TableRow>
+
+        <View
+            android:layout_height="2dip"
+            android:background="#FF3333" />
+
+        <TableRow
+            android:id="@+id/notification_tableRow3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dip" >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_weight="1"
+                android:fontFamily="Lucida"
+                android:text="@string/detailed_notification_profile_name"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <EditText
+                android:id="@+id/detailed_notification_profile_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_weight="2"
+                android:inputType="none" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/notification_tableRow4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dip" >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_weight="1"
+                android:fontFamily="Lucida"
+                android:text="@string/detailed_notification_last_name"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <EditText
+                android:id="@+id/detailed_notification_last_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_weight="2"
+                android:inputType="none" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/my_pet_tableRow5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="12dip" >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_weight="1"
+                android:fontFamily="Lucida"
+                android:text="@string/detailed_notification_email"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <EditText
+                android:id="@+id/detailed_notification_email"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_weight="2"
+                android:inputType="none" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/my_pet_tableRow6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="12dip" >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_weight="1"
+                android:fontFamily="Lucida"
+                android:text="@string/detailed_notification_phone"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <EditText
+                android:id="@+id/detailed_notification_phone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_weight="2"
+                android:inputType="none" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/notification_tableRow7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dip"
+            android:padding="5dip" >
+
+            <TextView
+                android:id="@+id/detailed_notification_ubication"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:fontFamily="Lucida"
+                android:text="@string/detailed_notification_ubication"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#FF3333" />
+        </TableRow>
+
+        <View
+            android:layout_height="2dip"
+            android:background="#FF3333" />
+
+        <TableRow
+            android:id="@+id/my_pet_tableRow8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dip" >
+
+            <Button
+                android:id="@+id/button_save_profile"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:fontFamily="Lucida"
+                android:onClick="seeLocation"
+                android:text="@string/my_pet_save" />
+        </TableRow>
+    </TableLayout>
+
+</ScrollView>

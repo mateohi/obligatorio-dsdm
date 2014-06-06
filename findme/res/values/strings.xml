@@ -9,7 +9,7 @@
     						          QR del perro que encontraste.</string>
     <string name="my_pet_important_info">Datos de importancia</string>
     <string name="checkbox_careful">Manejar con cuidado</string>
-    <string name="checkbox_vaccines">Tiene vacunas al día</string>	
+    <string name="checkbox_vaccines">Tiene vacunas al día</string>
     <string name="my_pet_extra_info">Información adicional</string>
     <string name="my_pet_button_resend_qr">Reenviar QR a mi correo</string>
     <string name="my_profile_personal_title">Datos personales</string>
@@ -24,5 +24,11 @@
     <string name="my_profile_save">Guardar perfil</string>
     <string name="my_pet_save">Guardar mascota</string>
     <string name="pet_name">Nombre</string>
+    <string name="detailed_notification_title">Datos de contacto</string>
+    <string name="detailed_notification_ubication">Ubicación</string>
+    <string name="detailed_notification_profile_name">Nombre</string>
+    <string name="detailed_notification_last_name">Apellido</string>
+    <string name="detailed_notification_email">Correo</string>
+    <string name="detailed_notification_phone">Celular</string>
 
 </resources>
