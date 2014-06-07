@@ -37,7 +37,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
-import android.widget.ProgressBar;
 import android.widget.ToggleButton;
 
 import com.example.findme.R;
@@ -387,8 +386,14 @@ public class MainActivity extends FragmentActivity {
 	}
 
 	public void resendQR(View v) {
-		String gcmId = getRegistrationId(getApplicationContext());
-		new ResendQrTask(this).execute(gcmId);
+		if (hayMascota()) {
+			String gcmId = getRegistrationId(getApplicationContext());
+			new ResendQrTask(this).execute(gcmId);
+		}
+		else {
+			Toast.makeText(this, "Cree una mascota antes", Toast.LENGTH_LONG)
+			.show();
+		}
 	}
 
 	public void savePetProfile(View v) {
@@ -484,7 +489,6 @@ public class MainActivity extends FragmentActivity {
 	}
 
 	private void guardarUsuario(Usuario usuario) {
-		toggleProgressBarProfile();
 		// Guardar local
 		DatabaseHandler handler = new DatabaseHandler(getApplicationContext());
 		if (hayUsuario()) {
@@ -495,7 +499,6 @@ public class MainActivity extends FragmentActivity {
 
 		// Guardar en el servidor
 		new PostUserTask(this).execute(usuario);
-		toggleProgressBarProfile();
 	}
 
 	private String validarUsuario(String nombre, String apellido,
@@ -522,17 +525,6 @@ public class MainActivity extends FragmentActivity {
 		}
 
 		return validaciones.toString();
-	}
-
-	private void toggleProgressBarProfile() {
-		ProgressBar progressBar = (ProgressBar) findViewById(id.progress_bar_profile);
-		int visibility = progressBar.getVisibility();
-
-		if (ProgressBar.VISIBLE == visibility) {
-			progressBar.setVisibility(ProgressBar.GONE);
-		} else {
-			progressBar.setVisibility(ProgressBar.VISIBLE);
-		}
 	}
 
 	// Utility methods

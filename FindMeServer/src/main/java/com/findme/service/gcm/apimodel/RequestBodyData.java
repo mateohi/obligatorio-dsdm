@@ -2,6 +2,8 @@ package com.findme.service.gcm.apimodel;
 
 public class RequestBodyData {
 
+    private String latitud;
+    private String longitud;
     private String nombreUsuario;
     private String apellidoUsuario;
     private String correo;
@@ -9,6 +11,22 @@ public class RequestBodyData {
     private String nombreMascota;
 
     public RequestBodyData() {
+    }
+
+    public String getLatitud() {
+        return latitud;
+    }
+
+    public void setLatitud(String latitud) {
+        this.latitud = latitud;
+    }
+
+    public String getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(String longitud) {
+        this.longitud = longitud;
     }
 
     public String getNombreUsuario() {
