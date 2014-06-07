@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.R.bool;
+import android.app.Notification;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
@@ -14,9 +15,14 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.MediaPlayer.OnCompletionListener;
+import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.provider.MediaStore;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
@@ -569,6 +575,38 @@ public class MainActivity extends FragmentActivity {
 				.bitmapToBytes(bitmap));
 
 		return fotoBase64;
+	}
+
+	// Notificaciones entrantes
+
+	public void avisoNotificiacion(View v) {
+		if (conVibrar()) {
+			Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+			vibrator.vibrate(1500);
+		}
+
+		if (conSonido()) {
+			Uri defaultRingtoneUri = RingtoneManager
+					.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
+			MediaPlayer mediaPlayer = new MediaPlayer();
+
+			try {
+				mediaPlayer.setDataSource(context, defaultRingtoneUri);
+				mediaPlayer
+						.setAudioStreamType(AudioManager.STREAM_NOTIFICATION);
+				mediaPlayer.prepare();
+				mediaPlayer.setOnCompletionListener(new OnCompletionListener() {
+					@Override
+					public void onCompletion(MediaPlayer mp) {
+						mp.release();
+					}
+				});
+				mediaPlayer.start();
+			} catch (Exception e) {
+				Log.w(TAG, e.getMessage());
+			}
+		}
 	}
 
 	private boolean conSonido() {
