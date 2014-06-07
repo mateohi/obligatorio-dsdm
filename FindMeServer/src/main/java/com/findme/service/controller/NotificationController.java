@@ -58,6 +58,7 @@ public class NotificationController {
                 }
                 catch (GcmException ex) {
                     LOG.error(ex.getMessage());
+                    LOG.error("GCM que falla: " + usuario.getGcmId());
                 }
             }
         }
