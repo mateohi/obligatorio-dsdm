@@ -193,8 +193,8 @@ public class MainActivity extends FragmentActivity {
 	}
 
 	public void setDetailedNotificationsFragment(Notificacion notificacion, boolean isReceivedNotification) {
-//		Fragment fragment = new FragmentDetailedNotification(notificacion, isReceivedNotification);
-		Fragment fragment = new FragmentDetailedNotification();
+		Fragment fragment = new FragmentDetailedNotification(notificacion, isReceivedNotification);
+//		Fragment fragment = new FragmentDetailedNotification();
 		FragmentManager frgManager = getSupportFragmentManager();
 		frgManager.beginTransaction().replace(R.id.content_frame, fragment)
 				.commit();

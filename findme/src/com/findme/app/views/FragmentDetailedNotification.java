@@ -19,13 +19,13 @@ public class FragmentDetailedNotification extends Fragment {
 	private Notificacion notificacion;
 	private boolean isReceivedNotification;
 
-	public FragmentDetailedNotification(){}
+//	public FragmentDetailedNotification(){}
 	
-//	public FragmentDetailedNotification(Notificacion pNotificacion,
-//			boolean pIsReceivedNotification) {
-//		this.notificacion = pNotificacion;
-//		this.isReceivedNotification = pIsReceivedNotification;
-//	}
+	public FragmentDetailedNotification(Notificacion pNotificacion,
+			boolean pIsReceivedNotification) {
+		this.notificacion = pNotificacion;
+		this.isReceivedNotification = pIsReceivedNotification;
+	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
