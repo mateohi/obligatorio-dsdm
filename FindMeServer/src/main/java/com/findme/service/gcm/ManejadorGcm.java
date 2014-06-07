@@ -89,7 +89,7 @@ public class ManejadorGcm {
     private void manejarStatus(int status, ResponseGcm response) throws GcmException {
         if (status == HttpStatus.SC_OK) {
             if (response.envioFallido()) {
-                throw new GcmException("Registration ID no valido");
+                throw new GcmException("Registration ID no valido. Error de Gcm: " + response.getResultsString());
             }
         }
         else {

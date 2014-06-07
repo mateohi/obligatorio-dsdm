@@ -10,15 +10,15 @@ import java.util.Properties;
 
 public class ManejadorMail {
 
-    public static void enviarQR(String idMascota, String mailTo, String dirProps)
+    public static void enviarQR(String idUsuario, String nombreMascota, String mailTo, String dirProps)
             throws QRGeneratorException, MailGeneratorException, IOException {
 
-        byte[] imagenBytes = GeneradorQR.crearQRChico(idMascota);
+        byte[] imagenBytes = GeneradorQR.crearQRChico(idUsuario + "+" + nombreMascota);
 
         Properties props = new Properties();
         props.load(new FileInputStream(dirProps));
 
         GeneradorMail generador = new GeneradorMail(props);
-        generador.enviarConAdjunto(mailTo, imagenBytes, "CodigoQR: " + idMascota);
+        generador.enviarConAdjunto(mailTo, imagenBytes, "CodigoQR: " + nombreMascota);
     }
 }

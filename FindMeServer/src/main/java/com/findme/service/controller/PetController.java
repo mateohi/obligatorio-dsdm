@@ -64,7 +64,7 @@ public class PetController {
                 LOG.info("Foto guardada");
 
                 if (enviarMail) {
-                    ManejadorMail.enviarQR(gcmId + "+" + mascota.getNombre(), usuario.getCorreo(), PROPS);
+                    ManejadorMail.enviarQR(gcmId, mascota.getNombre(), usuario.getCorreo(), PROPS);
                     LOG.info("Mail enviado");
                 }
             }
@@ -93,7 +93,7 @@ public class PetController {
                 String nombre = usuario.getMascota().getNombre();
                 String correo = usuario.getCorreo();
 
-                ManejadorMail.enviarQR(gcmId + "+" + nombre, correo, PROPS);
+                ManejadorMail.enviarQR(gcmId, nombre, correo, PROPS);
                 LOG.info("Mail enviado");
             }
             catch (QRGeneratorException ex) {

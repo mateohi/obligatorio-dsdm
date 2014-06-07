@@ -30,4 +30,15 @@ public class ResponseGcm {
     public void setResults(List<Result> results) {
         this.results = results;
     }
+
+    public String getResultsString() {
+        StringBuilder results = new StringBuilder();
+        for (Result result : getResults()) {
+            if (results.length() > 0) {
+                results.append(", ");
+            }
+            results.append(result.getError());
+        }
+        return results.toString();
+    }
 }
