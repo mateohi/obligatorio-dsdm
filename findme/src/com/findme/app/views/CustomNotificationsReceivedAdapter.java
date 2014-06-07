@@ -1,5 +1,6 @@
 package com.findme.app.views;
 
+import java.util.Calendar;
 import java.util.List;
 
 import com.example.findme.R;
@@ -15,14 +16,15 @@ import android.widget.TextView;
 
 import com.findme.app.model.Notificacion;
 
-public class CustomNotificationsReceivedAdapter extends ArrayAdapter<Notificacion> {
+public class CustomNotificationsReceivedAdapter extends
+		ArrayAdapter<Notificacion> {
 
 	Context contexto;
 	List<Notificacion> notificaciones;
 	int idDelLayout;
 
-	public CustomNotificationsReceivedAdapter(Context pContexto, int pIdDelLayout,
-			List<Notificacion> pNotificaciones) {
+	public CustomNotificationsReceivedAdapter(Context pContexto,
+			int pIdDelLayout, List<Notificacion> pNotificaciones) {
 		super(pContexto, pIdDelLayout, pNotificaciones);
 		this.contexto = pContexto;
 		this.notificaciones = pNotificaciones;
@@ -62,9 +64,7 @@ public class CustomNotificationsReceivedAdapter extends ArrayAdapter<Notificacio
 		listViewHolder.nombreMascota.setText("Encontraron a "+ listItem.getMascota().getNombre());
 		listViewHolder.nombreUsuarioInformante.setText(listItem
 				.getUsarioInformante().getNombre() + " ha encontrado a la mascota");
-		
-		listViewHolder.horaEncontrada.setText("15:45" + " hs");
-		//listViewHolder.horaEncontrada.setText(listItem.getFecha().getTime().toString());
+		listViewHolder.horaEncontrada.setText(String.valueOf(listItem.getFecha().get(Calendar.HOUR))+":"+ listItem.getFecha().get(Calendar.MINUTE)+ " hs");
 		//listViewHolder.fotoMascota.setImageDrawable(view.getResources()
 		//		.getDrawable(
 		//				Integer.parseInt(listItem.getMascota().getPathFoto())));

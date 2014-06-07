@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.R.bool;
 import android.app.Notification;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -49,6 +50,7 @@ import com.findme.app.controller.integration.tasks.PostPetTask;
 import com.findme.app.controller.integration.tasks.PostUserTask;
 import com.findme.app.controller.integration.tasks.ResendQrTask;
 import com.findme.app.model.Mascota;
+import com.findme.app.model.Notificacion;
 import com.findme.app.model.Usuario;
 import com.findme.app.utils.Base64Utils;
 import com.findme.app.utils.EmailValidator;
@@ -188,6 +190,14 @@ public class MainActivity extends FragmentActivity {
 		mDrawerList.setItemChecked(position, true);
 		mDrawerLayout.closeDrawer(mDrawerList);
 
+	}
+
+	public void setDetailedNotificationsFragment(Notificacion notificacion, boolean isReceivedNotification) {
+//		Fragment fragment = new FragmentDetailedNotification(notificacion, isReceivedNotification);
+		Fragment fragment = new FragmentDetailedNotification();
+		FragmentManager frgManager = getSupportFragmentManager();
+		frgManager.beginTransaction().replace(R.id.content_frame, fragment)
+				.commit();
 	}
 
 	@Override

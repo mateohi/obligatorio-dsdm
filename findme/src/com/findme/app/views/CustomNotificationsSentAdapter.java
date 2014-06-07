@@ -1,5 +1,6 @@
 package com.findme.app.views;
 
+import java.util.Calendar;
 import java.util.List;
 
 import android.app.Activity;
@@ -61,8 +62,7 @@ public class CustomNotificationsSentAdapter extends ArrayAdapter<Notificacion> {
 		listViewHolder.nombreMascota.setText("Encontraste a "+ listItem.getMascota().getNombre());
 		listViewHolder.nombreUsuarioInformante.setText("Has encontrado una mascota!");
 		
-		listViewHolder.horaEncontrada.setText("15:45" + " hs");
-		//listViewHolder.horaEncontrada.setText(listItem.getFecha().getTime().toString());
+		listViewHolder.horaEncontrada.setText(String.valueOf(listItem.getFecha().get(Calendar.HOUR))+":"+ listItem.getFecha().get(Calendar.MINUTE)+ " hs");
 		//listViewHolder.fotoMascota.setImageDrawable(view.getResources()
 		//		.getDrawable(
 		//				Integer.parseInt(listItem.getMascota().getPathFoto())));

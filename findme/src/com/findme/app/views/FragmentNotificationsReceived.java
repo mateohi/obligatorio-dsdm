@@ -7,6 +7,8 @@ import java.util.List;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,7 +42,9 @@ public class FragmentNotificationsReceived extends Fragment {
 
 		Notificacion n1 = new Notificacion();
 		n1.setMascota(mascota);
-		Calendar calendar = new GregorianCalendar(2013, 1, 28, 13, 24, 56);
+		Calendar calendar = new GregorianCalendar();
+		calendar.set(Calendar.HOUR, 10);
+		calendar.set(Calendar.MINUTE, 30);
 		n1.setFecha(calendar);
 		n1.setUsarioInformante(informante);
 
@@ -71,12 +75,8 @@ public class FragmentNotificationsReceived extends Fragment {
 			public void onItemClick(AdapterView<?> parent, final View view,
 					int position, long id) {
 				Notificacion selectedNotification = (Notificacion) parent.getItemAtPosition(position);
-				
-				Fragment fragment = new FragmentDetailedNotification();
-				getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment)
-						.commit();
-				
-				
+				MainActivity activity = (MainActivity)getActivity();
+				activity.setDetailedNotificationsFragment(selectedNotification, true);
 			}
 
 		});
