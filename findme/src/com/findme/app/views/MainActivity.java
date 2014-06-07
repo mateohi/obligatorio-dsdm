@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.Notification;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
@@ -13,9 +14,14 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.MediaPlayer.OnCompletionListener;
+import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.provider.MediaStore;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
@@ -61,7 +67,7 @@ public class MainActivity extends FragmentActivity {
 	private static final String PROPERTY_REG_ID = "registrationId";
 	private static final String PROPERTY_APP_VERSION = "appVersion";
 	private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
-	
+
 	public static final String PREFS_NAME = "FindMeConfig";
 	private static final String SILENT = "silent";
 	private static final String VIBRATE = "vibrate";
@@ -231,13 +237,15 @@ public class MainActivity extends FragmentActivity {
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
 		if (requestCode == REQUEST_SCAN) {
 			if (resultCode == RESULT_OK) {
-				String[] contents = intent.getStringExtra("SCAN_RESULT").split("\\+");
-				
+				String[] contents = intent.getStringExtra("SCAN_RESULT").split(
+						"\\+");
+
 				String gcmId = contents[0];
 				String nombreMascota = contents[1];
 
-				Toast.makeText(this, "Se encontro a " + nombreMascota, Toast.LENGTH_SHORT).show();
-				
+				Toast.makeText(this, "Se encontro a " + nombreMascota,
+						Toast.LENGTH_SHORT).show();
+
 				new PostNotificationTask(this).execute(gcmId);
 			}
 		}
@@ -348,9 +356,9 @@ public class MainActivity extends FragmentActivity {
 		editor.putInt(PROPERTY_APP_VERSION, appVersion);
 		editor.commit();
 	}
-	
+
 	// Configuration fragment methods
-	
+
 	public void scanQR(View view) {
 		try {
 			Intent intent = new Intent("com.google.zxing.client.android.SCAN");
@@ -376,12 +384,13 @@ public class MainActivity extends FragmentActivity {
 	}
 
 	public void savePetProfile(View v) {
-		
+
 		if (!hayUsuario()) {
-			Toast.makeText(this, "Cree un usuario antes", Toast.LENGTH_LONG).show();
+			Toast.makeText(this, "Cree un usuario antes", Toast.LENGTH_LONG)
+					.show();
 			return;
 		}
-		
+
 		String nombre = ((EditText) findViewById(id.my_pet_profile_name))
 				.getText().toString().trim();
 		boolean estaVacunada = ((ToggleButton) findViewById(id.switch_vacunada))
@@ -406,7 +415,8 @@ public class MainActivity extends FragmentActivity {
 			try {
 				guardarMascota(mascota);
 				// Guardar imagen local
-				ImageUtils.saveImageOnDevice(bitmap, mascota.getPathFoto(), getApplicationContext());
+				ImageUtils.saveImageOnDevice(bitmap, mascota.getPathFoto(),
+						getApplicationContext());
 			} catch (Exception ex) {
 				Toast.makeText(this, "Error al guardar", Toast.LENGTH_SHORT)
 						.show();
@@ -422,8 +432,7 @@ public class MainActivity extends FragmentActivity {
 		DatabaseHandler handler = new DatabaseHandler(getApplicationContext());
 		if (hayMascota()) {
 			handler.updateMascota(mascota);
-		} 
-		else {
+		} else {
 			handler.addMascota(mascota);
 		}
 
@@ -472,8 +481,7 @@ public class MainActivity extends FragmentActivity {
 		DatabaseHandler handler = new DatabaseHandler(getApplicationContext());
 		if (hayUsuario()) {
 			handler.updateUsuario(usuario);
-		}
-		else {
+		} else {
 			handler.addUsuario(usuario);
 		}
 
@@ -507,15 +515,14 @@ public class MainActivity extends FragmentActivity {
 
 		return validaciones.toString();
 	}
-	
+
 	private void toggleProgressBarProfile() {
 		ProgressBar progressBar = (ProgressBar) findViewById(id.progress_bar_profile);
 		int visibility = progressBar.getVisibility();
-		
+
 		if (ProgressBar.VISIBLE == visibility) {
 			progressBar.setVisibility(ProgressBar.GONE);
-		}
-		else {
+		} else {
 			progressBar.setVisibility(ProgressBar.VISIBLE);
 		}
 	}
@@ -531,7 +538,7 @@ public class MainActivity extends FragmentActivity {
 			return null;
 		}
 	}
-	
+
 	private Mascota getMascota() {
 		DatabaseHandler dh = new DatabaseHandler(getApplicationContext());
 
@@ -551,22 +558,57 @@ public class MainActivity extends FragmentActivity {
 		DatabaseHandler dh = new DatabaseHandler(getApplicationContext());
 		return dh.hayMascota();
 	}
-	
+
 	private String getBase64FromImageView(int imageViewId) {
 		ImageView image = (ImageView) findViewById(imageViewId);
-		Bitmap bitmap = ((BitmapDrawable)image.getDrawable()).getBitmap();
-		String fotoBase64 = Base64Utils.bytesToBase64String(ImageUtils.bitmapToBytes(bitmap));
-		
+		Bitmap bitmap = ((BitmapDrawable) image.getDrawable()).getBitmap();
+		String fotoBase64 = Base64Utils.bytesToBase64String(ImageUtils
+				.bitmapToBytes(bitmap));
+
 		return fotoBase64;
 	}
-	
+
+	// Notificaciones entrantes
+
+	public void avisoNotificiacion(View v) {
+		if (conVibrar()) {
+			Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+			vibrator.vibrate(1500);
+		}
+
+		if (conSonido()) {
+			Uri defaultRingtoneUri = RingtoneManager
+					.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
+			MediaPlayer mediaPlayer = new MediaPlayer();
+
+			try {
+				mediaPlayer.setDataSource(context, defaultRingtoneUri);
+				mediaPlayer
+						.setAudioStreamType(AudioManager.STREAM_NOTIFICATION);
+				mediaPlayer.prepare();
+				mediaPlayer.setOnCompletionListener(new OnCompletionListener() {
+					@Override
+					public void onCompletion(MediaPlayer mp) {
+						mp.release();
+					}
+				});
+				mediaPlayer.start();
+			} catch (Exception e) {
+				Log.w(TAG, e.getMessage());
+			}
+		}
+	}
+
 	private boolean conSonido() {
-		SharedPreferences settings = this.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+		SharedPreferences settings = this.getSharedPreferences(PREFS_NAME,
+				Context.MODE_PRIVATE);
 		return settings.getBoolean(SILENT, false);
 	}
-	
+
 	private boolean conVibrar() {
-		SharedPreferences settings = this.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+		SharedPreferences settings = this.getSharedPreferences(PREFS_NAME,
+				Context.MODE_PRIVATE);
 		return settings.getBoolean(VIBRATE, false);
 	}
 }
