@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.findme.R;
 import com.example.findme.R.id;
+import com.findme.app.controller.DatabaseHandler;
 import com.findme.app.model.Notificacion;
 
 public class FragmentDetailedNotification extends Fragment {
@@ -21,16 +22,25 @@ public class FragmentDetailedNotification extends Fragment {
 	private Notificacion notificacion;
 	private boolean isReceivedNotification;
 
-	public FragmentDetailedNotification(Notificacion pNotificacion,
-			boolean pIsReceivedNotification) {
-		this.notificacion = pNotificacion;
-		this.isReceivedNotification = pIsReceivedNotification;
+	public FragmentDetailedNotification() {
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
+		DatabaseHandler dh = new DatabaseHandler(getActivity()
+				.getApplicationContext());
+		isReceivedNotification = getArguments()
+				.getInt("isReceivedNotification") == 1 ? true : false;
+		if (isReceivedNotification) {
+			notificacion = dh.getNotificacionRecibida(getArguments().getInt(
+					"notificationId"));
+		} else {
+			notificacion = dh.getNotificacionEnviada(getArguments().getInt(
+					"notificationId"));
+		}
+		
 		View view = inflater.inflate(R.layout.fragment_detailed_notification,
 				container, false);
 		parentView = view;
@@ -48,10 +58,13 @@ public class FragmentDetailedNotification extends Fragment {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(Intent.ACTION_VIEW);
-				Uri geoLocationUri = Uri.parse("geo:<lat>,<long>?q="
-						+ notificacion.getLatitud() + ","
-						+ notificacion.getLongitud());
-				intent.setData(geoLocationUri);
+				if (notificacion != null) {
+					Uri geoLocationUri = Uri.parse("geo:<lat>,<long>?q="
+							+ notificacion.getLatitud() + ","
+							+ notificacion.getLongitud());
+					intent.setData(geoLocationUri);
+				}
+
 				if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
 					startActivity(intent);
 				}

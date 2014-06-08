@@ -116,6 +116,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		db.execSQL("DROP TABLE IF EXISTS " + TABLA_MASCOTA);
 		db.execSQL("DROP TABLE IF EXISTS " + TABLA_NOTIFICACIONES_ENVIADAS);
 		db.execSQL("DROP TABLE IF EXISTS " + TABLA_NOTIFICACIONES_RECIBIDAS);
+
+		onCreate(db);
 	}
 
 	public void addUsuario(Usuario usuario) {
@@ -254,7 +256,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		SQLiteDatabase db = this.getWritableDatabase();
 
 		Cursor cursor = db.rawQuery("SELECT * FROM "
-				+ TABLA_NOTIFICACIONES_RECIBIDAS, null);
+				+ TABLA_NOTIFICACIONES_RECIBIDAS + " ORDER BY "
+				+ COLUMNA_NOTIFICACION_RECIBIDA_ID + " DESC", null);
 		if (cursor != null) {
 			if (cursor.getCount() > 0) {
 				if (cursor.moveToFirst()) {
@@ -310,12 +313,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 	}
 
-	public List<Notificacion> getNotificacionesEnviadas(){
+	public List<Notificacion> getNotificacionesEnviadas() {
 		List<Notificacion> notificaciones = new ArrayList<Notificacion>();
 		SQLiteDatabase db = this.getWritableDatabase();
 
 		Cursor cursor = db.rawQuery("SELECT * FROM "
-				+ TABLA_NOTIFICACIONES_ENVIADAS, null);
+				+ TABLA_NOTIFICACIONES_ENVIADAS + " ORDER BY "
+				+ COLUMNA_NOTIFICACION_ENVIADA_ID + " DESC", null);
 		if (cursor != null) {
 			if (cursor.getCount() > 0) {
 				if (cursor.moveToFirst()) {
@@ -344,6 +348,67 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 			}
 		}
 		return notificaciones;
+	}
+
+	public Notificacion getNotificacionRecibida(int pId) {
+		Notificacion notificacion = null;
+		SQLiteDatabase db = this.getWritableDatabase();
+
+		Cursor cursor = db.rawQuery("SELECT * FROM "
+				+ TABLA_NOTIFICACIONES_RECIBIDAS + " WHERE "
+				+ COLUMNA_NOTIFICACION_RECIBIDA_ID + "=?",
+				new String[] { String.valueOf(pId) + "" });
+		if (cursor.getCount() > 0) {
+			if (cursor.moveToFirst()) {
+				notificacion = new Notificacion();
+				notificacion.setId(Integer.parseInt(cursor.getString(0)));
+
+				notificacion.setNombreUsuario(cursor.getString(1));
+				notificacion.setApellidoUsuario(cursor.getString(2));
+				notificacion.setCorreo(cursor.getString(3));
+				notificacion.setCelular(cursor.getString(4));
+				notificacion.setLongitud(cursor.getString(5));
+				try {
+					notificacion.setFecha(Notificacion.FULL_DATE.parse(cursor
+							.getString(6)));
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+				notificacion.setLongitud(cursor.getString(7));
+				notificacion.setNombreMascota(cursor.getString(8));
+			}
+		}
+		return notificacion;
+	}
+
+	public Notificacion getNotificacionEnviada(int pId) {
+		Notificacion notificacion = null;
+		SQLiteDatabase db = this.getWritableDatabase();
+
+		Cursor cursor = db.rawQuery("SELECT * FROM "
+				+ TABLA_NOTIFICACIONES_ENVIADAS + " WHERE "
+				+ COLUMNA_NOTIFICACION_ENVIADA_ID + "=?",
+				new String[] { String.valueOf(pId) + "" });
+		if (cursor.getCount() > 0) {
+			if (cursor.moveToFirst()) {
+				notificacion = new Notificacion();
+				notificacion.setId(Integer.parseInt(cursor.getString(0)));
+
+				notificacion.setNombreUsuario(cursor.getString(1));
+				notificacion.setApellidoUsuario(cursor.getString(2));
+				notificacion.setCelular(cursor.getString(3));
+				notificacion.setCorreo(cursor.getString(4));
+				try {
+					notificacion.setFecha(Notificacion.FULL_DATE.parse(cursor
+							.getString(5)));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				notificacion.setNombreMascota(cursor.getString(6));
+			}
+		}
+		return notificacion;
 	}
 
 	public boolean hayUsuario() {
