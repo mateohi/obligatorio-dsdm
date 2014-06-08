@@ -37,11 +37,7 @@ public class FragmentNotificationsReceived extends Fragment {
 		n1.setNombreMascota("Tornado");
 		n1.setCelular("094096444");
 		n1.setCorreo("a.mostaza@outlook.com");
-		try {
-			n1.setFecha(Notificacion.FULL_DATE.parse(Notificacion.FULL_DATE.format(new Date())));
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		n1.setFecha(new Date());
 		n1.setLatitud("1");
 		n1.setLongitud("2");
 		n1.setFotoBase64("");

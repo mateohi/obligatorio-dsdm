@@ -75,17 +75,12 @@ public class CustomNotificationsReceivedAdapter extends
 	public String setTime(Notificacion notificacion) {
 		String date = "";
 		Date fechaNotificacion = notificacion.getFecha();
-		Date fechaHoy;
-		try {
-			fechaHoy = Notificacion.FULL_DATE.parse(Notificacion.FULL_DATE
-					.format(new Date()));
-			if (Notificacion.DATE.format(fechaNotificacion).equals(fechaHoy)) {
-				date = Notificacion.TIME.format(fechaNotificacion) + " hs";
-			} else {
-				date = Notificacion.DATE.format(fechaNotificacion);
-			}
-		} catch (ParseException e) {
-			e.printStackTrace();
+		Date fechaHoy = new Date();
+
+		if (Notificacion.DATE.format(fechaNotificacion).equals(Notificacion.DATE.format(fechaHoy))) {
+			date = Notificacion.TIME.format(fechaNotificacion) + " hs";
+		} else {
+			date = Notificacion.DATE.format(fechaNotificacion);
 		}
 
 		return date;
