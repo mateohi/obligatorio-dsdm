@@ -53,7 +53,7 @@
         android:layout_alignTop="@id/pet_name"
         android:gravity="right"
         android:layout_marginRight="5dip"
-        android:textSize="12sp"
+        android:textSize="11sp"
         android:textColor="#343434"
         android:textStyle="bold"/>
   

@@ -79,7 +79,6 @@ public class CustomNotificationsReceivedAdapter extends
 		String date = "";
 		Date fechaNotificacion = notificacion.getFecha();
 		Date fechaHoy = new Date();
-
 		if (Notificacion.DATE.format(fechaNotificacion).equals(
 				Notificacion.DATE.format(fechaHoy))) {
 			date = Notificacion.TIME.format(fechaNotificacion) + " hs";
