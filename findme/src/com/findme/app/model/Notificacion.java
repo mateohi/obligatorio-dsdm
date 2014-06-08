@@ -5,9 +5,9 @@ import java.util.Date;
 
 public class Notificacion {
 	
-	public static SimpleDateFormat FULL_DATE = new SimpleDateFormat("dd/MM/yyyy'-'HH:mm");
-	public static SimpleDateFormat DATE = new SimpleDateFormat("dd/MM/yyyy");
-	public static SimpleDateFormat TIME = new SimpleDateFormat("HH:mm");
+	public static final SimpleDateFormat FULL_DATE = new SimpleDateFormat("dd/MM/yyyy'-'HH:mm");
+	public static final SimpleDateFormat DATE = new SimpleDateFormat("dd/MM/yyyy");
+	public static final SimpleDateFormat TIME = new SimpleDateFormat("HH:mm");
 	
 	
 	private int id;
