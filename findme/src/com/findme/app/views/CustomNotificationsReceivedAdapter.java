@@ -78,7 +78,7 @@ public class CustomNotificationsReceivedAdapter extends
 		Date fechaHoy = new Date();
 
 		if (Notificacion.DATE.format(fechaNotificacion).equals(Notificacion.DATE.format(fechaHoy))) {
-			date = Notificacion.TIME.format(fechaNotificacion) + " hs";
+			date = Notificacion.TIME.format(fechaNotificacion);
 		} else {
 			date = Notificacion.DATE.format(fechaNotificacion);
 		}

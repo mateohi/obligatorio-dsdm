@@ -51,11 +51,11 @@ public class FragmentNotificationsReceived extends Fragment {
 
 		
 		
-		ArrayAdapter<Notificacion> codeLearnArrayAdapter = new CustomNotificationsReceivedAdapter(
+		ArrayAdapter<Notificacion> adapter = new CustomNotificationsReceivedAdapter(
 				getActivity(), R.layout.custom_listview_item,
 				notificacionesRecibidas);
 		ListView listView = (ListView) view.findViewById(R.id.list_received);
-		listView.setAdapter(codeLearnArrayAdapter);
+		listView.setAdapter(adapter);
 
 		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
