@@ -189,11 +189,14 @@ public class MainActivity extends FragmentActivity {
 
 	}
 
-	public void setDetailedNotificationsFragment(Notificacion notificacion,
+	public void setDetailedNotificationsFragment(int notificationId,
 			boolean isReceivedNotification) {
-		Fragment fragment = new FragmentDetailedNotification(notificacion,
-				isReceivedNotification);
-		// Fragment fragment = new FragmentDetailedNotification();
+
+		Fragment fragment = new FragmentDetailedNotification();
+		Bundle args = new Bundle();
+		args.putInt("notificationId", notificationId);
+		args.putInt("isReceivedNotification", isReceivedNotification ? 1 : 0);
+		fragment.setArguments(args);
 		FragmentManager frgManager = getSupportFragmentManager();
 		frgManager.beginTransaction().replace(R.id.content_frame, fragment)
 				.commit();

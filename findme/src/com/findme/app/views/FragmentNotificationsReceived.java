@@ -49,6 +49,8 @@ public class FragmentNotificationsReceived extends Fragment {
 		List<Notificacion> notificacionesRecibidas = dh
 				.getNotificacionesRecibidas();
 
+		
+		
 		ArrayAdapter<Notificacion> codeLearnArrayAdapter = new CustomNotificationsReceivedAdapter(
 				getActivity(), R.layout.custom_listview_item,
 				notificacionesRecibidas);
@@ -63,7 +65,7 @@ public class FragmentNotificationsReceived extends Fragment {
 				Notificacion selectedNotification = (Notificacion) parent
 						.getItemAtPosition(position);
 				MainActivity activity = (MainActivity) getActivity();
-				activity.setDetailedNotificationsFragment(selectedNotification, true);
+				activity.setDetailedNotificationsFragment(selectedNotification.getId(), true);
 			}
 
 		});

@@ -61,7 +61,7 @@ public class FragmentNotificationsSent extends Fragment {
 				Notificacion selectedNotification = (Notificacion) parent
 						.getItemAtPosition(position);
 				MainActivity activity = (MainActivity) getActivity();
-				activity.setDetailedNotificationsFragment(selectedNotification, false);
+				activity.setDetailedNotificationsFragment(selectedNotification.getId(), false);
 			}
 
 		});
