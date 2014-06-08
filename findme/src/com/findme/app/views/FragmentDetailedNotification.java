@@ -5,13 +5,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.findme.R;
 import com.example.findme.R.id;
 import com.findme.app.model.Notificacion;
-import com.findme.app.model.Usuario;
 
 public class FragmentDetailedNotification extends Fragment {
 
@@ -19,10 +19,7 @@ public class FragmentDetailedNotification extends Fragment {
 	private Notificacion notificacion;
 	private boolean isReceivedNotification;
 
-//	public FragmentDetailedNotification(){}
-	
-	public FragmentDetailedNotification(Notificacion pNotificacion,
-			boolean pIsReceivedNotification) {
+	public FragmentDetailedNotification(Notificacion pNotificacion, boolean pIsReceivedNotification) {
 		this.notificacion = pNotificacion;
 		this.isReceivedNotification = pIsReceivedNotification;
 	}
@@ -35,33 +32,42 @@ public class FragmentDetailedNotification extends Fragment {
 				container, false);
 		parentView = view;
 		cargarDatos();
+		if(!isReceivedNotification){
+			((TextView) parentView.findViewById(id.detailed_notification_ubication)).setVisibility(View.GONE);
+			((View) parentView.findViewById(id.view_location)).setVisibility(View.GONE);
+			((Button) parentView.findViewById(id.button_location)).setVisibility(View.GONE);
+		}
 		return view;
 	}
 
 	public void cargarDatos() {
 		if (notificacion != null) {
-			Usuario usuario;
-			if (isReceivedNotification) {
-				usuario = notificacion.getUsarioInformante();
-			} else {
-				usuario = notificacion.getUsuarioDueno();
-			}
 
 			// ((ImageView))
 			// parentView.findViewById(id.my_pet_image_notification).setIm;
-			((EditText) parentView
+			((TextView) parentView
 					.findViewById(id.my_pet_profile_name_notification))
-					.setText(notificacion.getMascota().getNombre());
+					.setText(notificacion.getNombreMascota());
 			((EditText) parentView
 					.findViewById(id.detailed_notification_profile_name))
-					.setText(usuario.getNombre());
+					.setText(notificacion.getNombreUsuario());
 			((EditText) parentView
 					.findViewById(id.detailed_notification_last_name))
-					.setText(usuario.getApellido());
+					.setText(notificacion.getApellidoUsuario());
 			((EditText) parentView.findViewById(id.detailed_notification_phone))
-					.setText(usuario.getCelular());
+					.setText(notificacion.getCelular());
 			((EditText) parentView.findViewById(id.detailed_notification_email))
-					.setText(usuario.getCorreo());
+					.setText(notificacion.getCorreo());
+		
+			((EditText) parentView
+					.findViewById(id.detailed_notification_profile_name)).setKeyListener(null);
+			((EditText) parentView
+					.findViewById(id.detailed_notification_last_name)).setKeyListener(null);
+			((EditText) parentView
+					.findViewById(id.detailed_notification_phone)).setKeyListener(null);			
+			((EditText) parentView
+					.findViewById(id.detailed_notification_email)).setKeyListener(null);	
+					
 		}
 	}
 }

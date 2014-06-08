@@ -1,6 +1,7 @@
 package com.findme.app.views;
 
-import java.util.Calendar;
+import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 
 import android.app.Activity;
@@ -59,14 +60,30 @@ public class CustomNotificationsSentAdapter extends ArrayAdapter<Notificacion> {
 
 		Notificacion listItem = this.notificaciones.get(position);
 
-		listViewHolder.nombreMascota.setText("Encontraste a "+ listItem.getMascota().getNombre());
-		listViewHolder.nombreUsuarioInformante.setText("Has encontrado una mascota!");
-		
-		listViewHolder.horaEncontrada.setText(String.valueOf(listItem.getFecha().get(Calendar.HOUR))+":"+ listItem.getFecha().get(Calendar.MINUTE)+ " hs");
-		//listViewHolder.fotoMascota.setImageDrawable(view.getResources()
-		//		.getDrawable(
-		//				Integer.parseInt(listItem.getMascota().getPathFoto())));
+		listViewHolder.nombreMascota.setText("Encontraste a "
+				+ listItem.getNombreMascota());
+		listViewHolder.nombreUsuarioInformante
+				.setText("Has encontrado una mascota!");
+
+		listViewHolder.horaEncontrada.setText(setTime(listItem));
+		// listViewHolder.fotoMascota.setImageDrawable(view.getResources()
+		// .getDrawable(
+		// Integer.parseInt(listItem.getMascota().getPathFoto())));
 		return view;
+	}
+
+	public String setTime(Notificacion notificacion) {
+		String date = "";
+		Date fechaNotificacion = notificacion.getFecha();
+		Date fechaHoy = new Date();
+
+		if (Notificacion.DATE.format(fechaNotificacion).equals(Notificacion.DATE.format(fechaHoy))) {
+			date = Notificacion.TIME.format(fechaNotificacion) + " hs";
+		} else {
+			date = Notificacion.DATE.format(fechaNotificacion);
+		}
+
+		return date;
 	}
 
 	private static class ListViewItemHolder {

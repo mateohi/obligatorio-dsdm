@@ -1,26 +1,20 @@
 package com.findme.app.views;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.util.Date;
 import java.util.List;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.findme.R;
-import com.findme.app.model.Mascota;
+import com.findme.app.controller.DatabaseHandler;
 import com.findme.app.model.Notificacion;
-import com.findme.app.model.Usuario;
 
 public class FragmentNotificationsReceived extends Fragment {
 	public FragmentNotificationsReceived() {
@@ -33,39 +27,28 @@ public class FragmentNotificationsReceived extends Fragment {
 		View view = inflater.inflate(R.layout.fragment_notifications_received,
 				container, false);
 
-		Usuario informante = new Usuario();
-		informante.setNombre("Mario");
-
-		Mascota mascota = new Mascota();
-		mascota.setNombre("Lucy");
-		mascota.setPathFoto("");
+		DatabaseHandler dh = new DatabaseHandler(getActivity()
+				.getApplicationContext());
 
 		Notificacion n1 = new Notificacion();
-		n1.setMascota(mascota);
-		Calendar calendar = new GregorianCalendar();
-		calendar.set(Calendar.HOUR, 10);
-		calendar.set(Calendar.MINUTE, 30);
-		n1.setFecha(calendar);
-		n1.setUsarioInformante(informante);
+		n1.setNombreUsuario("Alberto");
+		n1.setApellidoUsuario("Mostaza");
+		n1.setNombreMascota("Tornado");
+		n1.setCelular("094096444");
+		n1.setCorreo("a.mostaza@outlook.com");
+		n1.setFecha(new Date());
+		n1.setLatitud("1");
+		n1.setLongitud("2");
+		n1.setFotoBase64("");
+		n1.setPathFoto("");
 
-		Usuario informante2 = new Usuario();
-		informante2.setNombre("Juan");
-
-		Mascota mascota2 = new Mascota();
-		mascota2.setNombre("Lucy");
-		mascota2.setPathFoto("");
-
-		Notificacion n2 = new Notificacion();
-		n2.setMascota(mascota2);
-		n2.setFecha(calendar);
-		n2.setUsarioInformante(informante2);
-
-		List<Notificacion> notificaciones = new ArrayList<Notificacion>();
-		notificaciones.add(n1);
-		notificaciones.add(n2);
+		dh.addNotificacionRecibida(n1);
+		List<Notificacion> notificacionesRecibidas = dh
+				.getNotificacionesRecibidas();
 
 		ArrayAdapter<Notificacion> codeLearnArrayAdapter = new CustomNotificationsReceivedAdapter(
-				getActivity(), R.layout.custom_listview_item, notificaciones);
+				getActivity(), R.layout.custom_listview_item,
+				notificacionesRecibidas);
 		ListView listView = (ListView) view.findViewById(R.id.list_received);
 		listView.setAdapter(codeLearnArrayAdapter);
 
@@ -74,8 +57,9 @@ public class FragmentNotificationsReceived extends Fragment {
 			@Override
 			public void onItemClick(AdapterView<?> parent, final View view,
 					int position, long id) {
-				Notificacion selectedNotification = (Notificacion) parent.getItemAtPosition(position);
-				MainActivity activity = (MainActivity)getActivity();
+				Notificacion selectedNotification = (Notificacion) parent
+						.getItemAtPosition(position);
+				MainActivity activity = (MainActivity) getActivity();
 				activity.setDetailedNotificationsFragment(selectedNotification, true);
 			}
 

@@ -165,6 +165,7 @@
         </TableRow>
 
         <View
+            android:id="@+id/view_location"
             android:layout_height="2dip"
             android:background="#FF3333" />
 
@@ -175,7 +176,7 @@
             android:padding="5dip" >
 
             <Button
-                android:id="@+id/button_save_profile"
+                android:id="@+id/button_location"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"

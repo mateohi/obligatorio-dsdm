@@ -1,13 +1,24 @@
 package com.findme.app.model;
 
-import java.util.Calendar;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Notificacion {
+	
+	public static final SimpleDateFormat FULL_DATE = new SimpleDateFormat("dd/MM/yyyy'-'HH:mm");
+	public static final SimpleDateFormat DATE = new SimpleDateFormat("dd/MM/yyyy");
+	public static final SimpleDateFormat TIME = new SimpleDateFormat("HH:mm");
+	
+	
 	private int id;
-	private Usuario usuarioDueno;
-	private Usuario usarioInformante;
-	private Mascota mascota;
-	private Calendar fecha;
+    private String nombreUsuario;
+    private String apellidoUsuario;
+    private String correo;
+	private String celular;
+	private String nombreMascota;
+    private String pathFoto;
+    private String fotoBase64;
+	private Date fecha;
 	private String longitud;
 	private String latitud;
 	
@@ -17,28 +28,52 @@ public class Notificacion {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public Usuario getUsuarioDueno() {
-		return usuarioDueno;
+	public String getNombreUsuario() {
+		return nombreUsuario;
 	}
-	public void setUsuarioDueno(Usuario usuarioDueno) {
-		this.usuarioDueno = usuarioDueno;
+	public void setNombreUsuario(String nombreUsuario) {
+		this.nombreUsuario = nombreUsuario;
 	}
-	public Usuario getUsarioInformante() {
-		return usarioInformante;
+	public String getApellidoUsuario() {
+		return apellidoUsuario;
 	}
-	public void setUsarioInformante(Usuario usarioInformante) {
-		this.usarioInformante = usarioInformante;
+	public void setApellidoUsuario(String apellidoUsuario) {
+		this.apellidoUsuario = apellidoUsuario;
 	}
-	public Mascota getMascota() {
-		return mascota;
+	public String getCorreo() {
+		return correo;
 	}
-	public void setMascota(Mascota mascota) {
-		this.mascota = mascota;
+	public void setCorreo(String correo) {
+		this.correo = correo;
 	}
-	public Calendar getFecha() {
+	public String getCelular() {
+		return celular;
+	}
+	public void setCelular(String celular) {
+		this.celular = celular;
+	}
+	public String getNombreMascota() {
+		return nombreMascota;
+	}
+	public void setNombreMascota(String nombreMascota) {
+		this.nombreMascota = nombreMascota;
+	}
+	public String getPathFoto() {
+		return pathFoto;
+	}
+	public void setPathFoto(String pathFoto) {
+		this.pathFoto = pathFoto;
+	}
+	public String getFotoBase64() {
+		return fotoBase64;
+	}
+	public void setFotoBase64(String fotoBase64) {
+		this.fotoBase64 = fotoBase64;
+	}
+	public Date getFecha() {
 		return fecha;
 	}
-	public void setFecha(Calendar fecha) {
+	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
 	public String getLongitud() {
@@ -53,4 +88,5 @@ public class Notificacion {
 	public void setLatitud(String latitud) {
 		this.latitud = latitud;
 	}
+
 }

@@ -189,9 +189,11 @@ public class MainActivity extends FragmentActivity {
 
 	}
 
-	public void setDetailedNotificationsFragment(Notificacion notificacion, boolean isReceivedNotification) {
-		Fragment fragment = new FragmentDetailedNotification(notificacion, isReceivedNotification);
-//		Fragment fragment = new FragmentDetailedNotification();
+	public void setDetailedNotificationsFragment(Notificacion notificacion,
+			boolean isReceivedNotification) {
+		Fragment fragment = new FragmentDetailedNotification(notificacion,
+				isReceivedNotification);
+		// Fragment fragment = new FragmentDetailedNotification();
 		FragmentManager frgManager = getSupportFragmentManager();
 		frgManager.beginTransaction().replace(R.id.content_frame, fragment)
 				.commit();
@@ -219,13 +221,21 @@ public class MainActivity extends FragmentActivity {
 			return true;
 		}
 		if (item.getItemId() == R.id.notification) {
-			Fragment fragment = new FragmentNotifications();
-			FragmentManager frgManager = getSupportFragmentManager();
-			frgManager.beginTransaction().replace(R.id.content_frame, fragment)
-					.commit();
-			mDrawerLayout.closeDrawer(mDrawerList);
+			if (!hayUsuario()) {
+				Toast.makeText(this, "Debe primero crear un usuario",
+						Toast.LENGTH_LONG).show();
+			} else if (!hayMascota()) {
+				Toast.makeText(this, "Debe primero registrar una mascota",
+						Toast.LENGTH_LONG).show();
+			} else {
+				Fragment fragment = new FragmentNotifications();
+				FragmentManager frgManager = getSupportFragmentManager();
+				frgManager.beginTransaction()
+						.replace(R.id.content_frame, fragment).commit();
+				mDrawerLayout.closeDrawer(mDrawerList);
 
-			return true;
+				return true;
+			}
 		}
 
 		return false;
@@ -386,10 +396,9 @@ public class MainActivity extends FragmentActivity {
 		if (hayMascota()) {
 			String gcmId = getRegistrationId(getApplicationContext());
 			new ResendQrTask(this).execute(gcmId);
-		}
-		else {
+		} else {
 			Toast.makeText(this, "Cree una mascota antes", Toast.LENGTH_LONG)
-			.show();
+					.show();
 		}
 	}
 
