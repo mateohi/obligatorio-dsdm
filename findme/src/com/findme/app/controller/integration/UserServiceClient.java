@@ -10,7 +10,6 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 
-import com.findme.app.controller.integration.tasks.ServiceConstants;
 import com.findme.app.model.Usuario;
 import com.google.gson.Gson;
 

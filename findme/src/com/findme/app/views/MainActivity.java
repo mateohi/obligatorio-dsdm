@@ -273,13 +273,10 @@ public class MainActivity extends FragmentActivity {
 					Uri selectedImage = intent.getData();
 					Bitmap image = ImageUtils.getImageFromUri(
 							getContentResolver(), selectedImage);
-					ImageUtils.saveImageOnDevice(image, "test",
-							getApplicationContext());
-					Bitmap recovered = ImageUtils.getCircleBitmapFromDevice(
-							"test", this.getApplicationContext());
+					Bitmap circleImage = ImageUtils.getCircleBitmap(image);
 
 					ImageView imageView = (ImageView) findViewById(R.id.my_pet_image);
-					imageView.setImageBitmap(recovered);
+					imageView.setImageBitmap(circleImage);
 				} catch (Exception ex) {
 					Log.e(TAG, ex.getMessage(), ex);
 				}
