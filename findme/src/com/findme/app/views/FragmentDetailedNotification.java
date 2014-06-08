@@ -82,11 +82,6 @@ public class FragmentDetailedNotification extends Fragment {
 
 	private void setUpView() {
 		if (!isReceivedNotification) {
-			((TextView) parentView
-					.findViewById(id.detailed_notification_ubication))
-					.setVisibility(View.GONE);
-			((View) parentView.findViewById(id.view_location))
-					.setVisibility(View.GONE);
 			((Button) parentView.findViewById(id.button_location))
 					.setVisibility(View.GONE);
 		}
@@ -98,7 +93,7 @@ public class FragmentDetailedNotification extends Fragment {
 			((ImageView) parentView.findViewById(id.my_pet_image_notification)).setImageBitmap(bm);
 			((TextView) parentView
 					.findViewById(id.my_pet_profile_name_notification))
-					.setText(notificacion.getNombreMascota());
+					.setText("Se encontró a " + notificacion.getNombreMascota());
 			((EditText) parentView
 					.findViewById(id.detailed_notification_profile_name))
 					.setText(notificacion.getNombreUsuario());

@@ -24,8 +24,9 @@
     <string name="my_profile_save">Guardar perfil</string>
     <string name="my_pet_save">Guardar mascota</string>
     <string name="pet_name">Nombre</string>
-    <string name="detailed_notification_title">Datos de contacto</string>
-    <string name="detailed_notification_ubication">Ubicación</string>
+    <string name="detailed_notification_title">Datos del denunciante</string>
+    <string name="detailed_sent_notification_title">Datos del dueño</string>
+    <string name="detailed_notification_ubication">Ver ubicación en el mapa</string>
     <string name="detailed_notification_profile_name">Nombre</string>
     <string name="detailed_notification_last_name">Apellido</string>
     <string name="detailed_notification_email">Correo</string>

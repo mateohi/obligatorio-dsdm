@@ -13,20 +13,25 @@
             android:layout_height="wrap_content"
             android:padding="12dip" >
 
-            <ImageView
-                android:id="@+id/my_pet_image_notification"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:contentDescription=""
-                android:src="@drawable/default_pet" />
-
             <TextView
                 android:id="@+id/my_pet_profile_name_notification"
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:layout_marginTop="25dp"
                 android:ems="10"
                 android:textSize="20sp"
-                android:layout_marginTop="25dp"></TextView>
+                android:textStyle="bold" >
+</TextView>
+            
+            <ImageView
+                android:id="@+id/my_pet_image_notification"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="top"
+                android:contentDescription=""
+                android:src="@drawable/default_pet" />
+
         </TableRow>
 
         <TableRow
@@ -147,29 +152,6 @@
         </TableRow>
 
         <TableRow
-            android:id="@+id/notification_tableRow7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dip"
-            android:padding="5dip" >
-
-            <TextView
-                android:id="@+id/detailed_notification_ubication"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:fontFamily="Lucida"
-                android:text="@string/detailed_notification_ubication"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="#FF3333" />
-        </TableRow>
-
-        <View
-            android:id="@+id/view_location"
-            android:layout_height="2dip"
-            android:background="#FF3333" />
-
-        <TableRow
             android:id="@+id/my_pet_tableRow8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -182,7 +164,9 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_weight="1"
+                android:drawableRight="@drawable/ic_location_place"
                 android:fontFamily="Lucida"
+                android:background="@color/light_gray"
                 android:text="@string/detailed_notification_ubication" />
         </TableRow>
     </TableLayout>
