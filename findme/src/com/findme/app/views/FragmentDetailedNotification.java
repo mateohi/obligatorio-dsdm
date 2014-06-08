@@ -1,5 +1,7 @@
 package com.findme.app.views;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -19,7 +21,8 @@ public class FragmentDetailedNotification extends Fragment {
 	private Notificacion notificacion;
 	private boolean isReceivedNotification;
 
-	public FragmentDetailedNotification(Notificacion pNotificacion, boolean pIsReceivedNotification) {
+	public FragmentDetailedNotification(Notificacion pNotificacion,
+			boolean pIsReceivedNotification) {
 		this.notificacion = pNotificacion;
 		this.isReceivedNotification = pIsReceivedNotification;
 	}
@@ -32,12 +35,42 @@ public class FragmentDetailedNotification extends Fragment {
 				container, false);
 		parentView = view;
 		cargarDatos();
-		if(!isReceivedNotification){
-			((TextView) parentView.findViewById(id.detailed_notification_ubication)).setVisibility(View.GONE);
-			((View) parentView.findViewById(id.view_location)).setVisibility(View.GONE);
-			((Button) parentView.findViewById(id.button_location)).setVisibility(View.GONE);
-		}
+		setUpView();
+		setButtonListener();
 		return view;
+	}
+
+	private void setButtonListener() {
+		Button buttonLocation = (Button) parentView
+				.findViewById(R.id.button_location);
+		buttonLocation.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(Intent.ACTION_VIEW);
+				Uri geoLocationUri = Uri.parse("geo:<lat>,<long>?q="
+						+ notificacion.getLatitud() + ","
+						+ notificacion.getLongitud());
+				intent.setData(geoLocationUri);
+				if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+					startActivity(intent);
+				}
+
+			}
+		});
+
+	}
+
+	private void setUpView() {
+		if (!isReceivedNotification) {
+			((TextView) parentView
+					.findViewById(id.detailed_notification_ubication))
+					.setVisibility(View.GONE);
+			((View) parentView.findViewById(id.view_location))
+					.setVisibility(View.GONE);
+			((Button) parentView.findViewById(id.button_location))
+					.setVisibility(View.GONE);
+		}
 	}
 
 	public void cargarDatos() {
@@ -58,16 +91,18 @@ public class FragmentDetailedNotification extends Fragment {
 					.setText(notificacion.getCelular());
 			((EditText) parentView.findViewById(id.detailed_notification_email))
 					.setText(notificacion.getCorreo());
-		
+
 			((EditText) parentView
-					.findViewById(id.detailed_notification_profile_name)).setKeyListener(null);
+					.findViewById(id.detailed_notification_profile_name))
+					.setKeyListener(null);
 			((EditText) parentView
-					.findViewById(id.detailed_notification_last_name)).setKeyListener(null);
-			((EditText) parentView
-					.findViewById(id.detailed_notification_phone)).setKeyListener(null);			
-			((EditText) parentView
-					.findViewById(id.detailed_notification_email)).setKeyListener(null);	
-					
+					.findViewById(id.detailed_notification_last_name))
+					.setKeyListener(null);
+			((EditText) parentView.findViewById(id.detailed_notification_phone))
+					.setKeyListener(null);
+			((EditText) parentView.findViewById(id.detailed_notification_email))
+					.setKeyListener(null);
+
 		}
 	}
 }

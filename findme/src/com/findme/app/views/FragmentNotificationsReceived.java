@@ -37,8 +37,8 @@ public class FragmentNotificationsReceived extends Fragment {
 		n1.setCelular("094096444");
 		n1.setCorreo("a.mostaza@outlook.com");
 		n1.setFecha(new Date());
-		n1.setLatitud("1");
-		n1.setLongitud("2");
+		n1.setLatitud("-34.881914");
+		n1.setLongitud("-56.051096");
 		n1.setFotoBase64("");
 		n1.setPathFoto("");
 
