@@ -189,8 +189,10 @@ public class MainActivity extends FragmentActivity {
 
 	}
 
-	public void setDetailedNotificationsFragment(Notificacion notificacion) {
-		Fragment fragment = new FragmentDetailedNotification(notificacion);
+	public void setDetailedNotificationsFragment(Notificacion notificacion,
+			boolean isReceivedNotification) {
+		Fragment fragment = new FragmentDetailedNotification(notificacion,
+				isReceivedNotification);
 		// Fragment fragment = new FragmentDetailedNotification();
 		FragmentManager frgManager = getSupportFragmentManager();
 		frgManager.beginTransaction().replace(R.id.content_frame, fragment)
@@ -397,10 +399,9 @@ public class MainActivity extends FragmentActivity {
 		if (hayMascota()) {
 			String gcmId = getRegistrationId(getApplicationContext());
 			new ResendQrTask(this).execute(gcmId);
-		}
-		else {
+		} else {
 			Toast.makeText(this, "Cree una mascota antes", Toast.LENGTH_LONG)
-			.show();
+					.show();
 		}
 	}
 

@@ -5,8 +5,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.findme.R;
@@ -17,9 +17,11 @@ public class FragmentDetailedNotification extends Fragment {
 
 	private View parentView;
 	private Notificacion notificacion;
+	private boolean isReceivedNotification;
 
-	public FragmentDetailedNotification(Notificacion pNotificacion) {
+	public FragmentDetailedNotification(Notificacion pNotificacion, boolean pIsReceivedNotification) {
 		this.notificacion = pNotificacion;
+		this.isReceivedNotification = pIsReceivedNotification;
 	}
 
 	@Override
@@ -30,6 +32,11 @@ public class FragmentDetailedNotification extends Fragment {
 				container, false);
 		parentView = view;
 		cargarDatos();
+		if(!isReceivedNotification){
+			((TextView) parentView.findViewById(id.detailed_notification_ubication)).setVisibility(View.GONE);
+			((View) parentView.findViewById(id.view_location)).setVisibility(View.GONE);
+			((Button) parentView.findViewById(id.button_location)).setVisibility(View.GONE);
+		}
 		return view;
 	}
 

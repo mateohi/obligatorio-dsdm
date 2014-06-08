@@ -1,7 +1,5 @@
 package com.findme.app.views;
 
-import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -10,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -51,9 +50,22 @@ public class FragmentNotificationsSent extends Fragment {
 		ArrayAdapter<Notificacion> codeLearnArrayAdapter = new CustomNotificationsSentAdapter(
 				getActivity(), R.layout.custom_listview_item,
 				notificacionesRecibidas);
-		ListView lv = (ListView) view.findViewById(R.id.list_sent);
-		lv.setAdapter(codeLearnArrayAdapter);
+		ListView listView = (ListView) view.findViewById(R.id.list_sent);
+		listView.setAdapter(codeLearnArrayAdapter);
 
+		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, final View view,
+					int position, long id) {
+				Notificacion selectedNotification = (Notificacion) parent
+						.getItemAtPosition(position);
+				MainActivity activity = (MainActivity) getActivity();
+				activity.setDetailedNotificationsFragment(selectedNotification, false);
+			}
+
+		});
+		
 		return view;
 	}
 }

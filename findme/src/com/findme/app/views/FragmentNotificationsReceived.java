@@ -1,6 +1,5 @@
 package com.findme.app.views;
 
-import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
@@ -61,7 +60,7 @@ public class FragmentNotificationsReceived extends Fragment {
 				Notificacion selectedNotification = (Notificacion) parent
 						.getItemAtPosition(position);
 				MainActivity activity = (MainActivity) getActivity();
-				activity.setDetailedNotificationsFragment(selectedNotification);
+				activity.setDetailedNotificationsFragment(selectedNotification, true);
 			}
 
 		});
