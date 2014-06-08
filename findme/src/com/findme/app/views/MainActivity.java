@@ -573,48 +573,4 @@ public class MainActivity extends FragmentActivity {
 
 		return fotoBase64;
 	}
-
-	// Notificaciones entrantes
-
-	public void avisoNotificiacion(View v) {
-		if (conVibrar()) {
-			Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-			vibrator.vibrate(1500);
-		}
-
-		if (conSonido()) {
-			Uri defaultRingtoneUri = RingtoneManager
-					.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-
-			MediaPlayer mediaPlayer = new MediaPlayer();
-
-			try {
-				mediaPlayer.setDataSource(context, defaultRingtoneUri);
-				mediaPlayer
-						.setAudioStreamType(AudioManager.STREAM_NOTIFICATION);
-				mediaPlayer.prepare();
-				mediaPlayer.setOnCompletionListener(new OnCompletionListener() {
-					@Override
-					public void onCompletion(MediaPlayer mp) {
-						mp.release();
-					}
-				});
-				mediaPlayer.start();
-			} catch (Exception e) {
-				Log.w(TAG, e.getMessage());
-			}
-		}
-	}
-
-	private boolean conSonido() {
-		SharedPreferences settings = this.getSharedPreferences(PREFS_NAME,
-				Context.MODE_PRIVATE);
-		return settings.getBoolean(SILENT, false);
-	}
-
-	private boolean conVibrar() {
-		SharedPreferences settings = this.getSharedPreferences(PREFS_NAME,
-				Context.MODE_PRIVATE);
-		return settings.getBoolean(VIBRATE, false);
-	}
 }

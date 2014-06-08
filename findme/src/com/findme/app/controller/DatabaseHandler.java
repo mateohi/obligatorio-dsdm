@@ -272,7 +272,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 							notificacion.setFecha(Notificacion.FULL_DATE
 									.parse(cursor.getString(6)));
 						} catch (ParseException e) {
-							e.printStackTrace();
+							// queda en null
 						}
 						notificacion.setLongitud(cursor.getString(7));
 						notificacion.setNombreMascota(cursor.getString(8));

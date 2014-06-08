@@ -30,6 +30,7 @@ public class FragmentNotificationsReceived extends Fragment {
 		DatabaseHandler dh = new DatabaseHandler(getActivity()
 				.getApplicationContext());
 
+		// Se va
 		Notificacion n1 = new Notificacion();
 		n1.setNombreUsuario("Alberto");
 		n1.setApellidoUsuario("Mostaza");
@@ -43,6 +44,8 @@ public class FragmentNotificationsReceived extends Fragment {
 		n1.setPathFoto("");
 
 		dh.addNotificacionRecibida(n1);
+		// Se va
+		
 		List<Notificacion> notificacionesRecibidas = dh
 				.getNotificacionesRecibidas();
 
