@@ -7,9 +7,12 @@ import org.apache.http.HttpStatus;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import com.findme.app.controller.api.Locacion;
 import com.findme.app.controller.integration.tasks.ServiceConstants;
+import com.google.gson.Gson;
 
 public class NotificationServiceClient {
 
@@ -20,9 +23,11 @@ public class NotificationServiceClient {
 
 	private static NotificationServiceClient instance;
 	private HttpClient cliente;
+	private Gson gson;
 
 	private NotificationServiceClient() {
 		this.cliente = new DefaultHttpClient();
+		this.gson = new Gson();
 	}
 
 	public static NotificationServiceClient instance() {
@@ -33,10 +38,14 @@ public class NotificationServiceClient {
 		return instance;
 	}
 	
-	public String notify(String gcmId) {
+	public String notify(String gcmId, Locacion locacion) {
 		try {
+			String jsonBody = gson.toJson(locacion);
+			StringEntity entity = new StringEntity(jsonBody);
+			
 			HttpPost post = new HttpPost(ServiceConstants.SERVICE_URL + NOTIFICATIONS + GCM_ID + gcmId);
 			post.addHeader(CONTENT_TYPE, APPLICATION_JSON);
+			post.setEntity(entity);
 
 			HttpResponse response = cliente.execute(post);
 			int status = response.getStatusLine().getStatusCode();

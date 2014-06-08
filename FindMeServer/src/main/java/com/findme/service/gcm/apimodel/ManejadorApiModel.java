@@ -5,6 +5,8 @@ import java.util.Map;
 
 public class ManejadorApiModel {
 
+    public static final String LATITUD = "latitud";
+    public static final String LONGITUD = "longitud";
     public static final String NOMBRE_USUARIO = "nombre_usuario";
     public static final String NOMBRE_MASCOTA = "nombre_mascota";
     public static final String APELLIDO_USUARIO = "apellido_usuario";
@@ -14,6 +16,9 @@ public class ManejadorApiModel {
 
     public static RequestBody mapToRequest(Map<String, String> mapa) {
         RequestBodyData requestData = new RequestBodyData();
+
+        requestData.setLatitud(mapa.get(LATITUD));
+        requestData.setLongitud(mapa.get(LONGITUD));
         requestData.setNombreUsuario(mapa.get(NOMBRE_USUARIO));
         requestData.setNombreMascota(mapa.get(NOMBRE_MASCOTA));
         requestData.setApellidoUsuario(mapa.get(APELLIDO_USUARIO));

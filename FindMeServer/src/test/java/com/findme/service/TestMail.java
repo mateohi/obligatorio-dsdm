@@ -13,13 +13,16 @@ public class TestMail {
 
     public static void main(String[] args) throws Exception {
         try {
-            ManejadorMail.enviarQR("Guido fag", "guidocorazza36@hotmail.com", "project.properties");
+            ManejadorMail.enviarQR("", "Guido fag", "guidocorazza36@hotmail.com", "project.properties");
             System.out.println("Mail enviado");
-        } catch (QRGeneratorException ex) {
+        }
+        catch (QRGeneratorException ex) {
             System.out.println("Error al generar el QR");
-        } catch (MailGeneratorException ex) {
+        }
+        catch (MailGeneratorException ex) {
             System.out.println("Error al generar el email");
-        } catch (IOException ex) {
+        }
+        catch (IOException ex) {
             System.out.println("Error al leer el archivo properties");
         }
     }

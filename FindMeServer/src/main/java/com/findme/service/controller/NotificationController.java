@@ -1,9 +1,9 @@
 package com.findme.service.controller;
 
-import com.findme.service.dataaccess.MascotaDao;
 import com.findme.service.dataaccess.UsuarioDao;
 import com.findme.service.gcm.GcmException;
 import com.findme.service.gcm.ManejadorGcm;
+import com.findme.service.gcm.apimodel.Locacion;
 import com.findme.service.gcm.apimodel.ManejadorApiModel;
 import com.findme.service.model.Mascota;
 import com.findme.service.model.Usuario;
@@ -12,6 +12,7 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,13 +25,11 @@ public class NotificationController {
     private static final Logger LOG = Logger.getLogger(NotificationController.class);
     private static final String SUCCESS_MSG = "Se encontro a %s, se notifica a %s";
     @Autowired
-    private MascotaDao mascotaDao;
-    @Autowired
     private UsuarioDao usuarioDao;
 
     @ResponseBody
     @RequestMapping(method = RequestMethod.POST)
-    public void notificar(@RequestParam("gcmId") String gcmId) {
+    public void notificar(@RequestBody(required = true) Locacion locacion, @RequestParam("gcmId") String gcmId) {
         LOG.info("Nueva notificacion ...");
         Usuario usuario = this.usuarioDao.getUsuarioByGcmId(gcmId);
 
@@ -46,6 +45,8 @@ public class NotificationController {
             else {
                 try {
                     Map<String, String> datos = new HashMap<String, String>();
+                    datos.put(ManejadorApiModel.LATITUD, locacion.getLatitud());
+                    datos.put(ManejadorApiModel.LONGITUD, locacion.getLongitud());
                     datos.put(ManejadorApiModel.NOMBRE_USUARIO, usuario.getNombre());
                     datos.put(ManejadorApiModel.APELLIDO_USUARIO, usuario.getApellido());
                     datos.put(ManejadorApiModel.CELULAR, usuario.getCelular());
@@ -58,6 +59,7 @@ public class NotificationController {
                 }
                 catch (GcmException ex) {
                     LOG.error(ex.getMessage());
+                    LOG.error("GCM que falla: " + usuario.getGcmId());
                 }
             }
         }
