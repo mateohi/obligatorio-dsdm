@@ -1,9 +1,8 @@
 package com.findme.app.views;
 
-import java.util.Calendar;
+import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
-
-import com.example.findme.R;
 
 import android.app.Activity;
 import android.content.Context;
@@ -14,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.findme.R;
 import com.findme.app.model.Notificacion;
 
 public class CustomNotificationsReceivedAdapter extends
@@ -61,14 +61,34 @@ public class CustomNotificationsReceivedAdapter extends
 
 		Notificacion listItem = this.notificaciones.get(position);
 
-		listViewHolder.nombreMascota.setText("Encontraron a "+ listItem.getMascota().getNombre());
+		listViewHolder.nombreMascota.setText("Encontraron a "
+				+ listItem.getNombreMascota());
 		listViewHolder.nombreUsuarioInformante.setText(listItem
-				.getUsarioInformante().getNombre() + " ha encontrado a la mascota");
-		listViewHolder.horaEncontrada.setText(String.valueOf(listItem.getFecha().get(Calendar.HOUR))+":"+ listItem.getFecha().get(Calendar.MINUTE)+ " hs");
-		//listViewHolder.fotoMascota.setImageDrawable(view.getResources()
-		//		.getDrawable(
-		//				Integer.parseInt(listItem.getMascota().getPathFoto())));
+				.getNombreUsuario() + " ha encontrado a la mascota");
+		listViewHolder.horaEncontrada.setText(setTime(listItem));
+		// listViewHolder.fotoMascota.setImageDrawable(view.getResources()
+		// .getDrawable(
+		// Integer.parseInt(listItem.getMascota().getPathFoto())));
 		return view;
+	}
+
+	public String setTime(Notificacion notificacion) {
+		String date = "";
+		Date fechaNotificacion = notificacion.getFecha();
+		Date fechaHoy;
+		try {
+			fechaHoy = Notificacion.FULL_DATE.parse(Notificacion.FULL_DATE
+					.format(new Date()));
+			if (Notificacion.DATE.format(fechaNotificacion).equals(fechaHoy)) {
+				date = Notificacion.TIME.format(fechaNotificacion) + " hs";
+			} else {
+				date = Notificacion.DATE.format(fechaNotificacion);
+			}
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		return date;
 	}
 
 	private static class ListViewItemHolder {

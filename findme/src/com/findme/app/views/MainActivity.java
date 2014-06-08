@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.R.bool;
-import android.app.Notification;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
@@ -192,9 +190,9 @@ public class MainActivity extends FragmentActivity {
 
 	}
 
-	public void setDetailedNotificationsFragment(Notificacion notificacion, boolean isReceivedNotification) {
-		Fragment fragment = new FragmentDetailedNotification(notificacion, isReceivedNotification);
-//		Fragment fragment = new FragmentDetailedNotification();
+	public void setDetailedNotificationsFragment(Notificacion notificacion) {
+		Fragment fragment = new FragmentDetailedNotification(notificacion);
+		// Fragment fragment = new FragmentDetailedNotification();
 		FragmentManager frgManager = getSupportFragmentManager();
 		frgManager.beginTransaction().replace(R.id.content_frame, fragment)
 				.commit();
@@ -222,13 +220,21 @@ public class MainActivity extends FragmentActivity {
 			return true;
 		}
 		if (item.getItemId() == R.id.notification) {
-			Fragment fragment = new FragmentNotifications();
-			FragmentManager frgManager = getSupportFragmentManager();
-			frgManager.beginTransaction().replace(R.id.content_frame, fragment)
-					.commit();
-			mDrawerLayout.closeDrawer(mDrawerList);
+			if (!hayUsuario()) {
+				Toast.makeText(this, "Debe primero crear un usuario",
+						Toast.LENGTH_LONG).show();
+			} else if (!hayMascota()) {
+				Toast.makeText(this, "Debe primero registrar una mascota",
+						Toast.LENGTH_LONG).show();
+			} else {
+				Fragment fragment = new FragmentNotifications();
+				FragmentManager frgManager = getSupportFragmentManager();
+				frgManager.beginTransaction()
+						.replace(R.id.content_frame, fragment).commit();
+				mDrawerLayout.closeDrawer(mDrawerList);
 
-			return true;
+				return true;
+			}
 		}
 
 		return false;
