@@ -1,6 +1,10 @@
 package com.findme.app.views;
 
+import java.io.FileNotFoundException;
+
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,12 +13,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.findme.R;
 import com.example.findme.R.id;
 import com.findme.app.controller.DatabaseHandler;
 import com.findme.app.model.Notificacion;
+import com.findme.app.utils.ImageUtils;
 
 public class FragmentDetailedNotification extends Fragment {
 
@@ -88,9 +94,8 @@ public class FragmentDetailedNotification extends Fragment {
 
 	public void cargarDatos() {
 		if (notificacion != null) {
-
-			// ((ImageView))
-			// parentView.findViewById(id.my_pet_image_notification).setIm;
+			Bitmap bm = devolverIconoGrande(notificacion.getNombreMascota());
+			((ImageView) parentView.findViewById(id.my_pet_image_notification)).setImageBitmap(bm);
 			((TextView) parentView
 					.findViewById(id.my_pet_profile_name_notification))
 					.setText(notificacion.getNombreMascota());
@@ -116,6 +121,21 @@ public class FragmentDetailedNotification extends Fragment {
 			((EditText) parentView.findViewById(id.detailed_notification_email))
 					.setKeyListener(null);
 
+		}
+	}
+	
+	private Bitmap devolverIconoGrande(String nombreMascota) {
+
+		String path = (this.isReceivedNotification ? "" : "N-") + nombreMascota;
+		
+		try {
+			Bitmap fotoMascota = ImageUtils
+					.getCircleBitmapFromDevice(path, this.parentView.getContext());
+			return fotoMascota;
+		} catch (FileNotFoundException e) {
+			Bitmap iconoFindMe = BitmapFactory.decodeResource(
+					this.parentView.getContext().getResources(), R.drawable.ic_launcher);
+			return iconoFindMe;
 		}
 	}
 }

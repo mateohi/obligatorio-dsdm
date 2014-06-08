@@ -374,7 +374,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 				} catch (ParseException e) {
 					e.printStackTrace();
 				}
-				notificacion.setLongitud(cursor.getString(7));
+				notificacion.setLatitud(cursor.getString(7));
 				notificacion.setNombreMascota(cursor.getString(8));
 			}
 		}
