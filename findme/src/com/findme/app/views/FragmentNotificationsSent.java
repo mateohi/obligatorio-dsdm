@@ -29,21 +29,7 @@ public class FragmentNotificationsSent extends Fragment {
 				container, false);
 		DatabaseHandler dh = new DatabaseHandler(getActivity()
 				.getApplicationContext());
-
-		Notificacion n1 = new Notificacion();
-		n1.setNombreUsuario("Alberto");
-		n1.setApellidoUsuario("Mostaza");
-		n1.setNombreMascota("Lucy");
-		n1.setCelular("094096444");
-		n1.setCorreo("a.mostaza@outlook.com");
-		n1.setFecha(new Date());
-		n1.setLatitud("1");
-		n1.setLongitud("2");
-		n1.setFotoBase64("");
-		n1.setPathFoto("");
-
-		dh.addNotificacionEnviada(n1);
-
+		
 		List<Notificacion> notificacionesRecibidas = dh
 				.getNotificacionesEnviadas();
 

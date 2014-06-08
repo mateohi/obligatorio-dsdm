@@ -1,11 +1,14 @@
 package com.findme.app.views;
 
+import java.io.FileNotFoundException;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +17,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.findme.R;
+import com.findme.app.controller.DatabaseHandler;
 import com.findme.app.model.Notificacion;
+import com.findme.app.utils.ImageUtils;
 
 public class CustomNotificationsReceivedAdapter extends
 		ArrayAdapter<Notificacion> {
@@ -48,7 +53,6 @@ public class CustomNotificationsReceivedAdapter extends
 					.findViewById(R.id.user_found_name);
 			listViewHolder.horaEncontrada = (TextView) view
 					.findViewById(R.id.date_found);
-
 			listViewHolder.fotoMascota = (ImageView) view
 					.findViewById(R.id.foto_mascota);
 
@@ -66,9 +70,8 @@ public class CustomNotificationsReceivedAdapter extends
 		listViewHolder.nombreUsuarioInformante.setText(listItem
 				.getNombreUsuario() + " ha encontrado a la mascota");
 		listViewHolder.horaEncontrada.setText(setTime(listItem));
-		// listViewHolder.fotoMascota.setImageDrawable(view.getResources()
-		// .getDrawable(
-		// Integer.parseInt(listItem.getMascota().getPathFoto())));
+		Bitmap fotoMascota = devolverIconoGrande(listItem.getNombreMascota());
+		listViewHolder.fotoMascota.setImageBitmap(fotoMascota);
 		return view;
 	}
 
@@ -77,7 +80,8 @@ public class CustomNotificationsReceivedAdapter extends
 		Date fechaNotificacion = notificacion.getFecha();
 		Date fechaHoy = new Date();
 
-		if (Notificacion.DATE.format(fechaNotificacion).equals(Notificacion.DATE.format(fechaHoy))) {
+		if (Notificacion.DATE.format(fechaNotificacion).equals(
+				Notificacion.DATE.format(fechaHoy))) {
 			date = Notificacion.TIME.format(fechaNotificacion) + " hs";
 		} else {
 			date = Notificacion.DATE.format(fechaNotificacion);
@@ -91,5 +95,18 @@ public class CustomNotificationsReceivedAdapter extends
 		TextView nombreUsuarioInformante;
 		TextView horaEncontrada;
 		ImageView fotoMascota;
+	}
+
+	private Bitmap devolverIconoGrande(String path) {
+
+		try {
+			Bitmap fotoMascota = ImageUtils
+					.getCircleBitmapFromDevice(path, this.contexto);
+			return fotoMascota;
+		} catch (FileNotFoundException e) {
+			Bitmap iconoFindMe = BitmapFactory.decodeResource(
+					this.contexto.getResources(), R.drawable.ic_launcher);
+			return iconoFindMe;
+		}
 	}
 }

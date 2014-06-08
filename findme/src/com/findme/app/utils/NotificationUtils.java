@@ -1,6 +1,7 @@
 package com.findme.app.utils;
 
 import java.io.FileNotFoundException;
+import java.util.Date;
 
 import com.example.findme.R;
 import com.findme.app.controller.DatabaseHandler;
@@ -41,7 +42,15 @@ public class NotificationUtils {
 	private static final String VIBRATE = "vibrate";
 	private static final int NOTIFICATION_ID = 1;
     
-	public static Notificacion bundleToNotification(Bundle bundle) {
+	public static void saveBundleAsReceivedNotification(Bundle bundle, Context ctx) {
+		Notificacion notificacion = bundleToNotification(bundle);
+		sendNotification(notificacion, ctx);
+		
+		DatabaseHandler dh = new DatabaseHandler(ctx);
+		dh.addNotificacionRecibida(notificacion);
+	}
+	
+	private static Notificacion bundleToNotification(Bundle bundle) {
 		String latitud = bundle.getString(LATITUD);
 		String longitud = bundle.getString(LONGITUD);
 		String nombreUsuario = bundle.getString(NOMBRE_USUARIO);
@@ -51,17 +60,25 @@ public class NotificationUtils {
 		String correo = bundle.getString(CORREO);
 
 		Notificacion notificacion = new Notificacion();
+		notificacion.setLatitud(latitud);
+		notificacion.setLongitud(longitud);
+		notificacion.setNombreUsuario(nombreUsuario);
+		notificacion.setNombreMascota(nombreMascota);
+		notificacion.setApellidoUsuario(apellidoUsuario);
+		notificacion.setCelular(celular);
+		notificacion.setCorreo(correo);
+		notificacion.setFecha(new Date());
 		
 		return notificacion;
 	}
 	
-	public static void sendNotification(Notificacion notificacion, Context ctx) {
+	private static void sendNotification(Notificacion notificacion, Context ctx) {
 		Bitmap icono = devolverIconoGrande(ctx);
 
 		NotificationCompat.Builder builder = new NotificationCompat.Builder(
 				ctx).setSmallIcon(R.drawable.ic_launcher)
 				.setContentTitle("Mascota encontrada!")
-				.setContentText("Han encontrado a CAMBIAR")
+				.setContentText("Han encontrado a " + notificacion.getNombreMascota())
 				.setLargeIcon(icono);
 
 		Intent resultIntent = new Intent(ctx, MainActivity.class);

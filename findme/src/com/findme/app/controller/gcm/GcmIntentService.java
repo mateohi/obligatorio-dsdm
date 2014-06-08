@@ -1,6 +1,5 @@
 package com.findme.app.controller.gcm;
 
-import com.findme.app.model.Notificacion;
 import com.findme.app.utils.NotificationUtils;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
@@ -40,7 +39,6 @@ public class GcmIntentService extends IntentService {
 	}
 
 	private void sendNotification(Bundle extras) {
-		Notificacion notificacion = NotificationUtils.bundleToNotification(extras);
-		NotificationUtils.sendNotification(notificacion, this.getApplicationContext());
+		NotificationUtils.saveBundleAsReceivedNotification(extras, this.getApplicationContext());
 	}
 }
