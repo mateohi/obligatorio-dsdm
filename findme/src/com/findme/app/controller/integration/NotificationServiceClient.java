@@ -11,7 +11,6 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import com.findme.app.controller.api.Locacion;
-import com.findme.app.controller.integration.tasks.ServiceConstants;
 import com.google.gson.Gson;
 
 public class NotificationServiceClient {
