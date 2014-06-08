@@ -1,13 +1,19 @@
 package com.findme.app.controller.gcm;
 
+import com.example.findme.R;
+import com.findme.app.model.Notificacion;
+import com.findme.app.utils.NotificationUtils;
 import com.findme.app.views.MainActivity;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 import android.app.IntentService;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
@@ -40,17 +46,16 @@ public class GcmIntentService extends IntentService {
              */
             if (GoogleCloudMessaging.
                     MESSAGE_TYPE_SEND_ERROR.equals(messageType)) {
-                sendNotification("Send error: " + extras.toString());
+            	// TODO
             } else if (GoogleCloudMessaging.
                     MESSAGE_TYPE_DELETED.equals(messageType)) {
-                sendNotification("Deleted messages on server: " +
-                        extras.toString());
-            // If it's a regular GCM message, do some work.
+            	// TODO
             } else if (GoogleCloudMessaging.
                     MESSAGE_TYPE_MESSAGE.equals(messageType)) {
                 // TODO Abrir una cierta Activity con un Intent capaz?
                 // Post notification of received message.
-                sendNotification("Received: " + extras.toString());
+            	Notificacion notificacion = NotificationUtils.bundleToNotification(extras);
+                sendNotification(notificacion);
                 Log.i(TAG, "Received: " + extras.toString());
             }
         }
@@ -61,22 +66,36 @@ public class GcmIntentService extends IntentService {
     // Put the message into a notification and post it.
     // This is just one simple example of what you might choose to do with
     // a GCM message.
-    private void sendNotification(String msg) {
-        mNotificationManager = (NotificationManager)
-                this.getSystemService(Context.NOTIFICATION_SERVICE);
+    private void sendNotification(Notificacion notificacion) {
+    	Bitmap icono = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
+    	
+    	NotificationCompat.Builder mBuilder =
+    	        new NotificationCompat.Builder(this)
+    	        .setSmallIcon(R.drawable.ic_launcher)
+    	        .setContentTitle("Mascota encontrada!")
+    	        .setContentText("Han encontrado a CAMBIAR")
+    	        .setLargeIcon(icono);
+    	// Creates an explicit intent for an Activity in your app
+    	Intent resultIntent = new Intent(this, MainActivity.class);
 
-        PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
-                new Intent(this, MainActivity.class), 0);
-
-        NotificationCompat.Builder mBuilder =
-                new NotificationCompat.Builder(this)
-//        .setSmallIcon(drawable.ic_popup_reminder)
-        .setContentTitle("GCM Notification")
-        .setStyle(new NotificationCompat.BigTextStyle()
-        .bigText(msg))
-        .setContentText(msg);
-
-        mBuilder.setContentIntent(contentIntent);
-        mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
+    	// The stack builder object will contain an artificial back stack for the
+    	// started Activity.
+    	// This ensures that navigating backward from the Activity leads out of
+    	// your application to the Home screen.
+    	TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+    	// Adds the back stack for the Intent (but not the Intent itself)
+    	stackBuilder.addParentStack(MainActivity.class);
+    	// Adds the Intent that starts the Activity to the top of the stack
+    	stackBuilder.addNextIntent(resultIntent);
+    	PendingIntent resultPendingIntent =
+    	        stackBuilder.getPendingIntent(
+    	            0,
+    	            PendingIntent.FLAG_UPDATE_CURRENT
+    	        );
+    	mBuilder.setContentIntent(resultPendingIntent);
+    	NotificationManager mNotificationManager =
+    	    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+    	// mId allows you to update the notification later on.
+    	mNotificationManager.notify(0, mBuilder.build());
     }
 }

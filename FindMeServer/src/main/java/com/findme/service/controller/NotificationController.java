@@ -45,6 +45,8 @@ public class NotificationController {
             else {
                 try {
                     Map<String, String> datos = new HashMap<String, String>();
+                    datos.put(ManejadorApiModel.LATITUD, locacion.getLatitud());
+                    datos.put(ManejadorApiModel.LONGITUD, locacion.getLongitud());
                     datos.put(ManejadorApiModel.NOMBRE_USUARIO, usuario.getNombre());
                     datos.put(ManejadorApiModel.APELLIDO_USUARIO, usuario.getApellido());
                     datos.put(ManejadorApiModel.CELULAR, usuario.getCelular());
