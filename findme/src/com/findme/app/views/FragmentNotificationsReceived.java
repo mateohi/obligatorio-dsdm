@@ -1,6 +1,5 @@
 package com.findme.app.views;
 
-import java.util.Date;
 import java.util.List;
 
 import android.os.Bundle;

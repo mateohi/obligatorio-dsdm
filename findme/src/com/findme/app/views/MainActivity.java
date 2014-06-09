@@ -21,9 +21,11 @@ import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -183,15 +185,20 @@ public class MainActivity extends FragmentActivity {
 
 	public void setDetailedNotificationsFragment(int notificationId,
 			boolean isReceivedNotification) {
-
 		Fragment fragment = new FragmentDetailedNotification();
 		Bundle args = new Bundle();
 		args.putInt("notificationId", notificationId);
 		args.putInt("isReceivedNotification", isReceivedNotification ? 1 : 0);
 		fragment.setArguments(args);
 		FragmentManager frgManager = getSupportFragmentManager();
-		frgManager.beginTransaction().replace(R.id.content_frame, fragment)
-				.commit();
+		FragmentTransaction transaction = frgManager.beginTransaction();
+		transaction.replace(R.id.content_frame, fragment);
+		if (isReceivedNotification) {
+			transaction.addToBackStack("Recibida");
+		} else {
+			transaction.addToBackStack("Enviada");
+		}
+		transaction.commit();
 	}
 
 	@Override
@@ -225,8 +232,10 @@ public class MainActivity extends FragmentActivity {
 			} else {
 				Fragment fragment = new FragmentNotifications();
 				FragmentManager frgManager = getSupportFragmentManager();
-				frgManager.beginTransaction()
-						.replace(R.id.content_frame, fragment).commit();
+				FragmentTransaction transaction = frgManager.beginTransaction();
+				transaction.replace(R.id.content_frame, fragment);
+				transaction.addToBackStack("Escanear");
+				transaction.commit();
 				mDrawerLayout.closeDrawer(mDrawerList);
 
 				return true;
@@ -258,7 +267,8 @@ public class MainActivity extends FragmentActivity {
 				Toast.makeText(this, "Se encontro a " + nombreMascota,
 						Toast.LENGTH_SHORT).show();
 
-				new PostNotificationTask(this).execute(getRegistrationId(), gcmId);
+				new PostNotificationTask(this).execute(getRegistrationId(),
+						gcmId);
 			}
 		}
 
