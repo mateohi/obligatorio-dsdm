@@ -59,6 +59,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	private static final String COLUMNA_NOTIFICACION_ENVIADA_CELULAR_DUENO = "celular_dueno";
 	private static final String COLUMNA_NOTIFICACION_ENVIADA_CORREO_DUENO = "correo_dueno";
 	private static final String COLUMNA_NOTIFICACION_ENVIADA_NOMBRE_MASCOTA = "nombre_mascota";
+	private static final String COLUMNA_NOTIFICACION_ENVIADA_PATH = "path_foto";
 
 	public DatabaseHandler(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -106,7 +107,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 				+ COLUMNA_NOTIFICACION_ENVIADA_CELULAR_DUENO + " TEXT, "
 				+ COLUMNA_NOTIFICACION_ENVIADA_CORREO_DUENO + " TEXT, "
 				+ COLUMNA_NOTIFICACION_ENVIADA_FECHA + " TEXT, "
-				+ COLUMNA_NOTIFICACION_ENVIADA_NOMBRE_MASCOTA + " TEXT )";
+				+ COLUMNA_NOTIFICACION_ENVIADA_NOMBRE_MASCOTA + " TEXT, "
+				+ COLUMNA_NOTIFICACION_ENVIADA_PATH + " TEXT )";
 		db.execSQL(CREAR_TABLA_NOTIFICACIONES_ENVIADAS);
 	}
 
@@ -306,6 +308,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 				Notificacion.FULL_DATE.format(notificacion.getFecha()));
 		values.put(COLUMNA_NOTIFICACION_ENVIADA_NOMBRE_MASCOTA,
 				notificacion.getNombreMascota());
+		values.put(COLUMNA_NOTIFICACION_ENVIADA_PATH,
+				notificacion.getPathFoto());
 
 		db.insert(TABLA_NOTIFICACIONES_ENVIADAS,
 				COLUMNA_NOTIFICACION_ENVIADA_FECHA, values);
@@ -340,6 +344,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 							e.printStackTrace();
 						}
 						notificacion.setNombreMascota(cursor.getString(6));
+						notificacion.setPathFoto(cursor.getString(7));
 
 						notificaciones.add(notificacion);
 						cursor.moveToNext();
@@ -406,6 +411,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 					e.printStackTrace();
 				}
 				notificacion.setNombreMascota(cursor.getString(6));
+				notificacion.setPathFoto(cursor.getString(7));
 			}
 		}
 		return notificacion;

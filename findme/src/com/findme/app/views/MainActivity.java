@@ -13,14 +13,9 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.media.AudioManager;
-import android.media.MediaPlayer;
-import android.media.MediaPlayer.OnCompletionListener;
-import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Vibrator;
 import android.provider.MediaStore;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
@@ -47,7 +42,6 @@ import com.findme.app.controller.integration.tasks.PostPetTask;
 import com.findme.app.controller.integration.tasks.PostUserTask;
 import com.findme.app.controller.integration.tasks.ResendQrTask;
 import com.findme.app.model.Mascota;
-import com.findme.app.model.Notificacion;
 import com.findme.app.model.Usuario;
 import com.findme.app.utils.Base64Utils;
 import com.findme.app.utils.EmailValidator;
@@ -68,8 +62,6 @@ public class MainActivity extends FragmentActivity {
 	private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
 
 	public static final String PREFS_NAME = "FindMeConfig";
-	private static final String SILENT = "silent";
-	private static final String VIBRATE = "vibrate";
 
 	private static final int REQUEST_SCAN = 0;
 	private static final int REQUEST_SELECT_IMAGE = 1;
@@ -140,7 +132,7 @@ public class MainActivity extends FragmentActivity {
 		// GCM registration.
 		if (checkPlayServices()) {
 			gcm = GoogleCloudMessaging.getInstance(this);
-			String regid = getRegistrationId(context);
+			String regid = getRegistrationId();
 
 			if (regid.isEmpty()) {
 				registerInBackground();
@@ -266,7 +258,7 @@ public class MainActivity extends FragmentActivity {
 				Toast.makeText(this, "Se encontro a " + nombreMascota,
 						Toast.LENGTH_SHORT).show();
 
-				new PostNotificationTask(this).execute(gcmId);
+				new PostNotificationTask(this).execute(getRegistrationId(), gcmId);
 			}
 		}
 
@@ -303,7 +295,8 @@ public class MainActivity extends FragmentActivity {
 		return true;
 	}
 
-	private String getRegistrationId(Context context) {
+	private String getRegistrationId() {
+		Context context = getApplicationContext();
 		final SharedPreferences prefs = getGcmPreferences(context);
 		String registrationId = prefs.getString(PROPERTY_REG_ID, "");
 		if (registrationId.isEmpty()) {
@@ -397,7 +390,7 @@ public class MainActivity extends FragmentActivity {
 
 	public void resendQR(View v) {
 		if (hayMascota()) {
-			String gcmId = getRegistrationId(getApplicationContext());
+			String gcmId = getRegistrationId();
 			new ResendQrTask(this).execute(gcmId);
 		} else {
 			Toast.makeText(this, "Cree una mascota antes", Toast.LENGTH_LONG)
@@ -459,7 +452,7 @@ public class MainActivity extends FragmentActivity {
 		}
 
 		// Guardar en el servidor
-		String gcmId = getRegistrationId(getApplicationContext());
+		String gcmId = getRegistrationId();
 		new PostPetTask(this).execute(mascota, gcmId);
 	}
 
@@ -483,7 +476,7 @@ public class MainActivity extends FragmentActivity {
 			usuario.setApellido(apellido);
 			usuario.setCorreo(correo);
 			usuario.setCelular(celular);
-			usuario.setGcmId(this.getRegistrationId(context));
+			usuario.setGcmId(this.getRegistrationId());
 
 			try {
 				guardarUsuario(usuario);

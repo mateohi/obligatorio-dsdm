@@ -1,17 +1,25 @@
 package com.findme.app.controller.integration.tasks;
 
+import java.io.IOException;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.AsyncTask;
+import android.util.Pair;
 import android.widget.Toast;
 
+import com.findme.app.controller.DatabaseHandler;
 import com.findme.app.controller.api.Locacion;
 import com.findme.app.controller.integration.NotificationServiceClient;
+import com.findme.app.model.Notificacion;
+import com.findme.app.utils.Base64Utils;
+import com.findme.app.utils.ImageUtils;
 
-public class PostNotificationTask extends AsyncTask<Object, Void, String> {
+public class PostNotificationTask extends AsyncTask<String, Void, Pair<String, Notificacion>> {
 
 	private Activity parent;
 	private ProgressDialog progress;
@@ -21,21 +29,37 @@ public class PostNotificationTask extends AsyncTask<Object, Void, String> {
 	}
 
 	@Override
-	protected String doInBackground(Object... arg0) {
-		String gcmId = (String) arg0[0];
-		String serviceResponse = NotificationServiceClient.instance().notify(gcmId, getLocacion());
+	protected Pair<String, Notificacion> doInBackground(String... arg0) {
+		String gcmId = arg0[0];
+		String gcmIdDueno = arg0[1];
+		Pair<String, Notificacion> serviceResponse = NotificationServiceClient.instance().notify(gcmId,gcmIdDueno, getLocacion());
 		
 		return serviceResponse;
 	}
 
 	@Override
-	protected void onPostExecute(String serviceResponse) {
+	protected void onPostExecute(Pair<String, Notificacion> serviceResponse) {
 		this.progress.dismiss();
 		
-		if (serviceResponse.isEmpty()) {
+		if (serviceResponse.first.isEmpty()) {
+			Notificacion notificacion = serviceResponse.second;
+			Context ctx = this.parent.getApplicationContext();
+			String path = "N-" + serviceResponse.second.getNombreMascota();
+			Bitmap image = ImageUtils.bytesToBitmap(Base64Utils.base64StringToBytes(notificacion.getFotoBase64()));
+			
+			try {
+				ImageUtils.saveImageOnDevice(image, path, ctx);
+			} catch (Exception e) {
+				// No se guarda
+			}
+			
+			notificacion.setFotoBase64(null);
+			notificacion.setPathFoto(path);
+			DatabaseHandler dh = new DatabaseHandler(ctx);
+			dh.addNotificacionEnviada(notificacion);
 			Toast.makeText(this.parent, "Notificacion enviada", Toast.LENGTH_SHORT).show();
 		} else {
-			Toast.makeText(this.parent, serviceResponse, Toast.LENGTH_SHORT).show();
+			Toast.makeText(this.parent, serviceResponse.first, Toast.LENGTH_SHORT).show();
 		}
 	}
 	

@@ -1,55 +1,98 @@
 package com.findme.service.model;
 
 import java.util.Date;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "Notificacion")
 public class Notification extends Persistent {
 
-    @Column(name = "Dueño")
-    private Usuario usuarioDueno;
-    @Column(name = "Informante")
-    private Usuario usuarioInformante;
-    @Column(name = "Mascota")
-    private Mascota mascota;
-    @Column(name = "Fecha")
-    @Temporal(TemporalType.DATE)
+    private String gcmIdDenunciante;
+    private String gcmIdDueno;
+    private String nombreUsuario;
+    private String apellidoUsuario;
+    private String correo;
+    private String celular;
+    private String nombreMascota;
+    private String pathFoto;
+    private String fotoBase64;
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;
-    @Column(name = "Longitud")
     private String longitud;
-    @Column(name = "Latitud")
     private String latitud;
 
-    public Notification() {
+    public String getGcmIdDenunciante() {
+        return gcmIdDenunciante;
     }
 
-    public Usuario getUsuarioDueno() {
-        return usuarioDueno;
+    public void setGcmIdDenunciante(String gcmIdDenunciante) {
+        this.gcmIdDenunciante = gcmIdDenunciante;
     }
 
-    public void setUsuarioDueno(Usuario usuarioDueno) {
-        this.usuarioDueno = usuarioDueno;
+    public String getGcmIdDueno() {
+        return gcmIdDueno;
     }
 
-    public Usuario getUsuarioInformante() {
-        return usuarioInformante;
+    public void setGcmIdDueno(String gcmIdDueno) {
+        this.gcmIdDueno = gcmIdDueno;
     }
 
-    public void setUsuarioInformante(Usuario usuarioInformante) {
-        this.usuarioInformante = usuarioInformante;
+    public String getNombreUsuario() {
+        return nombreUsuario;
     }
 
-    public Mascota getMascota() {
-        return mascota;
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
     }
 
-    public void setMascota(Mascota mascota) {
-        this.mascota = mascota;
+    public String getApellidoUsuario() {
+        return apellidoUsuario;
+    }
+
+    public void setApellidoUsuario(String apellidoUsuario) {
+        this.apellidoUsuario = apellidoUsuario;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public String getCelular() {
+        return celular;
+    }
+
+    public void setCelular(String celular) {
+        this.celular = celular;
+    }
+
+    public String getNombreMascota() {
+        return nombreMascota;
+    }
+
+    public void setNombreMascota(String nombreMascota) {
+        this.nombreMascota = nombreMascota;
+    }
+
+    public String getPathFoto() {
+        return pathFoto;
+    }
+
+    public void setPathFoto(String pathFoto) {
+        this.pathFoto = pathFoto;
+    }
+
+    public String getFotoBase64() {
+        return fotoBase64;
+    }
+
+    public void setFotoBase64(String fotoBase64) {
+        this.fotoBase64 = fotoBase64;
     }
 
     public Date getFecha() {

@@ -89,6 +89,12 @@ public class FragmentDetailedNotification extends Fragment {
 
 	public void cargarDatos() {
 		if (notificacion != null) {
+			if (!isReceivedNotification) {
+				((TextView) parentView
+						.findViewById(id.detailed_notification_info))
+						.setText("Datos del dueño");
+			}
+			
 			Bitmap bm = devolverIconoGrande(notificacion.getNombreMascota());
 			((ImageView) parentView.findViewById(id.my_pet_image_notification)).setImageBitmap(bm);
 			((TextView) parentView

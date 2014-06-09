@@ -1,11 +1,14 @@
 package com.findme.app.views;
 
+import java.io.FileNotFoundException;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +18,7 @@ import android.widget.TextView;
 
 import com.example.findme.R;
 import com.findme.app.model.Notificacion;
+import com.findme.app.utils.ImageUtils;
 
 public class CustomNotificationsSentAdapter extends ArrayAdapter<Notificacion> {
 
@@ -66,9 +70,8 @@ public class CustomNotificationsSentAdapter extends ArrayAdapter<Notificacion> {
 				.setText("Has encontrado una mascota!");
 
 		listViewHolder.horaEncontrada.setText(setTime(listItem));
-		// listViewHolder.fotoMascota.setImageDrawable(view.getResources()
-		// .getDrawable(
-		// Integer.parseInt(listItem.getMascota().getPathFoto())));
+		Bitmap fotoMascota = devolverIconoGrande(listItem.getPathFoto());
+		listViewHolder.fotoMascota.setImageBitmap(fotoMascota);
 		return view;
 	}
 
@@ -91,5 +94,18 @@ public class CustomNotificationsSentAdapter extends ArrayAdapter<Notificacion> {
 		TextView nombreUsuarioInformante;
 		TextView horaEncontrada;
 		ImageView fotoMascota;
+	}
+	
+	private Bitmap devolverIconoGrande(String path) {
+
+		try {
+			Bitmap fotoMascota = ImageUtils
+					.getCircleBitmapFromDevice(path, this.contexto);
+			return fotoMascota;
+		} catch (FileNotFoundException e) {
+			Bitmap iconoFindMe = BitmapFactory.decodeResource(
+					this.contexto.getResources(), R.drawable.ic_launcher);
+			return iconoFindMe;
+		}
 	}
 }
