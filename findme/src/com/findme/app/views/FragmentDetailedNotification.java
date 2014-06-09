@@ -46,7 +46,7 @@ public class FragmentDetailedNotification extends Fragment {
 			notificacion = dh.getNotificacionEnviada(getArguments().getInt(
 					"notificationId"));
 		}
-		
+
 		View view = inflater.inflate(R.layout.fragment_detailed_notification,
 				container, false);
 		parentView = view;
@@ -65,9 +65,10 @@ public class FragmentDetailedNotification extends Fragment {
 			public void onClick(View v) {
 				Intent intent = new Intent(Intent.ACTION_VIEW);
 				if (notificacion != null) {
-					Uri geoLocationUri = Uri.parse("geo:<lat>,<long>?q="
+					Uri geoLocationUri = Uri.parse("geo:0,0?q="
 							+ notificacion.getLatitud() + ","
-							+ notificacion.getLongitud());
+							+ notificacion.getLongitud() + "("
+							+ notificacion.getNombreMascota() + ")");
 					intent.setData(geoLocationUri);
 				}
 
@@ -94,7 +95,7 @@ public class FragmentDetailedNotification extends Fragment {
 						.findViewById(R.id.detailed_notification_info))
 						.setText("Datos del dueño");
 			}
-			
+
 			Bitmap bm = devolverIconoGrande(notificacion.getNombreMascota());
 			((ImageView) parentView.findViewById(R.id.my_pet_image_notification)).setImageBitmap(bm);
 			((TextView) parentView
@@ -122,18 +123,18 @@ public class FragmentDetailedNotification extends Fragment {
 
 		}
 	}
-	
+
 	private Bitmap devolverIconoGrande(String nombreMascota) {
 
 		String path = (this.isReceivedNotification ? "" : "N-") + nombreMascota;
-		
+
 		try {
-			Bitmap fotoMascota = ImageUtils
-					.getCircleBitmapFromDevice(path, this.parentView.getContext());
+			Bitmap fotoMascota = ImageUtils.getCircleBitmapFromDevice(path,
+					this.parentView.getContext());
 			return fotoMascota;
 		} catch (FileNotFoundException e) {
-			Bitmap iconoFindMe = BitmapFactory.decodeResource(
-					this.parentView.getContext().getResources(), R.drawable.ic_launcher);
+			Bitmap iconoFindMe = BitmapFactory.decodeResource(this.parentView
+					.getContext().getResources(), R.drawable.ic_launcher);
 			return iconoFindMe;
 		}
 	}
