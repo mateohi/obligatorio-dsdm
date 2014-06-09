@@ -12,7 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.example.findme.R;
+import com.findme.app.R;
 import com.findme.app.controller.DatabaseHandler;
 import com.findme.app.model.Notificacion;
 

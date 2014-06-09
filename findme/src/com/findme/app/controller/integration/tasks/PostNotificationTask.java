@@ -1,7 +1,5 @@
 package com.findme.app.controller.integration.tasks;
 
-import java.io.IOException;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;

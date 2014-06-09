@@ -1,7 +1,7 @@
 package com.findme.app.views;
 
-import com.example.findme.R;
-import com.example.findme.R.id;
+import com.findme.app.R;
+import com.findme.app.R.id;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;

@@ -2,7 +2,7 @@ package com.findme.app.views;
 
 import java.util.List;
 
-import com.example.findme.R;
+import com.findme.app.R;
 
 import android.app.Activity;
 import android.content.Context;

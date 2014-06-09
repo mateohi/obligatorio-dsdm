@@ -1,6 +1,6 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent" >
 
     <TableLayout
         android:id="@+id/table_detailed_notification"
@@ -22,8 +22,8 @@
                 android:ems="10"
                 android:textSize="20sp"
                 android:textStyle="bold" >
-</TextView>
-            
+            </TextView>
+
             <ImageView
                 android:id="@+id/my_pet_image_notification"
                 android:layout_width="60dp"
@@ -31,6 +31,25 @@
                 android:layout_gravity="top"
                 android:contentDescription=""
                 android:src="@drawable/default_pet" />
+        </TableRow>
+        
+        <TableRow
+            android:id="@+id/notification_tableRow4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dip" >
+
+            <CheckBox
+                android:id="@+id/checkBoxVacunada"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vacunada" />
+
+            <CheckBox
+                android:id="@+id/checkBoxCuidado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cuidado" />
 
         </TableRow>
 
@@ -60,23 +79,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="5dip" >
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_weight="1"
-                android:fontFamily="Lucida"
-                android:text="@string/detailed_notification_profile_name"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
-
-            <EditText
-                android:id="@+id/detailed_notification_profile_name"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
-                android:layout_weight="2"
-                android:inputType="none" />
         </TableRow>
 
         <TableRow
@@ -85,17 +87,8 @@
             android:layout_height="wrap_content"
             android:padding="5dip" >
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_weight="1"
-                android:fontFamily="Lucida"
-                android:text="@string/detailed_notification_last_name"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
-
             <EditText
-                android:id="@+id/detailed_notification_last_name"
+                android:id="@+id/detailed_notification_full_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
@@ -109,15 +102,6 @@
             android:layout_height="wrap_content"
             android:padding="12dip" >
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_weight="1"
-                android:fontFamily="Lucida"
-                android:text="@string/detailed_notification_email"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
-
             <EditText
                 android:id="@+id/detailed_notification_email"
                 android:layout_width="0dp"
@@ -125,6 +109,13 @@
                 android:layout_marginRight="20dp"
                 android:layout_weight="2"
                 android:inputType="none" />
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="mandarCorreo"
+                android:src="@drawable/ic_email" />
         </TableRow>
 
         <TableRow
@@ -133,15 +124,6 @@
             android:layout_height="wrap_content"
             android:padding="12dip" >
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_weight="1"
-                android:fontFamily="Lucida"
-                android:text="@string/detailed_notification_phone"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
-
             <EditText
                 android:id="@+id/detailed_notification_phone"
                 android:layout_width="0dp"
@@ -149,6 +131,13 @@
                 android:layout_marginRight="20dp"
                 android:layout_weight="2"
                 android:inputType="none" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="llamarTelefono"
+                android:src="@drawable/ic_call" />
         </TableRow>
 
         <TableRow
@@ -164,9 +153,9 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_weight="1"
+                android:background="@color/light_gray"
                 android:drawableRight="@drawable/ic_location_place"
                 android:fontFamily="Lucida"
-                android:background="@color/light_gray"
                 android:text="@string/detailed_notification_ubication" />
         </TableRow>
     </TableLayout>

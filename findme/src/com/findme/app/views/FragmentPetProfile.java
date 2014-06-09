@@ -10,8 +10,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ToggleButton;
 
-import com.example.findme.R;
-import com.example.findme.R.id;
+import com.findme.app.R;
+import com.findme.app.R.id;
 import com.findme.app.model.Mascota;
 import com.findme.app.utils.ImageUtils;
 

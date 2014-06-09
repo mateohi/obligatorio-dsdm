@@ -16,7 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.findme.R;
+import com.findme.app.R;
 import com.findme.app.model.Notificacion;
 import com.findme.app.utils.ImageUtils;
 

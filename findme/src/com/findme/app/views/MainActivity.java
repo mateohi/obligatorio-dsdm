@@ -34,8 +34,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-import com.example.findme.R;
-import com.example.findme.R.id;
+import com.findme.app.R;
+import com.findme.app.R.id;
 import com.findme.app.controller.DatabaseHandler;
 import com.findme.app.controller.integration.tasks.PostNotificationTask;
 import com.findme.app.controller.integration.tasks.PostPetTask;
@@ -568,5 +568,20 @@ public class MainActivity extends FragmentActivity {
 				.bitmapToBytes(bitmap));
 
 		return fotoBase64;
+	}
+	
+	public void llamarTelefono(View view) {
+		String celular = ((EditText) findViewById(id.detailed_notification_phone)).getText().toString();
+		Uri uriCelular = Uri.parse("tel:" + celular);
+		Intent callCellphone = new Intent(Intent.ACTION_DIAL);
+		callCellphone.setData(uriCelular);
+		startActivity(callCellphone);
+	}
+	
+	public void mandarCorreo(View view) {
+		String correo = ((EditText) findViewById(id.detailed_notification_email)).getText().toString();
+		
+		Intent sendEmail = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", correo, null));
+		startActivity(Intent.createChooser(sendEmail, "Send email..."));
 	}
 }

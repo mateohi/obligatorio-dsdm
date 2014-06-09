@@ -22,6 +22,8 @@ public class Notification extends Persistent {
     private Date fecha;
     private String longitud;
     private String latitud;
+    private boolean estaVacunada;
+    private boolean tenerCuidado;
 
     public String getGcmIdDenunciante() {
         return gcmIdDenunciante;
@@ -117,5 +119,21 @@ public class Notification extends Persistent {
 
     public void setLatitud(String latitud) {
         this.latitud = latitud;
+    }
+
+    public boolean estaVacunada() {
+        return estaVacunada;
+    }
+
+    public void setEstaVacunada(boolean estaVacunada) {
+        this.estaVacunada = estaVacunada;
+    }
+
+    public boolean tenerCuidado() {
+        return tenerCuidado;
+    }
+
+    public void setTenerCuidado(boolean tenerCuidado) {
+        this.tenerCuidado = tenerCuidado;
     }
 }

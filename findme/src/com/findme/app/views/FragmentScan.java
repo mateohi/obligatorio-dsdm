@@ -1,6 +1,6 @@
 package com.findme.app.views;
 
-import com.example.findme.R;
+import com.findme.app.R;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

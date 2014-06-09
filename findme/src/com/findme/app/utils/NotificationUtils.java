@@ -3,7 +3,7 @@ package com.findme.app.utils;
 import java.io.FileNotFoundException;
 import java.util.Date;
 
-import com.example.findme.R;
+import com.findme.app.R;
 import com.findme.app.controller.DatabaseHandler;
 import com.findme.app.model.Notificacion;
 import com.findme.app.views.MainActivity;

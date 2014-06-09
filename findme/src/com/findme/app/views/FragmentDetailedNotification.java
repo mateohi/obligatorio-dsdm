@@ -12,12 +12,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.findme.R;
-import com.example.findme.R.id;
+import com.findme.app.R;
 import com.findme.app.controller.DatabaseHandler;
 import com.findme.app.model.Notificacion;
 import com.findme.app.utils.ImageUtils;
@@ -82,7 +82,7 @@ public class FragmentDetailedNotification extends Fragment {
 
 	private void setUpView() {
 		if (!isReceivedNotification) {
-			((Button) parentView.findViewById(id.button_location))
+			((Button) parentView.findViewById(R.id.button_location))
 					.setVisibility(View.GONE);
 		}
 	}
@@ -91,35 +91,33 @@ public class FragmentDetailedNotification extends Fragment {
 		if (notificacion != null) {
 			if (!isReceivedNotification) {
 				((TextView) parentView
-						.findViewById(id.detailed_notification_info))
+						.findViewById(R.id.detailed_notification_info))
 						.setText("Datos del dueño");
 			}
 			
 			Bitmap bm = devolverIconoGrande(notificacion.getNombreMascota());
-			((ImageView) parentView.findViewById(id.my_pet_image_notification)).setImageBitmap(bm);
+			((ImageView) parentView.findViewById(R.id.my_pet_image_notification)).setImageBitmap(bm);
 			((TextView) parentView
-					.findViewById(id.my_pet_profile_name_notification))
+					.findViewById(R.id.my_pet_profile_name_notification))
 					.setText("Se encontró a " + notificacion.getNombreMascota());
 			((EditText) parentView
-					.findViewById(id.detailed_notification_profile_name))
-					.setText(notificacion.getNombreUsuario());
-			((EditText) parentView
-					.findViewById(id.detailed_notification_last_name))
-					.setText(notificacion.getApellidoUsuario());
-			((EditText) parentView.findViewById(id.detailed_notification_phone))
+					.findViewById(R.id.detailed_notification_full_name))
+					.setText(notificacion.getNombreUsuario() + " " + notificacion.getApellidoUsuario());
+			((EditText) parentView.findViewById(R.id.detailed_notification_phone))
 					.setText(notificacion.getCelular());
-			((EditText) parentView.findViewById(id.detailed_notification_email))
+			((EditText) parentView.findViewById(R.id.detailed_notification_email))
 					.setText(notificacion.getCorreo());
+			((CheckBox) parentView.findViewById(R.id.checkBoxVacunada))
+			.setChecked(notificacion.estaVacunada());
+			((CheckBox) parentView.findViewById(R.id.checkBoxCuidado))
+			.setChecked(notificacion.estaVacunada());
 
 			((EditText) parentView
-					.findViewById(id.detailed_notification_profile_name))
+					.findViewById(R.id.detailed_notification_full_name))
 					.setKeyListener(null);
-			((EditText) parentView
-					.findViewById(id.detailed_notification_last_name))
+			((EditText) parentView.findViewById(R.id.detailed_notification_phone))
 					.setKeyListener(null);
-			((EditText) parentView.findViewById(id.detailed_notification_phone))
-					.setKeyListener(null);
-			((EditText) parentView.findViewById(id.detailed_notification_email))
+			((EditText) parentView.findViewById(R.id.detailed_notification_email))
 					.setKeyListener(null);
 
 		}

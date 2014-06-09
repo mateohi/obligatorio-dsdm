@@ -62,6 +62,8 @@ public class NotificationController {
                     notification.setCorreo(dueno.getCorreo());
                     notification.setNombreMascota(mascota.getNombre());
                     notification.setFecha(new Date());
+                    notification.setEstaVacunada(mascota.tenerCuidado());
+                    notification.setTenerCuidado(mascota.estaVacunada());
                     notification.setGcmIdDenunciante(gcmId);
                     notification.setGcmIdDueno(gcmIdDueno);
                     this.notificationDao.addNotification(notification);

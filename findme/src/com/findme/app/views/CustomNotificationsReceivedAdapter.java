@@ -16,7 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.findme.R;
+import com.findme.app.R;
 import com.findme.app.controller.DatabaseHandler;
 import com.findme.app.model.Notificacion;
 import com.findme.app.utils.ImageUtils;
@@ -81,7 +81,7 @@ public class CustomNotificationsReceivedAdapter extends
 		Date fechaHoy = new Date();
 		if (Notificacion.DATE.format(fechaNotificacion).equals(
 				Notificacion.DATE.format(fechaHoy))) {
-			date = Notificacion.TIME.format(fechaNotificacion) + " hs";
+			date = Notificacion.TIME.format(fechaNotificacion);
 		} else {
 			date = Notificacion.DATE.format(fechaNotificacion);
 		}

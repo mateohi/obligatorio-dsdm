@@ -7,8 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
-import com.example.findme.R;
-import com.example.findme.R.id;
+import com.findme.app.R;
+import com.findme.app.R.id;
 import com.findme.app.model.Usuario;
 
 public class FragmentMyProfile extends Fragment {
