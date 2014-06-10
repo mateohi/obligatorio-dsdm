@@ -592,6 +592,6 @@ public class MainActivity extends FragmentActivity {
 		String correo = ((EditText) findViewById(id.detailed_notification_email)).getText().toString();
 		
 		Intent sendEmail = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", correo, null));
-		startActivity(Intent.createChooser(sendEmail, "Send email..."));
+		startActivity(Intent.createChooser(sendEmail, "Enviar correo"));
 	}
 }

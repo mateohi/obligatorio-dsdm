@@ -85,23 +85,20 @@ public class FragmentDetailedNotification extends Fragment {
 		if (!isReceivedNotification) {
 			((Button) parentView.findViewById(R.id.button_location))
 					.setVisibility(View.GONE);
+			((TextView) parentView
+					.findViewById(R.id.detailed_notification_info))
+					.setText("Datos del dueño            ");
 		}
 	}
 
 	public void cargarDatos() {
 		if (notificacion != null) {
-			if (!isReceivedNotification) {
-				((TextView) parentView
-						.findViewById(R.id.detailed_notification_info))
-						.setText("Datos del dueño");
-			}
-
 			Bitmap bm = devolverIconoGrande(notificacion.getNombreMascota());
 			((ImageView) parentView.findViewById(R.id.my_pet_image_notification)).setImageBitmap(bm);
 			((TextView) parentView
 					.findViewById(R.id.my_pet_profile_name_notification))
 					.setText("Se encontró a " + notificacion.getNombreMascota());
-			((EditText) parentView
+			((TextView) parentView
 					.findViewById(R.id.detailed_notification_full_name))
 					.setText(notificacion.getNombreUsuario() + " " + notificacion.getApellidoUsuario());
 			((EditText) parentView.findViewById(R.id.detailed_notification_phone))
@@ -113,9 +110,6 @@ public class FragmentDetailedNotification extends Fragment {
 			((CheckBox) parentView.findViewById(R.id.checkBoxCuidado))
 			.setChecked(notificacion.estaVacunada());
 
-			((EditText) parentView
-					.findViewById(R.id.detailed_notification_full_name))
-					.setKeyListener(null);
 			((EditText) parentView.findViewById(R.id.detailed_notification_phone))
 					.setKeyListener(null);
 			((EditText) parentView.findViewById(R.id.detailed_notification_email))
