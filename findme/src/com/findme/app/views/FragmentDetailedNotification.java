@@ -67,8 +67,7 @@ public class FragmentDetailedNotification extends Fragment {
 				if (notificacion != null) {
 					Uri geoLocationUri = Uri.parse("geo:0,0?q="
 							+ notificacion.getLatitud() + ","
-							+ notificacion.getLongitud() + "("
-							+ notificacion.getNombreMascota() + ")");
+							+ notificacion.getLongitud());
 					intent.setData(geoLocationUri);
 				}
 
