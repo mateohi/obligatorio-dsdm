@@ -175,8 +175,10 @@ public class MainActivity extends FragmentActivity {
 		}
 
 		FragmentManager frgManager = getSupportFragmentManager();
-		frgManager.beginTransaction().replace(R.id.content_frame, fragment)
-				.commit();
+		FragmentTransaction transaction = frgManager.beginTransaction();
+		transaction.replace(R.id.content_frame, fragment);
+		transaction.addToBackStack("DrawerElement");
+		transaction.commit();
 
 		mDrawerList.setItemChecked(position, true);
 		mDrawerLayout.closeDrawer(mDrawerList);
@@ -193,11 +195,7 @@ public class MainActivity extends FragmentActivity {
 		FragmentManager frgManager = getSupportFragmentManager();
 		FragmentTransaction transaction = frgManager.beginTransaction();
 		transaction.replace(R.id.content_frame, fragment);
-		if (isReceivedNotification) {
-			transaction.addToBackStack("Recibida");
-		} else {
-			transaction.addToBackStack("Enviada");
-		}
+		transaction.addToBackStack("Detalle notificacion");
 		transaction.commit();
 	}
 
@@ -234,7 +232,7 @@ public class MainActivity extends FragmentActivity {
 				FragmentManager frgManager = getSupportFragmentManager();
 				FragmentTransaction transaction = frgManager.beginTransaction();
 				transaction.replace(R.id.content_frame, fragment);
-				transaction.addToBackStack("Escanear");
+				transaction.addToBackStack("Notificaciones");
 				transaction.commit();
 				mDrawerLayout.closeDrawer(mDrawerList);
 
@@ -593,5 +591,13 @@ public class MainActivity extends FragmentActivity {
 		
 		Intent sendEmail = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", correo, null));
 		startActivity(Intent.createChooser(sendEmail, "Enviar correo"));
+	}
+	
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if(getSupportFragmentManager().getBackStackEntryCount() == 0 || getSupportFragmentManager().getBackStackEntryCount() == 1){
+			this.finish();
+		}
+		return super.onKeyDown(keyCode, event);
 	}
 }
