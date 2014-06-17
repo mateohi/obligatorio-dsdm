@@ -74,10 +74,10 @@ public class NotificationController {
                     Map<String, String> datos = new HashMap<String, String>();
                     datos.put(ManejadorApiModel.LATITUD, locacion.getLatitud());
                     datos.put(ManejadorApiModel.LONGITUD, locacion.getLongitud());
-                    datos.put(ManejadorApiModel.NOMBRE_USUARIO, dueno.getNombre());
-                    datos.put(ManejadorApiModel.APELLIDO_USUARIO, dueno.getApellido());
-                    datos.put(ManejadorApiModel.CELULAR, dueno.getCelular());
-                    datos.put(ManejadorApiModel.CORREO, dueno.getCorreo());
+                    datos.put(ManejadorApiModel.NOMBRE_USUARIO, denunciante.getNombre());
+                    datos.put(ManejadorApiModel.APELLIDO_USUARIO, denunciante.getApellido());
+                    datos.put(ManejadorApiModel.CELULAR, denunciante.getCelular());
+                    datos.put(ManejadorApiModel.CORREO, denunciante.getCorreo());
                     datos.put(ManejadorApiModel.REG_ID, dueno.getGcmId());
                     datos.put(ManejadorApiModel.NOMBRE_MASCOTA, mascota.getNombre());
 
